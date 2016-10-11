@@ -53,9 +53,17 @@ Un peu comme ceci
 
 ## Initialisation de l'application
 
-- Premièrement nous allons partir du starter kit qui est vide et qui ne contient volontairement que les fichiers de configuration.
-- Le fichier `package.json` dispose d'une commande `start` que l'on peut appeller avec `npm start`
-- Cette commande fait appel au script suivant:
+Nous avant déjà mis les dépendances qu'il faut dans le package.json. Je propose donc : 
+- D'ouvrir votre terminal et dans lancer la commande `npm i`. Cela installera tous les modules nécessaires au fonctionnement de l'application.
+- De créer la commande `dev-server` qui permettra, via la commande `npm start`, de lancer l'application.
+
+Pour cela nous allons écrire à l'intérieur de l'objet betterScripts de la manière suivante :
+```js
+"betterScripts": {
+}
+```
+
+Le code ci-dessous :
 
 ```js
 {
@@ -75,8 +83,13 @@ Un peu comme ceci
 }
 ```
 
-- Lancer la commande `npm start` et rendez vous à [http://localhost:3000](http://localhost:3000)
-- Il ne se passe rien
+Ensuite nous allons ajouter de l'ojet `scripts` placé au dessus de `betterScripts` la commande `start` de la manière suivante :
+```js
+"start": "better-npm-run dev-server"
+```
+
+- Lançons la commande `npm start` et rendez vous à [http://localhost:3000](http://localhost:3000)
+- Nous pouvons observer qu'il ne se passe rien
 
 Nous allons donce créer un dans le fichier index.js les élements suivants
 Le but est juste d'afficher un composant React.

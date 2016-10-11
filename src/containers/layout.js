@@ -16,24 +16,11 @@ import ConfirmationPopin from 'focus-components/confirmation-popin';
 import SnackBar from 'focus-components/snackbar';
 import Animation from 'focus-components/animation';
 import ContentActionsComponent from 'focus-components/header-actions';
+
 // This should be done by default by focus-application
 import { headerIsExpandedSelector} from 'focus-application/header/header-reducer';
 import { expandHeader, unExpandHeader} from 'focus-application/header/header-actions'
 const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHeader, unExpandHeader})(ScrollTrigger);
-
-// const SB = props => {
-//     const {id,content, title, deleteMessage, actionHandler, actionText} = props;
-//
-//     return (
-//         <div className="mdl-js-snackbar mdl-snackbar mdl-snackbar--active animated slideInUp" data-upgraded="MaterialSnackbar" aria-hidden="false">
-//             <div className="mdl-snackbar__text">{props.content}</div>
-//             {actionHandler && actionText &&
-//                 <button className='mdl-snackbar__action' type='button' onClick={() => {actionHandler(props); deleteMessage({id});}}>{actionText}</button>
-//             }
-//             <button className="mdl-snackbar__action" type="button" onClick={() => deleteMessage({id})}>Close</button>
-//         </div>
-//     );
-// }
 
 const ConfirmComponent = props => <ConfirmWrapper {...props}  ConfirmationModal={ConfirmationPopin}/>
 const AppMessages = props => <MessageCenter {...props} MessageComponent={SnackBar} />

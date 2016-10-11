@@ -1,8 +1,4 @@
 import React, {PureComponent, PropTypes} from 'react';
-import compose from 'lodash/flowRight';
-import Panel from 'focus-components/panel';
-
-import {confirm} from 'focus-application/confirm/confirm-actions';
 
 const User = () => (
   <div>

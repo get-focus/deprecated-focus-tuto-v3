@@ -4,47 +4,8 @@
   "description": "Form, data behaviours",
   "main": "src/index.js",
   "scripts": {
-    "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
-    "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
-    "start": "better-npm-run dev-server",
-    "build:node": "better-npm-run babelify",
-    "build": "npm run build:node",
-    "build:watch": "better-npm-run watch",
-    "publish": "npm run build"
   },
   "betterScripts": {
-    "dev-server": {
-      "command": "node ./server.js",
-      "env": {
-        "DEV": true,
-        "SOURCE_MAPS": false,
-        "ENTRY_FILE_PATH": "./src/",
-        "PAGE_TITLE": "Focus entity dev page",
-        "MINIMIFY": false,
-        "API_PORT": 9999,
-        "PACKAGE_JSON_PATH": "../",
-        "ANCHOR_CLASS": "focus-graph-demo-app"
-      }
-    },
-    "watch": {
-      "command": "webpack --watch ./src/index.js",
-      "env": {
-        "DEV": true,
-        "SOURCE_MAPS": false,
-        "ENTRY_FILE_PATH": "./src/index",
-        "PAGE_TITLE": "Focus entity dev page",
-        "MINIMIFY": false,
-        "API_PORT": 9999,
-        "PACKAGE_JSON_PATH": "../",
-        "ANCHOR_CLASS": "focus-graph-demo-app"
-      }
-    },
-    "babelify": {
-      "env": {
-        "BABEL_ENV": "production"
-      },
-      "command": "node scripts/babelify.js"
-    }
   },
   "repository": {
     "type": "git",

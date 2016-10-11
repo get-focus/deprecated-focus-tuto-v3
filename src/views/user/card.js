@@ -8,6 +8,7 @@ const cardStyle= {
   marginRight: '20px',
   marginBottom: '20px'
 };
+
 const Card = ({title,description, route, destination }) => {
   return (
       <div style={cardStyle} className="demo-card-wide mdl-card mdl-shadow--2dp">

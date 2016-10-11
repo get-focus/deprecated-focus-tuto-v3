@@ -3,11 +3,13 @@ import 'focus-components/style';
 import 'focus-graph/src/style/field.scss';
 import 'focus-application/layout/index.scss'
 import 'focus-application/header/index.scss'
-import {init as initTranslation} from 'focus-components/translation';
-
-//------------------------------
+import {intializeTranslation} from 'focus-application/translation';
+import i18n from 'i18next';
+import focusTranslation from 'focus-components/translation/resources/fr-FR';
+import frTranslation from './config/translations/fr';
+////------------------------------
 // INIT FOCUS TRANSLATION
-initTranslation();
+intializeTranslation(i18n, 'fr-FR', [focusTranslation, frTranslation]);
 //------------------------------
 
 import React , {PropTypes} from 'react';
@@ -26,7 +28,7 @@ const renderApp = RootComponent => {
         <AppContainer>
             <RootComponent store={store} />
         </AppContainer>,
-        document.querySelector('.focus-graph-demo-app')
+        document.querySelector('.focus-tuto-app')
     );
 }
 

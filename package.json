@@ -23,7 +23,7 @@
         "MINIMIFY": false,
         "API_PORT": 9999,
         "PACKAGE_JSON_PATH": "../",
-        "ANCHOR_CLASS": "focus-graph-demo-app"
+        "ANCHOR_CLASS": "focus-tuto-app"
       }
     },
     "watch": {
@@ -36,7 +36,7 @@
         "MINIMIFY": false,
         "API_PORT": 9999,
         "PACKAGE_JSON_PATH": "../",
-        "ANCHOR_CLASS": "focus-graph-demo-app"
+        "ANCHOR_CLASS": "focus-tuto-app"
       }
     },
     "babelify": {
@@ -64,11 +64,11 @@
   "homepage": "https://github.com/pierr/data-behaviours#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
-    "babel-core": "^6.4.5",
-    "babel-eslint": "^6.0.2",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.2",
     "babel-plugin-flow-comments": "^6.3.19",
-    "babel-polyfill": "^6.5.0",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-focus": "^0.6.1",
     "better-npm-run": "0.0.11",
     "body-parser": "^1.14.2",
@@ -80,22 +80,23 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "faker": "^3.0.1",
     "file-loader": "^0.9.0",
-    "focus-graph": "^3.0.0-rc4",
+    "focus-graph": "^3.0.0-rc6",
     "html-webpack-plugin": "^2.8.1",
+    "i18next": "^3.4.3",
     "isomorphic-fetch": "^2.2.1",
-    "jsdom": "^9.5.0",
+    "jsdom": "^9.6.0",
     "json-loader": "^0.5.4",
-    "lodash": "^4.6.1",
-    "material-design-icons-iconfont": "^2.0.4",
+    "lodash": "^4.16.3",
+    "material-design-icons-iconfont": "^3.0.0",
     "material-design-lite": "^1.2.1",
     "mocha": "^3.1.0",
     "moment": "^2.12.0",
-    "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^15.3.0",
+    "node-sass": "^3.10.1",
     "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-test-utils": "^15.3.0",
     "react-hot-loader": "^3.0.0-beta.1",
     "react-redux": "^4.4.5",
-    "redux-devtools": "^3.1.1",
+    "redux-devtools": "^3.3.1",
     "redux-devtools-dispatch": "^2.0.1",
     "redux-devtools-dock-monitor": "^1.1.0",
     "redux-devtools-inspector": "^0.8.0",
@@ -103,7 +104,7 @@
     "redux-logger": "^2.5.0",
     "redux-slider-monitor": "^1.0.2",
     "redux-thunk": "^2.1.0",
-    "remarkable": "^1.6.2",
+    "remarkable": "^1.7.1",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
@@ -115,9 +116,10 @@
     "webpack-focus": "^0.12.2"
   },
   "dependencies": {
-    "focus-application": "^3.0.0-rc8",
-    "focus-components": "3.0.0-rc13",
-    "focus-graph": "^3.0.0-rc4",
+    "focus-application": "^3.0.0-rc18",
+    "focus-components": "^3.0.0-rc14",
+    "focus-graph": "^3.0.0-rc8",
+    "focus-search": "^3.0.0-rc61",
     "material-design-icons-iconfont": "2.0.4",
     "material-design-lite": "1.2.1",
     "react": "^15.3.2",

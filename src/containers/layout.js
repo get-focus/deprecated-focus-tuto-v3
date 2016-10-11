@@ -14,12 +14,18 @@ import MenuLeft from 'focus-components/menu';
 // focus-components
 import ConfirmationPopin from 'focus-components/confirmation-popin';
 import SnackBar from 'focus-components/snackbar';
+import Button from 'focus-components/button';
+import ButtonBack from 'focus-components/button-back';
+import Icon from 'focus-components/icon';
 import Animation from 'focus-components/animation';
 import ContentActionsComponent from 'focus-components/header-actions';
 // This should be done by default by focus-application
 import { headerIsExpandedSelector} from 'focus-application/header/header-reducer';
 import { expandHeader, unExpandHeader} from 'focus-application/header/header-actions'
 const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHeader, unExpandHeader})(ScrollTrigger);
+
+// Navigation
+import {browserHistory} from 'react-router';
 
 // const SB = props => {
 //     const {id,content, title, deleteMessage, actionHandler, actionText} = props;
@@ -35,25 +41,60 @@ const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHe
 //     );
 // }
 
+const  checkLocation = (path) => {
+  const splitPath = path.split('/');
+  if(splitPath[4] === 'user' || splitPath[4] === 'finance') {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const SummaryTitle = () => <div style={{fontSize: '16px', color: 'white'}}>Focus Tuto V3</div>;
+
+const Summary  = () => {
+  const isHome = checkLocation(window.location.href);
+  return(
+    <div> {isHome ? null : <SummaryTitle />} </div>
+  )
+}
+
+const BarContentLeft = () => {
+  const isHome = checkLocation(window.location.href);
+  return(
+    <div>
+      {isHome ? <SummaryTitle /> :
+        <ButtonBack color='white' back={!isHome ? () => browserHistory.goBack() : null}/>
+      }
+    </div>
+  )
+}
+
+const BarContentExpanded  = () => <div style={{fontSize: '30px', fontWeight: 'bold', color: 'white'}}>Focus Tuto V3</div>;
+
+const BarContentRight = () => {
+  return(
+    <Button style={{color: 'white'}} shape='icon' icon='info' hasRipple={false} onClick={() => window.open('https://github.com/get-focus/focus-tuto-v3/tree/final')}/>
+  )
+}
+
 const ConfirmComponent = props => <ConfirmWrapper {...props}  ConfirmationModal={ConfirmationPopin}/>
 const AppMessages = props => <MessageCenter {...props} MessageComponent={SnackBar} />
-// const StateDisplayer = connectToStore(s => s)(props => <pre><code>{JSON.stringify(props, null, 4)}</code></pre>)
-const AppHeader = props => <Header {...props} ContentActionsComponent={ContentActionsComponent} />
+const AppHeader = props => <Header primaryColor={'#424950'} BarContentSummary={Summary} BarContentExpanded={BarContentExpanded} BarContentLeft={BarContentLeft} BarContentRight={BarContentRight } ContentActionsComponent={ContentActionsComponent} {...props} />
 
 //confirmation-popin
 function AppLayout(props) {
-    return  (
-        <ConnectedScrollTrigger>
-            <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={MenuLeft} MessageCenter={AppMessages}>
-                {props.hasDevtools  && <DevTools />}
-                <h1>Tuto Focus v3{props.name} </h1>
-                {/* On récupère les définitions dans les props*/}
-                {props.children}
-            </Layout>
-        </ConnectedScrollTrigger>
-    )
+  window.scrollTo(0, 0);
+  return  (
+    <ConnectedScrollTrigger>
+      <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={MenuLeft} MessageCenter={AppMessages}>
+        {props.hasDevtools  && <DevTools />}
+        {props.children}
+      </Layout>
+    </ConnectedScrollTrigger>
+  )
 };
 AppLayout.defaultProps = {
-    hasDevtools: true
+  hasDevtools: true
 };
 export default AppLayout

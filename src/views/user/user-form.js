@@ -1,25 +1,57 @@
-import React, {PureComponent, PropTypes} from 'react';
-import compose from 'lodash/flowRight';
+import React, {Component, PropTypes} from 'react';
+import {connect as connectToForm } from 'focus-graph/behaviours/form';
+import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
+import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
+import {loadUserAction, saveUserAction} from '../../actions/user-actions';
+import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
+
 import Panel from 'focus-components/panel';
+import {compose} from 'redux';
 
-import {confirm} from 'focus-application/confirm/confirm-actions';
+const actions = {
+  primary: [
+    {icon: 'face', label: 'face', action: () => console.log('User Form')},
+    {icon: 'event', label: 'event', action: () => console.log('User Form')}
+  ],
+  secondary: [
+    {label: 'Informations', action: () => console.log('User Form')},
+    {label: 'Settings', action: () => console.log('User Form')}
+  ]
+}
 
-const User = () => (
-  <div>
-    <Panel title='User'>
-      Bien le bonjour
-    </Panel>
-  </div>
-);
+class User extends Component {
+  componentWillMount() {
+    const {id, load, injectActionHeader, triggerPosition} = this.props;
+    // Et voilà un load !
+    load({id});
+    triggerPosition(0);
+    injectActionHeader(actions);
+  }
 
-class SmartUser extends PureComponent {
   render() {
+    const {fieldFor} = this.props;
     return (
-      <User/>
+      <Panel title='User' {...this.props}>
+        {fieldFor('uuid')}
+        {fieldFor('firstName')}
+        {fieldFor('lastName')}
+      </Panel>
     );
   }
 };
 
-User.displayName = 'SmartUser ';
+const formConfig = {
+  formKey: 'userForm',
+  entityPathArray: ['user'],
+  loadAction: loadUserAction,
+  saveAction: saveUserAction,
+  mapDispatchToProps: {injectActionHeader, triggerPosition}
+};
 
-export default SmartUser;
+const ConnectedUserForm = compose(
+  connectToMetadata(['user']),
+  connectToForm(formConfig),
+  connectToFieldHelpers()
+)(User);
+
+export default ConnectedUserForm;

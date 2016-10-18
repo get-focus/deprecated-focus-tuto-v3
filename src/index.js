@@ -16,13 +16,17 @@ import { AppContainer } from 'react-hot-loader';
 import {createStore} from 'redux';
 import Root from './root';
 import {initFetch} from './services/fetch';
+import configureStore from './store';
+const store = configureStore();
+initFetch(store.dispatch);
 
 const renderApp = RootComponent => {
     console.info('App rendered')
     ReactDOM.render(
         <AppContainer>
+          <RootComponent store={store} />
         </AppContainer>,
-        document.querySelector('.focus-graph-demo-app')
+        document.querySelector('.focus-tuto-app')
     );
 }
 

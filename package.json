@@ -4,8 +4,22 @@
   "description": "Form, data behaviours",
   "main": "src/index.js",
   "scripts": {
+    "start": "better-npm-run dev-server"
   },
   "betterScripts": {
+    "dev-server": {
+      "command": "node ./server.js",
+      "env": {
+        "DEV": true,
+        "SOURCE_MAPS": false,
+        "ENTRY_FILE_PATH": "./src/",
+        "PAGE_TITLE": "Focus entity dev page",
+        "MINIMIFY": false,
+        "API_PORT": 9999,
+        "PACKAGE_JSON_PATH": "../",
+        "ANCHOR_CLASS": "focus-tuto-app"
+      }
+    }
   },
   "repository": {
     "type": "git",

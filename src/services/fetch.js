@@ -4,8 +4,7 @@ let fetch;
 export const initFetch =  dispatch => {
   fetch = createfocusFetchProxy(dispatch);
 }
-export default (...fetchArgs) => {
-    const {url, data, method} = fetchArgs[0];
+export default (url, method, data) => {
     return fetch(url, {
         method: method,
         body: JSON.stringify(data),

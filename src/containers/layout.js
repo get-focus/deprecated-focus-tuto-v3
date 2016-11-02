@@ -27,20 +27,6 @@ const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHe
 // Navigation
 import {browserHistory} from 'react-router';
 
-// const SB = props => {
-//     const {id,content, title, deleteMessage, actionHandler, actionText} = props;
-//
-//     return (
-//         <div className="mdl-js-snackbar mdl-snackbar mdl-snackbar--active animated slideInUp" data-upgraded="MaterialSnackbar" aria-hidden="false">
-//             <div className="mdl-snackbar__text">{props.content}</div>
-//             {actionHandler && actionText &&
-//                 <button className='mdl-snackbar__action' type='button' onClick={() => {actionHandler(props); deleteMessage({id});}}>{actionText}</button>
-//             }
-//             <button className="mdl-snackbar__action" type="button" onClick={() => deleteMessage({id})}>Close</button>
-//         </div>
-//     );
-// }
-
 const  checkLocation = (path) => {
   const splitPath = path.split('/');
   if(splitPath[4] === 'user' || splitPath[4] === 'finance') {
@@ -64,7 +50,7 @@ const BarContentLeft = () => {
   return(
     <div>
       {isHome ? <SummaryTitle /> :
-        <ButtonBack color='white' back={!isHome ? () => browserHistory.goBack() : null}/>
+        <ButtonBack color='primary' back={!isHome ? () => browserHistory.goBack() : null}/>
       }
     </div>
   )

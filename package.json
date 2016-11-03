@@ -7,6 +7,7 @@
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
     "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
     "start": "better-npm-run dev-server",
+    "start:local": "better-npm-run webpack-dev-server-local-focus",
     "build:node": "better-npm-run babelify",
     "build": "npm run build:node",
     "build:watch": "better-npm-run watch",
@@ -24,6 +25,20 @@
         "API_PORT": 9999,
         "PACKAGE_JSON_PATH": "../",
         "ANCHOR_CLASS": "focus-tuto-app"
+      }
+    },
+    "webpack-dev-server-local-focus": {
+      "command": "node ./server.js",
+      "env": {
+        "DEV": true,
+        "SOURCE_MAPS": false,
+        "ENTRY_FILE_PATH": "./src/",
+        "PAGE_TITLE": "Focus entity dev page",
+        "API_PORT": 9999,
+        "MINIMIFY": false,
+        "PACKAGE_JSON_PATH": "../",
+        "ANCHOR_CLASS": "focus-tuto-app",
+        "LOCAL_FOCUS": true
       }
     },
     "watch": {

@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import moment from 'moment';
 
 
 import Checkbox from 'focus-components/input-checkbox';
@@ -18,8 +19,9 @@ export const DO_TEXTE = {
 }
 
 export const DO_DATE = {
-    type: 'text',
-    InputComponent: InputDate
+    InputComponent: InputDate,
+    formatter: date => date ? moment(date, moment.ISO_8601).format('D MMMM YYYY') : '',
+    format: ['DD/MM/YYYY', 'DD-MM-YYYY', 'D MMM YYYY']
 }
 
 export const DO_AMOUNT = {
@@ -51,7 +53,6 @@ export const DO_CIVILITE= {
 
 export const DO_ACCOUNTS_NAMES = {
     type: 'text',
-    InputComponent: Autocompelte
 }
 
 export const DO_CHECKBOX = {

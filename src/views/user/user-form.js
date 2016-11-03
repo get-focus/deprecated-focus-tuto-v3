@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
+import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
@@ -21,20 +22,27 @@ const actions = {
 
 class User extends Component {
   componentWillMount() {
-    const {id, load, injectActionHeader, triggerPosition} = this.props;
+    const {id, load, loadMasterData, injectActionHeader, triggerPosition} = this.props;
     // Et voilà un load !
     load({id});
+    loadMasterData();
     triggerPosition(0);
     injectActionHeader(actions);
   }
 
   render() {
-    const {fieldFor} = this.props;
+    const {fields, fieldFor, selectFor} = this.props;
+    const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
     return (
       <Panel title='User' {...this.props}>
         {fieldFor('uuid')}
+        {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
+        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName', {entityPath: 'user'})}
+        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName', {entityPath: 'user'})}
         {fieldFor('firstName')}
         {fieldFor('lastName')}
+        {fieldFor('date')}
+        {fieldFor('accountsNames')}
       </Panel>
     );
   }
@@ -50,6 +58,7 @@ const formConfig = {
 
 const ConnectedUserForm = compose(
   connectToMetadata(['user']),
+  connectToMasterData(['civility']),
   connectToForm(formConfig),
   connectToFieldHelpers()
 )(User);

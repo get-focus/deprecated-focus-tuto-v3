@@ -11,6 +11,10 @@ export const user = {
     domain: 'DO_TEXTE',
     isRequired: true
   },
+  date: {
+    domain: 'DO_DATE',
+    isRequired: false
+  },
   style: {
     domain: 'DO_CHECKBOX',
     isRequired: false

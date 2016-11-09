@@ -24,11 +24,12 @@ const actions = {
 
 class UserForm extends Component {
   componentWillMount() {
-    const {id, load, loadMasterData, injectActionHeader, triggerPosition} = this.props;
+    const {id, load, loadMasterData, injectActionHeader, triggerPosition, toggleEdit} = this.props;
     load({id});
-    loadMasterData();
     injectActionHeader(actions);
     triggerPosition(0);
+    toggleEdit(true);
+    loadMasterData();
   }
 
   render() {

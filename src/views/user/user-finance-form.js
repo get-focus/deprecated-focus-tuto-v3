@@ -85,7 +85,7 @@ const formConfig = {
   entityPathArray: ['user', 'address'],
   loadAction: loadUserAction,
   saveAction: saveUserAction,
-  nonValidatedFields: ['user.firstName'],
+  nonValidatedFields: ['user.firstName', 'address.city', 'user.accountsNames', 'address.uuid', 'user.civility'],
   mapDispatchToProps: {injectActionHeader, triggerPosition}
 };
 

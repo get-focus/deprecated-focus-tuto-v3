@@ -5,7 +5,7 @@ import moment from 'moment';
 import Checkbox from 'focus-components/input-checkbox';
 import InputDate from 'focus-components/input-date';
 import InputText from 'focus-components/input-text';
-import InputSelect from 'focus-components/select-mdl';
+import InputSelect from 'focus-components/select';
 import Autocompelte from 'focus-components/autocomplete-text/field';
 
 export const DO_ID = {
@@ -42,12 +42,6 @@ export const DO_MONTANT = {
 
 export const DO_CIVILITE= {
     type: 'text',
-    validators: [{
-        type: 'string',
-        options: {
-            maxLength: 200
-        }
-    }],
     SelectComponent: InputSelect
 }
 
@@ -56,6 +50,9 @@ export const DO_ACCOUNTS_NAMES = {
 }
 
 export const DO_CHECKBOX = {
-    type: 'boolean',
-    InputComponent: Checkbox
+    type: 'checkojdfjsd',
+    validators: [{
+        type: 'checkbox',
+    }],
+    InputComponent: Checkbox,
 }

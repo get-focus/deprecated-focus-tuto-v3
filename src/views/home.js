@@ -10,7 +10,8 @@ const routes = [
   {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire FINANCE', title: 'Finance List'},
   {route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire USER-FINANCE', title: 'User finances'},
   {route: '/user/list/120', destination: 'Custom data', description: 'Exemple d\'utitlisation d\'un custom midlleware', title: 'Custom data'},
-  {route: '/user/select/120', destination: 'user refs', description: 'Formulaire avec liste de references', title: 'User Ref List'}
+  {route: '/user/select/120', destination: 'user refs', description: 'Formulaire avec liste de references', title: 'User Ref List'},
+  {route: '/autosample', destination: 'autosample', description: 'Autocomplete-Text Sample', title: 'AutoSample'}
 ];
 
 const actions = {

@@ -17,7 +17,7 @@ export const user = {
   },
   style: {
     domain: 'DO_CHECKBOX',
-    isRequired: false
+    isRequired: true
   },
   civility: { domain: 'DO_CIVILITE', isRequired: true},
   accountsNames: {domain: 'DO_ACCOUNTS_NAMES', isRequired: true}

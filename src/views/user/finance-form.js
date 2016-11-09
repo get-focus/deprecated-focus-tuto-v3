@@ -22,7 +22,8 @@ const actions = {
 
 const Finance = ({fieldFor,listFor, ...otherProps}) => (
     <Panel title='Finance List' {...otherProps}>
-        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine, isRaw: true})}
+        {fieldFor('name')}
+        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
     </Panel>
 )
 

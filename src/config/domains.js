@@ -5,8 +5,8 @@ import moment from 'moment';
 import Checkbox from 'focus-components/input-checkbox';
 import InputDate from 'focus-components/input-date';
 import InputText from 'focus-components/input-text';
-import InputSelect from 'focus-components/select';
-import Autocompelte from 'focus-components/autocomplete-text/field';
+import InputSelect from 'focus-components/select-mdl';
+import TextArea from 'focus-components/input-textarea';
 
 export const DO_ID = {
     type: 'text'
@@ -14,7 +14,10 @@ export const DO_ID = {
 }
 
 export const DO_TEXTE = {
-    type: 'text'
+    type: 'text',
+    formatter: (data) => {
+        return data ? data.toUpperCase() : data;
+    },
     //InputComponent: (props) => <div>DO_TEXTE {JSON.stringify(props)}</div>
 }
 
@@ -54,5 +57,5 @@ export const DO_CHECKBOX = {
     validators: [{
         type: 'checkbox',
     }],
-    InputComponent: Checkbox,
+    InputComponent: Checkbox
 }

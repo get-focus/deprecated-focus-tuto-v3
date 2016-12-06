@@ -20,7 +20,6 @@ const customConfig = localFocus ? {
     },
     proxy: null,
     externals: {
-        'react-dom': 'ReactDOM',
         'redux-devtools': 'redux-devtools',
         'react-addons-css-transition-group': {
             root: ['React', 'addons', 'CSSTransitionGroup']
@@ -31,6 +30,7 @@ const customConfig = localFocus ? {
     resolve: {
         alias: {
             react: path.resolve(process.cwd(), './node_modules/react'),
+            'react-dom': path.resolve(process.cwd(), './node_modules/react-dom'),
             'focus-application': path.resolve(process.cwd(), '../focus-application'),
             'focus-components': path.resolve(process.cwd(), '../focus-components'),
             'focus-graph': path.resolve(process.cwd(), '../focus-graph'),

@@ -22,12 +22,17 @@ const actions = {
 
 class User extends Component {
   componentWillMount() {
-    const {id, load, loadMasterData, injectActionHeader, triggerPosition} = this.props;
+    const {id, load, clear, loadMasterData, injectActionHeader, triggerPosition} = this.props;
     // Et voilà un load !
-    load({id});
+    if(id) {
+      load({id});
+    } else {
+      clear({isActive: true});
+    }
     loadMasterData();
     triggerPosition(0);
     injectActionHeader(actions);
+    console.log('PROPS', this.props);
   }
 
   render() {
@@ -40,7 +45,6 @@ class User extends Component {
         {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName', {entityPath: 'user'})}
         {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName', {entityPath: 'user'})}
         {fieldFor('firstName')}
-        {fieldFor('lastName')}
         {fieldFor('date')}
         {fieldFor('accountsNames')}
       </Panel>
@@ -53,6 +57,7 @@ const formConfig = {
   entityPathArray: ['user'],
   loadAction: loadUserAction,
   saveAction: saveUserAction,
+  nonValidateFields: ['lastName'],
   mapDispatchToProps: {injectActionHeader, triggerPosition}
 };
 

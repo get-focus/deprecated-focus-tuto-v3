@@ -11,8 +11,6 @@ import {injectActionHeader, triggerPosition} from 'focus-application/header/head
 import Panel from 'focus-components/panel';
 import {compose} from 'redux';
 
-import Autocomplete from 'focus-components/autocomplete-text/field';
-
 const actions = {
   primary: [
     {icon: 'verified_user', label: 'verified_user', action: () => console.log('User Form')},
@@ -23,31 +21,6 @@ const actions = {
     {label: 'Settings', action: () => console.log('User Form')}
   ]
 }
-
-const _querySearcher = query => {
-    let data = [
-        {
-            key: 'JL',
-            label: 'Joh Lickeur'
-        },
-        {
-            key: 'GK',
-            label: 'Guénolé Kikabou'
-        },
-        {
-            key: 'YL',
-            label: 'Yannick Lounivis'
-        }
-    ];
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({
-                data,
-                totalCount: data.length
-            });
-        }, 500);
-    });
-};
 
 class UserForm extends Component {
   componentWillMount() {
@@ -65,14 +38,11 @@ class UserForm extends Component {
       <div>
         <Panel title={`User's finances`} {...this.props}>
           {fieldFor('uuid', {entityPath: 'user'})}
+          {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
+          {fieldFor('lastName', {entityPath: 'user'})}
+          {fieldFor('firstName', {entityPath: 'user'})}
           {fieldFor('style',  {entityPath: 'user'})}
         </Panel>
-        <Autocomplete
-          isEdit={true}
-          querySearcher={_querySearcher}
-          placeholder={'Your search...'}
-          onChange={(value) => console.log(value)}
-          />
       </div>
     );
   }

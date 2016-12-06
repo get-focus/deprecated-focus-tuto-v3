@@ -5,7 +5,9 @@ export default {
     uuid: 'identifiant',
     style: 'style',
     civility: 'civilité',
-    accountsNames: 'comptes'
+    accountsNames: 'comptes',
+    mister: 'M.',
+    miss: 'Mme.'
   },
   finance: {
     name: 'nom du compte',

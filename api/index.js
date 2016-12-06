@@ -88,30 +88,25 @@ app.use(allowCrossDomain);
 
 app.get(API_ROOT  + '/entity', function getAllNotifications(req, res) {
     res.json(entityJSON);
-}
-);
+});
 
 app.get(API_ROOT  + '/entity/:id', function getSingleEntity(req, res) {
     res.json(entityJSON.find(d => d.uuid === req.params.id));
-}
-);
+});
 
 app.get(API_ROOT  + '/mixed/:id', function getSingleEntity(req, res) {
     res.json({
         user: entityJSON.find(d => d.uuid === req.params.id),
         address: adressJSON.find(d => d.uuid = req.params.id)
     });
-}
-);
+});
 
 app.get(API_ROOT  + '/complex/:id', function getSingleEntity(req, res) {
     res.json(complexJSON.find(d => d.user.uuid ===  req.params.id));
-}
-);
+});
 app.get(API_ROOT  + '/complex', (req, res) => {
     res.json(complexJSON);
-}
-);
+});
 
 
 app.put(API_ROOT  + '/entity/:id', (req, res) => {
@@ -120,8 +115,7 @@ app.put(API_ROOT  + '/entity/:id', (req, res) => {
     //console.log('saved', JSON.stringify(req.body  ));
     savedData.isSaved = true;
     res.json(savedData);
-}
-);
+});
 
 app.post(API_ROOT  + '/entity/:id', (req, res) => {
     var savedData = req.body;
@@ -149,5 +143,4 @@ app.delete(API_ROOT  + '/entity/:id', function deleteNotif(req, res) {
 
 const server = app.listen(MOCKED_API_PORT, function serverCallback() {
     console.log('Mocked entity API listening at http://localhost:%s', MOCKED_API_PORT);
-}
-);
+});

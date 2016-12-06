@@ -8,6 +8,8 @@ import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data
 import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 
+import InputSelect from 'focus-components/select-mdl';
+
 import Panel from 'focus-components/panel';
 import compose from 'lodash/flowRight';
 

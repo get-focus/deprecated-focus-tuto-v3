@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {connect as connectToStore} from 'react-redux';
 
 // focus-application
@@ -28,40 +28,53 @@ const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHe
 import {browserHistory} from 'react-router';
 
 const  checkLocation = (path) => {
-  const splitPath = path.split('/');
-  if(splitPath[4] === 'user' || splitPath[4] === 'finance') {
-    return false;
-  } else {
-    return true;
-  }
+    const splitPath = path.split('/');
+    if(splitPath[4] === 'user' || splitPath[4] === 'finance') {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 const SummaryTitle = () => <div style={{fontSize: '16px', color: 'white'}}>Focus Tuto V3</div>;
 
 const Summary  = () => {
-  const isHome = checkLocation(window.location.href);
-  return(
-    <div> {isHome ? null : <SummaryTitle />} </div>
-  )
+    const isHome = checkLocation(window.location.href);
+    return(
+        <div> {isHome ? null : <SummaryTitle />} </div>
+    )
 }
 
 const BarContentLeft = () => {
-  const isHome = checkLocation(window.location.href);
-  return(
-    <div>
-      {isHome ? <SummaryTitle /> :
-        <ButtonBack color='primary' back={!isHome ? () => browserHistory.goBack() : null}/>
-      }
-    </div>
-  )
+    const isHome = checkLocation(window.location.href);
+    return(
+        <div>
+            {isHome ? <SummaryTitle /> :
+                <ButtonBack color='primary' back={!isHome ? () => browserHistory.goBack() : null}/>
+            }
+        </div>
+    )
 }
 
 const BarContentExpanded  = () => <div style={{fontSize: '30px', fontWeight: 'bold', color: 'white'}}>Focus Tuto V3</div>;
 
 const BarContentRight = () => {
-  return(
-    <Button style={{color: 'white'}} shape='icon' icon='info' hasRipple={false} onClick={() => window.open('https://github.com/get-focus/focus-tuto-v3/tree/final')}/>
-  )
+    return(
+        <Button style={{color: 'white'}} shape='icon' icon='info' hasRipple={false} onClick={() => window.open('https://github.com/get-focus/focus-tuto-v3/tree/final')}/>
+    )
+}
+
+class Menu extends PureComponent {
+    render() {
+        const {location} = this.props;
+        const menus = [
+            { icon: 'home', label: 'menu.home', route: '/' }, // route: 'home'
+            { icon: 'search', label: 'menu.search', route: '/user/120' },
+        ]
+        return (
+            <MenuLeft menus={menus} pathname={location.pathname} homePath='/'/>
+        )
+    }
 }
 
 const ConfirmComponent = props => <ConfirmWrapper {...props}  ConfirmationModal={ConfirmationPopin}/>
@@ -70,17 +83,17 @@ const AppHeader = props => <Header primaryColor={'#424950'} BarContentSummary={S
 
 //confirmation-popin
 function AppLayout(props) {
-  window.scrollTo(0, 0);
-  return  (
-    <ConnectedScrollTrigger>
-      <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={MenuLeft} MessageCenter={AppMessages}>
-        {props.hasDevtools  && <DevTools />}
-        {props.children}
-      </Layout>
-    </ConnectedScrollTrigger>
-  )
+    window.scrollTo(0, 0);
+    console.log(props);
+    return  (
+        <ConnectedScrollTrigger>
+            <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={()=> <Menu location={props.location} />} MessageCenter={AppMessages}>
+                {props.children}
+            </Layout>
+        </ConnectedScrollTrigger>
+    )
 };
 AppLayout.defaultProps = {
-  hasDevtools: true
+    hasDevtools: true
 };
 export default AppLayout

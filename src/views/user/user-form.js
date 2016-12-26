@@ -22,10 +22,11 @@ const actions = {
 
 class User extends Component {
   componentWillMount() {
-    const {id, load, clear, loadMasterData, injectActionHeader, triggerPosition} = this.props;
+    const {id, load, clear, loadMasterData, injectActionHeader, triggerPosition, toggleEdit} = this.props;
     // Et voilà un load !
     if(id) {
       load({id});
+      toggleEdit(true);
     } else {
       clear({isActive: true});
     }

@@ -133,7 +133,7 @@
   "dependencies": {
     "focus-application": "^3.0.0-rc26",
     "focus-components": "^3.0.0-rc49",
-    "focus-graph": "^3.0.0-beta11",
+    "focus-graph": "^3.0.0-beta12",
     "focus-search": "^3.0.0-beta4",
     "material-design-icons-iconfont": "2.0.4",
     "material-design-lite": "1.2.1",

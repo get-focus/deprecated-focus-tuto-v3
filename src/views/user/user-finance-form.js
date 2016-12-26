@@ -42,6 +42,8 @@ class UserForm extends Component {
           {fieldFor('lastName', {entityPath: 'user'})}
           {fieldFor('firstName', {entityPath: 'user'})}
           {fieldFor('style',  {entityPath: 'user'})}
+          {fieldFor('date', {entityPath: 'user'})}
+          {fieldFor('accountsNames', {entityPath: 'user'})}
         </Panel>
       </div>
     );

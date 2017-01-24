@@ -4,7 +4,13 @@
   "description": "Form, data behaviours",
   "main": "src/index.js",
   "scripts": {
-    "start": "better-npm-run dev-server"
+    "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
+    "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
+    "start": "better-npm-run dev-server",
+    "build:node": "better-npm-run babelify",
+    "build": "npm run build:node",
+    "build:watch": "better-npm-run watch",
+    "publish": "npm run build"
   },
   "betterScripts": {
     "dev-server": {
@@ -19,6 +25,25 @@
         "PACKAGE_JSON_PATH": "../",
         "ANCHOR_CLASS": "focus-tuto-app"
       }
+    },
+    "watch": {
+      "command": "webpack --watch ./src/index.js",
+      "env": {
+        "DEV": true,
+        "SOURCE_MAPS": false,
+        "ENTRY_FILE_PATH": "./src/index",
+        "PAGE_TITLE": "Focus entity dev page",
+        "MINIMIFY": false,
+        "API_PORT": 9999,
+        "PACKAGE_JSON_PATH": "../",
+        "ANCHOR_CLASS": "focus-tuto-app"
+      }
+    },
+    "babelify": {
+      "env": {
+        "BABEL_ENV": "production"
+      },
+      "command": "node scripts/babelify.js"
     }
   },
   "repository": {
@@ -39,15 +64,14 @@
   "homepage": "https://github.com/pierr/data-behaviours#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
-    "babel-core": "^6.4.5",
-    "babel-eslint": "^6.0.2",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.2",
     "babel-plugin-flow-comments": "^6.3.19",
-    "babel-polyfill": "^6.5.0",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-focus": "^0.6.1",
     "better-npm-run": "0.0.11",
     "body-parser": "^1.14.2",
-    "carte-blanche": "^0.3.1",
     "chai": "^3.5.0",
     "chai-subset": "^1.2.0",
     "css-loader": "^0.25.0",
@@ -55,30 +79,25 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "faker": "^3.0.1",
     "file-loader": "^0.9.0",
-    "focus-graph": "^3.0.0-rc4",
     "html-webpack-plugin": "^2.8.1",
+    "i18next": "^3.4.3",
     "isomorphic-fetch": "^2.2.1",
-    "jsdom": "^9.5.0",
+    "jsdom": "^9.6.0",
     "json-loader": "^0.5.4",
-    "lodash": "^4.6.1",
-    "material-design-icons-iconfont": "^2.0.4",
+    "lodash": "^4.17.4",
+    "material-design-icons-iconfont": "^3.0.0",
     "material-design-lite": "^1.2.1",
     "mocha": "^3.1.0",
-    "moment": "^2.12.0",
-    "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^15.3.0",
-    "react-addons-css-transition-group": "^15.3.1",
-    "react-hot-loader": "^3.0.0-beta.1",
-    "react-redux": "^4.4.5",
-    "redux-devtools": "^3.1.1",
-    "redux-devtools-dispatch": "^2.0.1",
-    "redux-devtools-dock-monitor": "^1.1.0",
-    "redux-devtools-inspector": "^0.8.0",
-    "redux-devtools-multiple-monitors": "^1.0.0",
-    "redux-logger": "^2.5.0",
-    "redux-slider-monitor": "^1.0.2",
-    "redux-thunk": "^2.1.0",
-    "remarkable": "^1.6.2",
+    "moment": "^2.17.1",
+    "node-sass": "^3.10.1",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-redux": "^5.0.2",
+    "redux-devtools": "^3.3.2",
+    "redux-logger": "^2.7.4",
+    "redux-slider-monitor": "^1.0.7",
+    "remarkable": "^1.7.1",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
@@ -90,16 +109,19 @@
     "webpack-focus": "^0.12.2"
   },
   "dependencies": {
-    "focus-application": "^3.0.0-rc8",
-    "focus-components": "3.0.0-rc13",
-    "focus-graph": "^3.0.0-rc4",
+    "focus-application": "3.0.0",
+    "focus-components": "3.0.0",
+    "focus-graph": "3.0.0",
+    "focus-search": "3.0.0",
     "material-design-icons-iconfont": "2.0.4",
     "material-design-lite": "1.2.1",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.8.1",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-redux": "5.0.2",
+    "react-router": "3.0.2",
+    "redux": "3.6.0",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-inspector": "^0.10.0",
+    "redux-thunk": "2.2.0"
   }
 }

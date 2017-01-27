@@ -5,10 +5,14 @@ const faker = require('faker');
 const isEmpty = require('lodash/isEmpty');
 
 const NB_GENERATED_ENTITY = 10;
+
+faker.locale = "fr";
+
 let entityJSON = [{
   uuid: '1234',
   firstName: 'Don Diego',
-  lastName: 'De Libercourt'
+  lastName: 'De Libercourt',
+  civility: 'Mr'
 }];//require('./api-mock/notifs.json');
 
 let adressJSON = [{
@@ -21,6 +25,7 @@ function createEntity(i){
     uuid: '12'+i,
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
+    civility: faker.name.prefix(),
     style: true,
     accountsNames: 'GK'
   };

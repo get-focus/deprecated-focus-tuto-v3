@@ -15,8 +15,14 @@ export const user = {
     domain: 'DO_CHECKBOX',
     isRequired: false
   },
-  civility: { domain: 'DO_CIVILITE', isRequired: true},
-  accountsNames: {domain: 'DO_ACCOUNTS_NAMES', isRequired: true}
+  civility: {
+    domain: 'DO_CIVILITE',
+    isRequired: true
+  },
+  accountsNames: {
+    domain: 'DO_ACCOUNTS_NAMES',
+    isRequired: true
+  }
 }
 
 export const address = {

@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import {userReducer, financeReducer} from './user-finance-reducer';
+import financeReducer from './finance-reducer';
+import userReducer from './user-reducer';
 import {customReducer} from './custom-reducer';
 
 export default combineReducers({

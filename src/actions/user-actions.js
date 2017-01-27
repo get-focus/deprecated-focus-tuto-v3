@@ -1,4 +1,3 @@
-
 import {actionBuilder} from 'focus-graph/actions/entity-actions-builder';
 import {loadUser, saveUser} from '../services/user-service';
 

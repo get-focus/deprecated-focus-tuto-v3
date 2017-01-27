@@ -6,7 +6,8 @@ import {compose} from 'redux';
 import {Link} from 'react-router';
 
 const routes = [
-  {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
+  {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
+  {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire FINANCE', title: 'Finance List'}
 ];
 
 const actions = {

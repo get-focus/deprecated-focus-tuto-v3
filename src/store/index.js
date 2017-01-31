@@ -8,7 +8,8 @@ import fetchReducer from 'focus-application/fetch/fetch-reducer';
 import DevTools from '../containers/dev-tools'
 import rootReducer from '../reducer';
 import customReducer from '../reducer/custom-reducer'
-import {toUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware} from '../../src/middleware/user-middleware';
+
+import {amoutToUpperCaseMiddleware, errorFieldMiddleware  } from '../../src/middleware/user-middleware';
 
 import i18n from 'i18next';
 
@@ -24,7 +25,7 @@ export default function configureStore(initialState){
       fetch:fetchReducer,
       customData: customReducer
     },
-    [errorFieldMiddleware, ownActiondMiddleware],
+    [amoutToUpperCaseMiddleware, errorFieldMiddleware],
     [DevTools.instrument()],
     props => { return i18n.t(props)}
   );

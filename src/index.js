@@ -3,12 +3,12 @@ import 'focus-components/style';
 import 'focus-graph/src/style/field.scss';
 import 'focus-application/layout/index.scss'
 import 'focus-application/header/index.scss'
-import {init as initTranslation} from 'focus-components/translation';
 
-//------------------------------
-// INIT FOCUS TRANSLATION
-initTranslation();
-//------------------------------
+import {intializeTranslation} from 'focus-application/translation';
+import i18n from 'i18next';
+import focusTranslation from 'focus-components/translation/resources/fr-FR';
+import frTranslation from './config/translations/fr';
+intializeTranslation(i18n, 'fr-FR', [focusTranslation, frTranslation]);
 
 import React , {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
@@ -17,15 +17,14 @@ import {createStore} from 'redux';
 import Root from './root';
 import {initFetch} from './services/fetch';
 import configureStore from './store';
+
 const store = configureStore();
 initFetch(store.dispatch);
 
 const renderApp = RootComponent => {
     console.info('App rendered')
     ReactDOM.render(
-        <AppContainer>
-          <RootComponent store={store} />
-        </AppContainer>,
+        <RootComponent store={store} />,
         document.querySelector('.focus-tuto-app')
     );
 }

@@ -4,6 +4,6 @@ import userReducer from './user-reducer';
 import {customReducer} from './custom-reducer';
 
 export default combineReducers({
-  user: userReducer,
-  finance: financeReducer
+    user: userReducer,
+    finance: financeReducer
 });

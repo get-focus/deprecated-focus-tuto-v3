@@ -5,7 +5,6 @@ const _loadUserFinanceAction = actionBuilder({names: ['user', 'finance' ], type:
 
 export const loadUserFinanceAction = _loadUserFinanceAction.action;
 
-
 const _saveUserFinanceAction = actionBuilder({names: ['user','finance'], type: 'save', service: saveUserFinance});
 
 export const saveUserFinanceAction = _saveUserFinanceAction.action;

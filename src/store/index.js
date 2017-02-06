@@ -9,42 +9,37 @@ import DevTools from '../containers/dev-tools'
 import rootReducer from '../reducer';
 import customReducer from '../reducer/custom-reducer'
 
-import {amoutToUpperCaseMiddleware, errorFieldMiddleware  } from '../../src/middleware/user-middleware';
+import {amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware} from '../../src/middleware/user-middleware';
 
 import i18n from 'i18next';
 
 let lastCreatedStore;
 
-export default function configureStore(initialState){
-  const store = createStoreWithFocus(
-    {
-      dataset: rootReducer,
-      header: headerReducer,
-      messages: messageReducer,
-      confirm: confirmReducer,
-      fetch:fetchReducer,
-      customData: customReducer
-    },
-    [amoutToUpperCaseMiddleware, errorFieldMiddleware],
-    [DevTools.instrument()],
-    props => { return i18n.t(props)}
-  );
+export default function configureStore(initialState) {
+    const store = createStoreWithFocus(
+        {
+            dataset: rootReducer,
+            header: headerReducer,
+            messages: messageReducer,
+            confirm: confirmReducer,
+            fetch:fetchReducer,
+            customData: customReducer
+        },
+        [amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware],
+        [DevTools.instrument()],
+        props => { return i18n.t(props)}
+    );
 
-  lastCreatedStore = store;
-  return store;
+    lastCreatedStore = store;
+    return store;
 };
-/*
-import createStoreWithFocus from 'focus-graph/store/create-store';
-import dataSetReducer from '../../src/reducer';
-import {amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware} from '../middleware/user-middleware.js';
-import DevTools from '../containers/dev-tools'
-
-const store = createStoreWithFocus(
-  // Le reducer de données
-  {dataSet: dataSetReducer},
-  // Le tableau de middleware custom
-  [errorFieldMiddleware, amoutToUpperCaseMiddleware,ownActiondMiddleware], [DevTools.instrument()] // on ajoute les devtools focus
-);
-
-export default store;
-*/
+// import dataSetReducer from '../../src/reducer';
+//
+// const store = createStoreWithFocus(
+//     // Le reducer de données
+//     {dataSet: dataSetReducer},
+//     // Le tableau de middleware custom
+//     [errorFieldMiddleware, amoutToUpperCaseMiddleware,ownActiondMiddleware], [DevTools.instrument()] // on ajoute les devtools focus
+// );
+//
+// export default store;

@@ -6,49 +6,15 @@ import {compose} from 'redux';
 import {Link} from 'react-router';
 
 const routes = [
-  {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
-  {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire FINANCE', title: 'Finance List'},
-  {route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire USER-FINANCE', title: 'User finances'},
-
+    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
+    {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'},
+    {route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finances'},
+    {route: '/user/list/120', destination: 'Custom data', description: 'Exemple d\'utitlisation d\'un custom midlleware', title: 'Custom data'},
+    {route: '/user/component/120', destination: 'user refs', description: 'Formulaire avec différents composants', title: 'User Components'}
 ];
 
-const actions = {
-  primary: [
-    {icon: 'face', label: 'face', action: () => window.location.href = '/#/user/120/'},
-    {icon: 'account_balance_wallet', label: 'wallet', action: () => window.location.href = '/#/finance/120/'}
-  ],
-  secondary: [
-    {label: 'Informations', action: () => console.log('User Form')},
-    {label: 'Settings', action: () => console.log('User Form')}
-  ]
-}
-
-class Home extends Component {
-  componentWillMount() {
-    window.scrollTo(0, 0);
-    const {injectActionHeader, triggerPosition} = this.props;
-    triggerPosition(0);
-    injectActionHeader(actions);
-  }
-
-  render() {
-    return(
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+const Home = props =>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
         {routes.map(route => <Card key={route.route} {...route} />)}
-      </div>
-    );
-  }
-}
-
-const formConfig = {
-  formKey: 'homeForm',
-  entityPathArray: ['user'],
-  mapDispatchToProps: {injectActionHeader, triggerPosition}
-};
-
-const ConnectedHome = compose(
-  connectToForm(formConfig)
-)(Home);
-
-// const Home = props => <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>{routes.map(route => <Card key={route.route} {...route} />)}</div>;
-export default ConnectedHome;
+    </div>;
+export default Home;

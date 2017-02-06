@@ -4,7 +4,6 @@ import 'focus-graph/src/style/field.scss';
 import 'focus-application/layout/index.scss'
 import 'focus-application/header/index.scss'
 
-
 import {intializeTranslation} from 'focus-application/translation';
 import i18n from 'i18next';
 import focusTranslation from 'focus-components/translation/resources/fr-FR';
@@ -18,15 +17,14 @@ import {createStore} from 'redux';
 import Root from './root';
 import {initFetch} from './services/fetch';
 import configureStore from './store';
+
 const store = configureStore();
 initFetch(store.dispatch);
 
 const renderApp = RootComponent => {
     console.info('App rendered')
     ReactDOM.render(
-        <AppContainer>
-          <RootComponent store={store} />
-        </AppContainer>,
+        <RootComponent store={store} />,
         document.querySelector('.focus-tuto-app')
     );
 }

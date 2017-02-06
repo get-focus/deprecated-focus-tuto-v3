@@ -3,61 +3,51 @@ import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {loadFinanceAction, saveFinanceAction} from '../../actions/finance-actions';
-import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 
 import Panel from 'focus-components/panel';
 import {compose} from 'redux';
 import FinancialMoveLine from './financialMoveLine'
 
-const actions = {
-  primary: [
-    {icon: 'verified_user', label: 'verified_user', action: () => console.log('User Form')},
-    {icon: 'timeline', label: 'timeline', action: () => console.log('User Form')}
-  ],
-  secondary: [
-    {label: 'Informations', action: () => console.log('User Form')},
-    {label: 'Settings', action: () => console.log('User Form')}
-  ]
-}
-
 const Finance = ({fieldFor,listFor, ...otherProps}) => (
-  <Panel title='Finance ' {...otherProps}>
-    {fieldFor('name', {entityPath: 'finance'})}
-    {fieldFor('amount', {entityPath: 'finance'})}
-    {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
-  </Panel>
+    <Panel title='Finance ' {...otherProps}>
+        {fieldFor('name', {entityPath: 'finance'})}
+        {fieldFor('amount', {entityPath: 'finance'})}
+        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+    </Panel>
 )
 
 class SmartFinance extends Component {
-  componentWillMount() {
-    const {id, load, injectActionHeader, triggerPosition} = this.props;
-    load({id});
-    triggerPosition(60);
-    injectActionHeader(actions);
-  }
+    componentWillMount() {
+        const {id, load} = this.props;
+        load({id});
+    }
 
-  render() {
-    const {fieldFor, listFor} = this.props;
-    return (
-      <Finance fieldFor={fieldFor} listFor={listFor} { ...this.props}/>
-    );
-  }
+    render() {
+        const {fieldFor, listFor} = this.props;
+        return (
+            <div>
+                <p>
+                    Formulaire classique avec une liste éditable (listFor) pour le champs opérations sur le compte.
+                </p>
+                <Finance fieldFor={fieldFor} listFor={listFor} { ...this.props}/>
+            </div>
+        );
+    }
 };
 
 Finance.displayName = 'SmartFinance ';
 
 const formConfig = {
-  formKey: 'userForm',
-  entityPathArray: ['finance'],
-  loadAction: loadFinanceAction,
-  saveAction: saveFinanceAction,
-  mapDispatchToProps: {injectActionHeader, triggerPosition}
+    formKey: 'userForm',
+    entityPathArray: ['finance'],
+    loadAction: loadFinanceAction,
+    saveAction: saveFinanceAction
 };
 
 const ConnectedFinanceForm = compose(
-  connectToMetadata(['financialMove', 'finance']),
-  connectToForm(formConfig),
-  connectToFieldHelpers()
+    connectToMetadata(['financialMove', 'finance']),
+    connectToForm(formConfig),
+    connectToFieldHelpers()
 )(SmartFinance);
 
 export default ConnectedFinanceForm;

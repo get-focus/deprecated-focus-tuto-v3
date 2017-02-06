@@ -7,7 +7,6 @@ const _loadUserAction = actionBuilder({names: ['user' ], type: 'load', service: 
 export const loadUserTypes = _loadUserAction.types;
 export const loadUserAction = _loadUserAction.action;
 
-
 // Création de l'action de Load via un tableau de node pour le store redux, un type d'action et un service associé
 const _saveUserAction = actionBuilder({names: ['user'], type: 'save', service: saveUser});
 //En retour on a l'action à appelé dans la vue, et les types des actions redux crées à donner au reduce redux

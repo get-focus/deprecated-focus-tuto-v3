@@ -13,8 +13,8 @@ import UserComponent from '../views/user/user-form-checkbox';
 
 const paramExtractor = Component => props => <Component id={props.params.id} />
 const UserWithParam = paramExtractor(User);
-const router = <Router history={hashHistory}  key='router'>
-    <Route path='/' component={App} key='mainRoute' >
+const router = <Router history={hashHistory} key='router'>
+    <Route path='/' component={App} key='mainRoute'>
         <IndexRoute component={Home}/>
         {/* Les :id sert à fournir un paramètre à l'url on extrait les paramètres d'url via la props params*/}
         <Route path='user/:id' component={UserWithParam} />
@@ -25,6 +25,6 @@ const router = <Router history={hashHistory}  key='router'>
     </Route>
 </Router>;
 
-//{/* On injecte comme composant d'application un composant connecté au store redux */}
-//{/* Le composant IndexRoute signifie qui sera appellée par défaut*/}
+/* On injecte comme composant d'application un composant connecté au store redux */
+/* Le composant IndexRoute signifie qui sera appelée par défaut*/
 export default router;

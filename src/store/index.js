@@ -17,6 +17,7 @@ let lastCreatedStore;
 
 export default function configureStore(initialState) {
     const store = createStoreWithFocus(
+        // Le reducer de données
         {
             dataset: rootReducer,
             header: headerReducer,
@@ -25,21 +26,13 @@ export default function configureStore(initialState) {
             fetch:fetchReducer,
             customData: customReducer
         },
+        // Le tableau de middleware custom
         [amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware],
+        // on ajoute les devtools focus
         [DevTools.instrument()],
-        props => { return i18n.t(props)}
+        props => {return i18n.t(props)}
     );
 
     lastCreatedStore = store;
     return store;
 };
-// import dataSetReducer from '../../src/reducer';
-//
-// const store = createStoreWithFocus(
-//     // Le reducer de données
-//     {dataSet: dataSetReducer},
-//     // Le tableau de middleware custom
-//     [errorFieldMiddleware, amoutToUpperCaseMiddleware,ownActiondMiddleware], [DevTools.instrument()] // on ajoute les devtools focus
-// );
-//
-// export default store;

@@ -97,9 +97,9 @@ class UserForm extends Component {
 
     render() {
         const {fields, fieldFor, selectFor} = this.props;
-        /*const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
+        const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
         const {date1, error1} = this.state;
-
+        /*
         <InputDate
         error={error1}
         format={['DD/MM/YYYY', 'DD.MM.YYYY', 'DD MMM YYYY']}
@@ -124,7 +124,7 @@ class UserForm extends Component {
         */
         return (
             <div>
-                <p>Formulaire affichant différents composants. Ce formulaire permet de tester les composants, checkbox, date et autoComplete.</p>
+                <p>Formulaire affichant différents composants. Ce formulaire permet de tester les composants, checkbox et date.</p>
                 <Panel title='User Ref List Checkbox' {...this.props}>
                     {fieldFor('uuid', {entityPath: 'user'})}
                     {fieldFor('style', {entityPath: 'user'})}
@@ -142,7 +142,6 @@ const formConfig = {
     entityPathArray: ['user', 'address'],
     loadAction: loadUserAction,
     saveAction: saveUserAction,
-    nonValidatedFields: ['user.firstName'],
     mapDispatchToProps: {injectActionHeader, triggerPosition}
 };
 

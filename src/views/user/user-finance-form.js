@@ -10,17 +10,6 @@ import {loadUserFinanceAction, saveUserFinanceAction} from '../../actions/financ
 import compose from 'lodash/flowRight';
 import FinancialMoveLine from './financialMoveLine'
 
-const actions = {
-    primary: [
-        {icon: 'verified_user', label: 'verified_user', action: () => console.log('User Form')},
-        {icon: 'timeline', label: 'timeline', action: () => console.log('User Form')}
-    ],
-    secondary: [
-        {label: 'Informations', action: () => console.log('User Form')},
-        {label: 'Settings', action: () => console.log('User Form')}
-    ]
-}
-
 const User = ({fieldFor,listFor, ...otherProps}) => (
     <Panel title='User' {...otherProps}>
         {fieldFor('uuid', {entityPath: 'user'})}
@@ -34,7 +23,6 @@ const User = ({fieldFor,listFor, ...otherProps}) => (
 class SmartUserFinance extends Component {
     componentWillMount() {
         const {id, load} = this.props;
-        // Et voila un load !
         load({id});
     }
 

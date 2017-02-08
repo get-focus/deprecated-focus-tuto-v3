@@ -7,6 +7,7 @@ export default {
         civility: 'civilité',
         accountsNames: 'comptes',
         sex: 'sexe',
+        date: 'date',
         fields: {
             saved: 'sauvegardé'
         }

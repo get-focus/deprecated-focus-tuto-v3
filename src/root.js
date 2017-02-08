@@ -1,14 +1,14 @@
 import React, {PropTypes, Component} from 'react';
-import { browserHistory, Router } from 'react-router';
-import { Provider as StoreProvider } from 'react-redux';
-import { Provider as MetadataProvider } from 'focus-graph/behaviours/metadata';
-import { Provider as FieldHelpersProvider } from 'focus-graph/behaviours/field';
-import { Provider as MasterdataProvider } from 'focus-graph/behaviours/master-data';
+import {hashHistory, Router} from 'react-router';
+import {Provider as StoreProvider} from 'react-redux';
+import {Provider as MetadataProvider} from 'focus-graph/behaviours/metadata';
+import {Provider as FieldHelpersProvider} from 'focus-graph/behaviours/field';
+import {Provider as MasterdataProvider} from 'focus-graph/behaviours/master-data';
 
 import routes from './router';
 import * as definitions from './config/entity-definitions';
 import * as domains from './config/domains';
-import masterdatas from './config/master-datas';
+import {masterDataConfig} from './config/master-datas';
 
 import InputText from 'focus-components/input-text';
 import DisplayComponent from 'focus-components/input-display/text';
@@ -29,8 +29,8 @@ class Root extends Component {
             <StoreProvider store={store}>
                 <MetadataProvider definitions={definitions} domains={domains}>
                     <FieldHelpersProvider {...fieldHelperProps}>
-                        <MasterdataProvider configuration={masterdatas}>
-                            <Router history={browserHistory} routes={routes} />
+                        <MasterdataProvider configuration={masterDataConfig}>
+                            <Router history={hashHistory} routes={routes} />
                         </MasterdataProvider>
                     </FieldHelpersProvider>
                 </MetadataProvider>

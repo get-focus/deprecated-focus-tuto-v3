@@ -1,13 +1,13 @@
 # Tutorial de fonctionnement de la nouvelle API de gestion des entités et des pages
- Nous avons conscience qu'il reste quelques petites erreurs, nous avons fait ce tutoriel avec plein d'amour, n'hésitez pas à contribuer pour nous aider =) !
+Nous avons conscience qu'il reste quelques petites erreurs, nous avons fait ce tutoriel avec plein d'amour, n'hésitez pas à contribuer pour nous aider =) !
 
- Afin d'aborder au mieux ce tutoriel, vous avez idéalement des connaissance en JavaScript. [Notre tutoriel est disponible ici](http://getfocus.io/formation-js/#/).
- Vous pouvez approndir celles-ci ainsi que le stanfard JavaScript ECMAScript 6 [sur le site Mozilla Developer Network](https://developer.mozilla.org/fr/docs/Web/JavaScript).
+Afin d'aborder au mieux ce tutoriel, vous avez idéalement des connaissance en JavaScript. [Notre tutoriel est disponible ici](http://getfocus.io/formation-js/#/).
+Vous pouvez approndir celles-ci ainsi que le stanfard JavaScript ECMAScript 6 [sur le site Mozilla Developer Network](https://developer.mozilla.org/fr/docs/Web/JavaScript).
 
 # Prérequis
- Avoir [git](https://git-scm.com/) et [node](https://www.npmjs.com/) d'installés.
- Avoir dans C:\Users\«MON USER» :
- un fichier.npmrc contenant
+Avoir [git](https://git-scm.com/) et [node](https://www.npmjs.com/) d'installés.
+Avoir dans C:\Users\«MON USER» :
+un fichier.npmrc contenant
 ```sh
  //registry.npmjs.org/:_authToken=36b5317e-e385-4f97-841d-252a3036a490
 proxy=http://172.20.0.9:3128/
@@ -25,9 +25,18 @@ export no_proxy=localhost,otherdomain.lan.net
 
 ## Initialisation
 
-Dans le dossier souhaité, récupérez le projet avec la commande `git clone https://github.com/get-focus/focus-tuto-v3.git` depuis la console Git.
-Naviguez dans le dossier créé via le terminal. Nous avant déjà mis les dépendances qu'il faut dans le package.json.
-Il reste à exécuter la commande `npm i`. Cela installera tous les modules nécessaires au fonctionnement de l'application.
+### Récupérer le tutoriel
+
+Dans le dossier souhaité, récupérez le projet depuis la console Git.
+Naviguez dans le dossier créé via le terminal. Nous avons déjà mis les dépendances qu'il faut dans le package.json.
+Il reste à exécuter la commande `npm install`. Cela installera tous les modules nécessaires au fonctionnement de l'application dans un dossier node_modules.
+
+```
+git clone https://github.com/get-focus/focus-tuto-v3.git
+cd focus-tuto-v3
+npm install
+npm start
+```
 
 ## De quoi part-on
 
@@ -64,9 +73,9 @@ Nous avons une API qui nous sert un objet JSON de la forme suivante
 }
 ```
 L'utilisateur a donc :
-- Des informations uuid, name, firstName
-- Une adresse
-- Des informations financières
+- des informations uuid, name, firstName
+- une adresse
+- des informations financières
 
 L'objectif de ce tutoriel est d'afficher chacune de ces données, éventuellement un peu plus.
 
@@ -77,19 +86,19 @@ Nous voulons avoir les informations suivantes :
 
 Un peu comme ceci
 
-![img_1618](https://cloud.githubusercontent.com/assets/286966/16341155/0e5c798c-3a2c-11e6-98e7-276130a236d6.JPG)
-
+![image](https://cloud.githubusercontent.com/assets/8124804/22733365/c0af1e7c-edf1-11e6-9ac8-f2969759577b.png)
 
 ## Première éxecution de l'application
 
 - Lancez la commande `npm start` et rendez vous à [http://localhost:3000](http://localhost:3000)
-- Voici ce qu'on affiche (TODO : mettre cpature d'écran)
+- Voici ce qu'on affiche (TODO : mettre capture d'écran)
 
 
 ### Analyse de ce qui est affiché.
 
 Nous avons dans le fichier index.js les éléments suivants :
 
+TODO : remplacer le code. garder les explications
 ```jsx
 // On récupère react
 import React from 'react';
@@ -189,9 +198,11 @@ ReactDOM.render(
 > Maintenant on a un routeur et une application qui fonctionnent pas trop mal
 > Mais bon l'usage reste super basique
 
+Pour aller plus loin dans l'apprentissage de React Route, voici un tutoriel [sur le GitHub de ReactJS](https://github.com/reactjs/react-router-tutorial) et [un autre de CSS-Tricks](https://css-tricks.com/learning-react-router/).
+
 ## Provider et connector
 
- Maintenant nous allons nous occuper d'initialiser l'application avec l'ensemble des `Providers`. Le concept de Provider utilise des fonctionnalités avancées de `React`. React dispose d'un mécanisme appelé le `context` qui permet de passer des informations de manière implicite à un arbre de composant. Si un parent décide de fournir des informations dans son contexte, tous les enfants peuvent les lire. **Attention l'usage du contexte n'est pas recommandé pour autre chose que pour des librairies qui cherchent à abstraire un concept**. Un provider sert donc à insérer des informations dans le contexte. Il va souvent de pair avec un `connecteur` qui lui sert à extraire des informations du contexte pour les fournir en `props` au composant fils. Le concept de connecteur repose sur le pattern de `High Order Component`.
+ Maintenant nous allons nous occuper d'initialiser l'application avec l'ensemble des `Providers`. Le concept de Provider utilise des fonctionnalités avancées de `React`. React dispose d'un mécanisme appelé le `context` qui permet de passer des informations de manière implicite à un arbre de composant. Si un parent décide de fournir des informations dans son contexte, tous les enfants peuvent les lire. **Attention l'usage du contexte n'est pas recommandé pour autre chose que pour des librairies qui cherchent à abstraire un concept**. Un provider sert donc à insérer des informations dans le contexte. Il va souvent de pair avec un `connecteur` qui lui sert à extraire des informations du contexte pour les fournir en `props` au composant fils. Le concept de connecteur repose sur le pattern de [High Order Component](https://facebook.github.io/react/docs/higher-order-components.html).
 
 - Nous allons ajouter en premier le Provider de `redux`, il sert à insérer le store applicatif dans le contexte. (On pourrait le mettre plus bas dans l'application) mais nous allons le mettre à la racine.
 
@@ -232,7 +243,7 @@ ReactDOM.render(
 );
 ```
 
-- Jusqu'e 'ici rien de très compliqué, maintenant, nous allons connecter l'application (pour tester) au store redux via le connecteur.
+- Jusqu'ici rien de très compliqué. Maintenant, nous allons connecter l'application (pour tester) au store redux via le connecteur.
 
 ```jsx
 import {connect as connectToStore} from 'react-redux';
@@ -382,7 +393,7 @@ On peut donc créer un fichier de config qui contiendra les domaines.
 [Les domaines sont définis plus particulièrement ici](http://kleegroup.github.io/focus-docs/tutorial/surcharger-form-input.html).
 
 > Pour information, vous pouvez insérer ce que vous souhaitez dans les domaines afin de le récupérer dans le composant cible.
-> Je vous invite à lire la superbe documentation dans le connecteur de metadata [ici](https://github.com/get-focus/focus-graph/blob/master/src/behaviours/metadata.js#L71) :+1
+> Je vous invite à lire [la superbe documentation dans le connecteur de metadata](https://github.com/get-focus/focus-graph/blob/master/src/behaviours/metadata.js#L71) :
 > L'objectif de ces métadonnées est d'être fournies au composant générique `Field`
 
 ![slack for ios upload](https://cloud.githubusercontent.com/assets/286966/16376434/7e7d06c4-3c60-11e6-9f4e-5b263df071b2.jpg)
@@ -493,7 +504,6 @@ export const financialMove = {
 
 - Maintenant que nous avons accès à ces définitions, nous allons les initialiser dans l'application.
 - De la même manière que nous avons enrobé le routeur d'un provider de store, nous allons ajouter le provider de métadonnées.
-
 - Nous allons ajouter les lignes suivantes afin de fournir à l'ensemble des composants fils le contenu des domaines et des définitions.
 
 ```jsx
@@ -580,7 +590,7 @@ const Root = ({store, history}) => /*On place le provider de store au plus haut 
 
 ### Le concept de store dans redux
 
-Afin d'utiliser les reducers que vous avez pu écrire, il est nécessaire d'utiliser la méthode `createStore` de redux qui est documenté [ici](http://redux.js.org/docs/api/createStore.html).
+Afin d'utiliser les reducers que vous avez pu écrire, il est nécessaire d'utiliser la méthode `createStore` de redux qui est [documenté ici](http://redux.js.org/docs/api/createStore.html).
 
 
 La création d'un store sert à :
@@ -618,7 +628,7 @@ Voici ce que le `createStoreWithFocus` manipule.
   - `customMiddlewares` l'ensemble des middlewares servant à faire un comportement métier _custom_ au projet. (Mettre à jour un champ en fonction d'un autre par exemple, un exemple détaillé est dans ce tutoriel)
   - `formMiddleware` le middleware responsable de la population du state propre au formulaire
   - `fieldMiddleware` le middleware responsable de la population de chaque field et de la réaction à chaque frappe, chaque changement de focus...
-  - `thunkMiddleware` sert à pouvoir appeler des actions asynchrones. Voir [ici](https://github.com/gaearon/redux-thunk) pour de plus amples informations.
+  - `thunkMiddleware` sert à pouvoir appeler des actions asynchrones. [Voir ici](https://github.com/gaearon/redux-thunk) pour de plus amples informations.
 - `otherEnHancers` qui sert à fournir des enhancers à redux, typiquement le fait d'avoir des devtools redux.
 
 ### Exemple
@@ -643,952 +653,10 @@ export default store;
 
 Ensuite ce store sera fourni au `Provider` de store exposé par [react-redux](https://github.com/reactjs/react-redux).
 
-
 > Le socle applicatif est maintenant prêt.
 > On y va, on peut passer aux exemples !
 
 
+---
 
-# Votre premier formulaire
-
-Commençons par quelque chose de simple, on va afficher simplement les informations d'un User, avec son prénom, son nom, son id, sa civilité et son sexe.
-
-Il y a alors quatre étapes pour réaliser cela. La vue, les actions, les services et les reducers.
-
-# La vue
-
-Nous avons besoin d'un composant React : User.
-
-```jsx
-// views/user/user-form.js
-import React, {Component, PropTypes} from 'react';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
-import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {loadUserAction, saveUserAction} from '../../actions/user-actions';
-
-// Les boutons de save et de load sont maintenant portés par le panel
-import Panel from 'focus-components/panel';
-import {compose} from 'redux';
-
-class User extends Component {
-    componentWillMount() {
-        const {id, load} = this.props;
-        // Load de l'entité !
-        load({id});
-    }
-
-    render() {
-        // Via le connectToFieldHelpers nous pouvons récupérer les fieldFor des props
-        const {fieldFor} = this.props;
-        return (
-            <Panel title='User' {...this.props}>
-                {fieldFor('uuid', {entityPath: 'user'})}
-                {fieldFor('firstName', {entityPath: 'user'})}
-                {fieldFor('lastName', {entityPath: 'user'})}
-            </Panel>
-        );
-    }
-};
-
-User.displayName = 'User';
-
-// FormKey : Elle doit être unique pour chaque Form, elle nous permet d'avoir un discriminant !
-// Définit les définitions relatives au form en question, vous pouvez en mettre autant que vous voulez !
-// LoadAction, elle porte bien son nom ! Elle se trouve maintenant dans les props sous le nom de .... load
-// SaveAction, elle porte également très bien son nom et se trouve également dans les props sont le nom de ... save !!
-// nonValidatedFields : tableau qui permet de ne pas prendre en compte un champs required d'une définition
-const formConfig = {
-    formKey: 'userForm',
-    entityPathArray: ['user'],
-    loadAction: loadUserAction,
-    saveAction: saveUserAction,
-    nonValidatedFields: ['user.firstName']
-};
-
-// Il faut connecter notre composant aux différents providers
-// Les domaines + définitions
-// Puis pour le form
-// et enfin le FieldHelpers
-// Attention l'ordre des connecteurs est important !
-const ConnectedUserForm = compose(
-    connectToMetadata(['user']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(User);
-
-//Attention de toujours exporter le composant connecté
-export default ConnectedUserForm;
-```
-
-Expliquons le pas à pas !
-
-### Création d'un composant :
- Rien de bien nouveau sous le soleil, je vous invite à aller [sur le site de React en cas de doute subsistant](https://facebook.github.io/react/docs/react-component.html). Notre composant est un composant React des plus classiques.
-
-> A noter, le composant Panel utilisé, est le panel disponible dans focus-component et ainsi c'est lui qui pose les boutons save et load du panel d'où l'intérêt de lui passer `{...otherProps}`
-
- > Dans l'immédiat, et pour une meilleure clarté de ce tutoriel, le composant User est une classe qui possède la logique (load ...) et l'affichage. En pratique, nous vous encourageons de séparer cette logique de l'affichage afin d'utiliser des composants purs, pour plus de performance, de beauté !
-
-```jsx
-// views/user/user-form.js
-import React, {Component, PropTypes} from 'react';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
-import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {loadUserAction, saveUserAction} from '../../actions/user-actions';
-
-import Panel from 'focus-graph/components/panel';
-import {compose} from 'redux';
-
-const User = ({fieldFor, ...otherProps}) => (
-  <Panel title='User' {...otherProps}>
-      {fieldFor('uuid', {entityPath: 'user'})}
-      {fieldFor('firstName', {entityPath: 'user'})}
-      {fieldFor('lastName', {entityPath: 'user'})}
-  </Panel>
-)
-
-
-class SmartUser extends Component {
-    componentWillMount() {
-        const {id, load} = this.props;
-        // Et voilà un load !
-        load({id});
-    }
-
-    render() {
-        const {fieldFor} = this.props;
-        return (
-          <User fieldFor={fieldFor} { ...this.props}/>
-        );
-    }
-};
-
-User.displayName = 'SmartUser';
-
-const formConfig = {
-    formKey: 'userForm',
-    entityPathArray: ['user'],
-    loadAction: loadUserAction,
-    saveAction: saveUserAction,
-    nonValidatedFields: ['user.firstName']
-};
-
-const ConnectedUserForm = compose(
-    connectToMetadata(['user']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(SmartUser );
-
-export default ConnectedUserForm;
-```
-
-### Connexion au provider :
-Avant toute chose, pour petit rappel, cette connexion est possible grâce aux provider qui ont été mis précédemment autour de vos composants, ainsi que la création du store (via le createStoreWithFocus). Dans notre cas nous allons connecter notre composant :
-- aux métadonnées (les définitions et les domaines)
-- aux fonctionnalités disponibles du Form via un objet de config
-- aux fieldHelpers qui va exposer les fonctionnnalités de fieldFor
-
-Le `connectToForm` est l'élément principal de cet écran, il attend un objet spécifique :
-
-``` jsx
-const formConfig = {
-//FormKey : Elle doit être unique pour chaque Form, elle nous permet d'avoir un discriminant !
-    formKey: 'userForm',
-//Définit les définitions relatives au form en question, vous pouvez en mettre autant que vous voulez !
-    entityPathArray: ['user'],
-// Load Action, elle porte bien son nom ! Elle se trouve maintenant dans les props sous le nom de load
-    loadAction: loadUserAction,
-// Save Action, elle porte également très bien son nom et se trouve également dans les props sont le nom de save
-    saveAction: saveUserAction,
-    nonValidatedFields: ['user.firstName']
-};
-```
-**Le tableau de nonValidatedFields :** ce tableau permet, dans le cas où l'entity definition de votre entity utilisée dans le formulaire a des champs que vous ne souhaitez pas valider.  Nous préconisons une utilisation occasionnelle de ce tableau. En effet si cela devient systématique, nous recommandons de faire des objets non-persistés en base spécifique pour le formulaire en question.  
-Pour la forme, il suffit de lui passer le champ en question de l'entity via une notation simple : 'entity.nomDuChamps'. Pour les champs listes, même principe mais avec un tableau pour chaque champ de l'entité de la liste. Voici un exemple complet : `nonValidatedFields: ['user.uuid', {'user.childs': ['firstName']}]`
-
-> Pour information ce connecteur utilise le `connect` au store de redux afin de récupérer le nœud form du store. Pour en savoir plus sur le shape du store, n'hésitez pas à aller voir la documentation liée.
-
-> Votre composant est maintenant connecté aux différents provider dont vous avez besoin, n'oubliez pas que c'est le composant connecté qu'il faut exporter !
-
-### Votre composant est prêt !
-
-Et voilà rien de plus simple maintenant, tout est dans vos props ! Le fieldFor, selectFor et ListFor, le save, le load et compagnie !
-Vous pouvez maintenant construire votre vue avec des fieldFor comme ça par exemple :
-`{fieldFor('uuid', {entityPath: 'user'})}`
-
-Comme il est possible d'associer plusieurs entityPath à un form, il devient nécessaire d'indiquer pour chaque fieldFor l'entityPath à laquelle il appartient ! Il est possible également de surcharger toutes les fonctions `onChange` ou `onBlur` :
-`{fieldFor('uuid', {onChange: () => {console.log('onChange changé !')}, entityPath: 'user'})}`
-
-Dans le cas ou votre formulaire n'est associé qu'à une seule entité, il n'est pas nécessaire d'indiquer l'entityPath à chaque fois.
-
-> Pour mettre ce composant en musique, comme vous l'avez sans doute remarqué, nous avons dû importer des actions ! Pas de panique, c'est la prochaine partie !  
-> Si vous souhaitez ne faire que de l'affichage, l'action save n'est pas obligatoire.
-
-# Les actions :
-
-Nous avons deux actions à écrire le load et le save. Il est alors possible d'utiliser l'actionBuilder. Nous préconisons l'utilisation de ce dernier, mais ce n'est pas une obligation.
-
-```jsx
-actions/user-actions.js
-import {actionBuilder} from 'focus-graph/actions/entity-actions-builder';
-import {loadUser, saveUser} from '../services/user-service';
-
-const _loadUserAction = actionBuilder({names: ['user'], type: 'load', service: loadUser});
-export const loadUserTypes = _loadUserAction.types;
-export const loadUserAction = _loadUserAction.action;
-
-const _saveUserAction = actionBuilder({names: ['user'], type: 'save', service: saveUser});
-export const saveUserTypes = _saveUserAction.types;
-export const saveUserAction = _saveUserAction.action;
-```
-
-Et voilà de belles actions ! Plusieurs points à expliquer mais avant tout si vous n'êtes pas encore au point sur les actions, les reducers, le store redux, je vous invite grandement à retourner [voir la documentation de redux à ce sujet](http://redux.js.org/docs/basics/Reducers.html) !
-Vous avez trois choses à renseigner ici :
-
-- Les `names `: c'est un tableau qui correspond aux nodes du store redux concernés par votre action (dans notre cas nous avons mis `user`), il est tout à fait possible d'en mettre plusieurs pour mettre à jour plusieurs nœuds ([voir l'exemple à ce sujet](https://github.com/get-focus/focus-tuto-v3/tree/tutorial#les-actions-builders-avec-deux-noeuds))
-- Le type : toute action doit avoir un type, load ou save.
-- Le service : fonction qui fait appel aux serveurs.
-
-> Vous avez ainsi en retour, une action que vous allez utiliser dans votre vue, ainsi que des types qui seront utilisés dans vos reducers (expliqué juste en dessous !)
-
-
-#Les services
-
-Les services fonctionnent exactement de la même façon qu'avant, ne perdons pas de temps inutilement.
-On rappellera juste que les services renvoient des promesses, pour plus d'informations voici la documentation :
-https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Promise.
-
-```jsx
-// services/user-service.js
-import fetch from './fetch';
-
-export const loadUser = async ({id}) => {
-  const response = await fetch(`http://localhost:9999/x/complex/${id}`)
-  const data = await response.response.json();
-  return data.user;
-}
-
-export const saveUser = async ({user}) => {
-  await new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, 0);
-  });
-  return {...user};
-}
-```
-
-#Les reducers
-
-Pour rappel un reducer est une fonction pure (pas liée à un contexte, dans d'autres termes une fonction `static` !) avec une signature très simple :
-		`(previousState, action) => newState`
-
-```jsx
-// reducer/user-reducer.js
-import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadUserTypes} from '../actions/user-actions';
-import {saveUserTypes} from '../actions/user-actions';
-
-// Données initiales pour la state redux
-const DEFAULT_DATA = {
-    firstName:'Amélie'
-};
-
-// Utilisation du reducerBuilder qui attend un name correspondant à votre entité, puis les types de load renvoyés par les actions
-// mais aussi les types des saves et enfin les defaultData.
-const userReducer = reducerBuilder({
-    name: 'user',
-    loadTypes: loadUserTypes,
-    saveTypes: saveUserTypes,
-    defaultData: DEFAULT_DATA
-});
-
-export default userReducer;
-```
-
-Encore une fois quelques explications très simples. Souvenez-vous, dans Redux, les reducers permettent de mettre à jour une partie du state pour une action particulière, discriminée par son type.  Le `reducerBuilder` permet alors de réaliser cela facilement pour nos deux actions construites avec l'`actionBuilder`. Il prend en entrée un objet composé de :
-
-- name : correspondant à votre entité définition.
-
-- LoadTypes : l'`actionBuilder` permet de construire trois actions au sens Redux du terme : la request, la response, et l'error. Ces trois types sont renvoyés par l'actionBuilder dans l'objet loadUserTypes que nous avons importé.
-
-- SaveTypes : même principe que le load.
-
-- DefaultData : il est également possible de mettre un state par default dans les reducers Redux. Cette fonctionnalité est également disponible via le `reducerBuilder` en lui donnant l'objet souhaité.
-
-Ce builder permet donc de construire des reducers Redux, voilà ce qu'il créé :
-```jsx
- function userReducer(state = DEFAULT_STATE, {type, payload}){
- const {data} = state;
-  switch (type) {
-   case REQUEST_LOAD_USER:
-       return {data, loading: true, saving: false};
-   case RESPONSE_LOAD_USER:
-       return {data: payload, loading: false, saving: false};
-   case ERROR_LOAD_USER:
-	   return {data: payload, loading: false, saving: false};    
-   default:
-       return state
-  }
- }
-```
-
-> De la même façon que l'actionBuilder, le reducerBuilder permet de simplifier les développements. Cependant son utilisation n'est pas obligatoire.
-
-
-## Bilan
-
-Nous avons donc réalisé un exemple complet de formulaire. On va juste faire un petit récapitulatif :
-### Lancement par le cycle de vie du composant ou via un bouton
-
-TODO : à mettre en schéma idéalement
-`Vue (load) => dispatch une action (request) => middleware réalisant une action asynchrone (appel au serveur) (request) => reducer => nouveau state => vue(s) mise(s) à jour (état loading) ---(après un certain temps)----> Response du serveur => dispatch une action (response ) => middleware (construction ou maj du state du form) (response) => reducer => nouveau state => vue(s) mise(s) à jour avec les données`
-
-> Ce qu'il se passe quand un input change ou blur
-
-```
-field:dispatch(INPUT_CHANGE) => application:middleware(INPUT_CHANGE):(dispatch(FORM_STATE)) => reducers => newState => field receive new value
-
-field:dispatch(INPUT_BLUR) => application:middleware(INPUT_CHANGE):(dispatch(FORM_STATE)) => reducers => newState => field receive new value
-```
-
-Ce formulaire permet ainsi d'avoir facilement :
-- les actions de load et de save avec gestion de l'asynchronie des requêtes à l'Api avec une gestion des erreurs et l'affichage de celle-ci
-- les fieldHelpers (fieldFor, selectFor, displayFor et listFor)
-- le formatage des données via la fonction écrite dans les domaines (voir le tutoriel sur domaines)
-- Une validation au blur (désactivable facilement)
-- Une fonctionnement par défaut sur le `onChange` avec une gestion des erreurs et l'affichage de celles-ci
-- Une validation globale du formulaire avec une gestion des erreurs et l'affichage de celles-ci.
-
-
-![capture](https://cloud.githubusercontent.com/assets/10349407/16381193/944d89fe-3c7b-11e6-9c05-d1b6c1d49a02.PNG)
-
-
-# Des exemples, encore des exemples.
-
-Le plus dur a été fait, reste maintenant des petits exemples en plus, pour agrémenter tout cela :
- - Les listes
- - Les `actionBuilder` avec deux nœuds
- - Trois exemples de middleware
- - Les listes de références
-
-## Les listes
-
-Via le connecteur fieldHelpers il est possible d'utiliser un listFor et ainsi d'avoir une liste éditable.
-Toujours quatre étapes à réaliser : la vue, les actions, les services et les reducers. Il n'est pas utile de redétailler les mêmes étapes que pour le cas d'un User, ainsi nous allons nous concentrer sur les changements :
- - L'objet serveur
- - Les actions et les reducers
- - La vue et le LineComponent
-
-```
-/views/user/finance-form.js
-import React, {Component, PropTypes} from 'react';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
-import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {loadFinanceAction, saveFinanceAction} from '../../actions/finance-actions';
-
-import Panel from 'focus-components/panel';
-import {compose} from 'redux';
-import FinancialMoveLine from './financialMoveLine'
-
-const Finance = ({fieldFor,listFor, ...otherProps}) => (
-    <Panel title='Finance ' {...otherProps}>
-        {fieldFor('name', {entityPath: 'finance'})}
-        {fieldFor('amount', {entityPath: 'finance'})}
-        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
-    </Panel>
-)
-
-class SmartFinance extends Component {
-    componentWillMount() {
-        const {id, load} = this.props;
-        load({id});
-    }
-
-    render() {
-        const {fieldFor, listFor} = this.props;
-        return (
-            <div>
-                <p>
-                    Formulaire classique avec une liste éditable (listFor) pour le champs opérations sur le compte.
-                </p>
-                <Finance fieldFor={fieldFor} listFor={listFor} { ...this.props}/>
-            </div>
-        );
-    }
-};
-
-Finance.displayName = 'SmartFinance ';
-
-const formConfig = {
-    formKey: 'userForm',
-    entityPathArray: ['finance'],
-    loadAction: loadFinanceAction,
-    saveAction: saveFinanceAction
-};
-
-const ConnectedFinanceForm = compose(
-    connectToMetadata(['financialMove', 'finance']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(SmartFinance);
-
-export default ConnectedFinanceForm;
-
-```
-
-### Structure de l'objet :
-Pour cet exemple voici l'objet envoyé par le serveur.
-```jsx
-"finance":{
-      "name":"Personal Loan Account",
-      "amount":"157.00",
-      "currency":"European Unit of Account 9(E.U.A.-9)",
-      "moves":[
-         {
-            "transactionType":"withdrawal",
-            "amount":"971.00"
-         },
-         {
-            "transactionType":"payment",
-            "amount":"838.00"
-         }
-      ]
-   }
-```
-### Les actions
-
-Les actions et les reducers n'ont rien de particulier pour une liste par rapport au formulaire classique.
-
-```jsx
-import {actionBuilder} from 'focus-graph/actions/entity-actions-builder';
-import {loadFinance, saveFinance} from '../services/finance-service';
-
-// Création de l'action de Load via un tableau de node pour le store redux, un type d'action et un service associé
-const _loadFinanceAction = actionBuilder({names: ['finance' ], type: 'load', service: loadFinance});
-//En retour on a l'action à appelé dans la vue, et les types des actions redux crées à donner au reduce redux
-export const loadFinanceTypes = _loadFinanceAction.types;
-export const loadFinanceAction = _loadFinanceAction.action;
-
-// Création de l'action de Load via un tableau de node pour le store redux, un type d'action et un service associé
-const _saveFinanceAction = actionBuilder({names: ['finance'], type: 'save', service: saveFinance});
-//En retour on a l'action à appelé dans la vue, et les types des actions redux crées à donner au reduce redux
-export const saveFinanceTypes = _saveFinanceAction.types;
-export const saveFinanceAction = _saveFinanceAction.action;
-```
-
-### Les reducers
-
-```jsx
-import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadFinanceTypes, saveFinanceTypes} from '../actions/finance-actions';
-
-const financeReducer = reducerBuilder({
-    name: 'finance',
-    loadTypes: loadFinanceTypes,
-    saveTypes: saveFinanceTypes
-});
-
-export default financeReducer;
-```
-
-### La vue et le LineComponent
-
-Dans notre exemple, le champ `moves` de finance est une liste. Ainsi il a été précisé lors de la déclaration de l'entity definition, l'entity de redirection de la liste. Chacune de ses lignes sera un objet de cette entity de redirection.
-
-```jsx
-// config/entity-definitions.js
-export const finance = {
-    name:  {
-        domain: 'DO_TEXTE',
-        isRequired: true
-    },
-    amount:  {
-        domain: 'DO_AMOUNT',
-        isRequired: true
-    },
-    currency: {
-        domain: 'DO_SYMBOL',
-        isRequired: true
-    },
-    date: {
-        domain: 'DO_DATE',
-        isRequired: false
-    },
-    moves:{
-        redirect: ['financialMove']
-    }
-}
-```
-
-Il suffit, alors, d'ajouter un listFor :
-`{listFor('moves', { redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}`
-
-En lui indiquant le champ qui doit être une liste et en lui donnant l'entité de la redirection ainsi que le LineCompoment :
-```jsx
-//views/user/financialMoveLine.js
-import React, {PropTypes} from 'react';
-
-function FinancialMoveLine({fieldForLine, ...otherProps}) {
-    return (
-    <div>
-        <div> {fieldForLine('transactionType', {entityPath: 'financialMove'})} </div>
-        <div> {fieldForLine('amount', {entityPath: 'financialMove'})} </div>
-    </div>
-  );
-}
-
-FinancialMoveLine.displayName = 'financialMoveLine';
-FinancialMoveLine.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    options: PropTypes.arrayOf(PropTypes.string)
-};
-FinancialMoveLine.defaultProps = {
-    options: []
-}
-export default FinancialMoveLine;
-```
-
-##Les actions Builders avec deux nœuds
-
-Il est possible, de manière très simple, d'ajouter deux nœuds à une actionBuilder afin de charger deux entités lors d'un seul service.
-
-```jsx
-//actions/finance-user-actions.js
-import {actionBuilder} from 'focus-graph/actions/entity-actions-builder';
-import {loadUserFinance, saveUserFinance} from '../services/user-finance-service';
-
-const _loadUserFinanceAction = actionBuilder({names: ['user', 'finance' ], type: 'load', service: loadUserFinance});
-
-export const loadUserFinanceAction = _loadUserFinanceAction.action;
-
-const _saveUserFinanceAction = actionBuilder({names: ['user','finance'], type: 'save', service: saveUserFinance});
-
-export const saveUserFinanceAction = _saveUserFinanceAction.action;
-```
-
-Comme nous pouvons le remarquer, nous avons mis deux nœuds dans le tableaux names : 'user' et 'finance'. Notre serveur nous renvoyant les informations d'un user et l'objet finance avec les deux noms des nœuds comme clé.
-
-Exemple de
-```json
-{
-   "user": {
-      "uuid":"120",
-      "firstName":"Kian",
-      "lastName":"Stroman"
-   },
-   "finance": {
-      "name":"Personal Loan Account",
-      "amount":"157.00",
-      "currency":"European Unit of Account 9(E.U.A.-9)",
-      "moves": [
-          {
-            "transactionType":"withdrawal",
-            "amount":"971.00"
-         },
-         {
-            "transactionType":"payment",
-            "amount":"838.00"
-         }
-      ]
-   }
-}
-```
-
-Une question se pose concernant le reducer : *Quand on regarde plus en détail ce que l'actionBuilder renvoie, on se rend compte qu'il y a en effet : une action et six types différents. Pourquoi ?*
-L'actionBuilder permet d'avoir un load pour deux entités, c'est l'action que vous pourrez donner dans votre formulaire ! Pour les types, pas de panique c'est normal, vous avez deux entités, et donc six actions au sens redux du terme, vous avez alors six types pour votre reducer. Ainsi si vous avez suivi le superbe tutoriel depuis le début vous avez déjà un reducer pour le nœud finance, et un autre pour le nœud user. Ainsi vous n'avez besoin que de l'action pour votre vue.
-Sinon je propose ces petits reducers (et n'oubliez pas d'exporter vos types en retour de l'action) :
-
-```jsx
-import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadUserFinanceTypes, saveUserFinanceTypes} from '../actions/finance-user-actions';
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_LOAD_FINANCE, RESPONSE_LOAD_FINANCE, ERROR_LOAD_FINANCE} = loadUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_SAVE_FINANCE, RESPONSE_SAVE_FINANCE, ERROR_SAVE_FINANCE} = saveUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_LOAD_USER, RESPONSE_LOAD_USER, ERROR_LOAD_USER} = loadUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_SAVE_USER, RESPONSE_SAVE_USER, ERROR_SAVE_USER} = saveUserFinanceTypes;
-
-// Utilisation du reducerBuilder qui attends le type des trois actions créés par l'actionBuimlder
-export const financeReducer = reducerBuilder({
-  name: 'finance',
-  loadTypes: {REQUEST_LOAD_FINANCE, RESPONSE_LOAD_FINANCE, ERROR_LOAD_FINANCE},
-  saveTypes: {REQUEST_SAVE_FINANCE, RESPONSE_SAVE_FINANCE, ERROR_SAVE_FINANCE}
-});
-
-export const userReducer = reducerBuilder({
-	name: 'user',
-    saveTypes: {REQUEST_SAVE_USER, RESPONSE_SAVE_USER, ERROR_SAVE_USER},
-    loadTypes : {REQUEST_LOAD_USER, RESPONSE_LOAD_USER, ERROR_LOAD_USER},
-    defaultData: DEFAULT_DATA
-});
-```
-
-Sans oublier de les ajouter dans le combineReducer :
-
-```jsx
-import {combineReducers} from 'redux';
-//import user from './user-reducer;
-//import finance from './finance-reducer';
-import {userReducer, financeReducer} from './user-finance-reducer'
-
-export default combineReducers({
-    user : userReducer,
-    finance : financeReducer
-});
-```
-
-Nous sommes fin prêts à mettre en place notre formulaire à deux nœuds :
-
-```jsx
-import React, {Component, PropTypes} from 'react';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
-import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {loadUserFinanceAction, saveUserFinanceAction} from '../../actions/finance-user-actions';
-
-import Panel from 'focus-components/panel';
-import compose from 'lodash/flowRight';
-import FinancialMoveLine from './financialMoveLine'
-
-const User = ({fieldFor,listFor, ...otherProps}) => (
-  <Panel title='User' {...otherProps}>
-      {fieldFor('uuid', {entityPath: 'user'})}
-      {fieldFor('firstName', {entityPath: 'user'})}
-      {fieldFor('lastName', {entityPath: 'user'})}
-      {fieldFor('name', {entityPath: 'finance'})}
-      {fieldFor('amount', {entityPath: 'finance'})}
-  </Panel>
-)
-
-
-class SmartUserFinance extends Component {
-    componentWillMount() {
-        const {id, load} = this.props;
-        // Et voilà un load !
-        load({id});
-    }
-
-    render() {
-        const {fieldFor, list} = this.props;
-        return (
-          <User fieldFor={fieldFor} listFor={list} { ...this.props}/>
-        );
-    }
-};
-
-SmartUserFinance.displayName = 'SmartUser ';
-
-const formConfig = {
-    formKey: 'userForm',
-    entityPathArray: ['user','finance'],
-    loadAction: loadUserFinanceAction,
-    saveAction: saveUserFinanceAction,
-    nonValidatedFields: ['user.firstName']
-};
-
-const ConnectedUserForm = compose(
-    connectToMetadata(['user', 'financialMove', 'finance']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(SmartUserFinance );
-
-export default ConnectedUserForm;
-```
-
-## Les Middlewares
-Je vous recommande la documentation de redux : http://redux.js.org/docs/advanced/Middleware.html
-qui vous sera d'une grande aide si vous avez un doute sur les middlewares.
-N'hésitez pas à relire également la documentation sur le createStoreWithFocus.
-
-Vous voulez avoir, en fonction d'une action, un comportement particulier, une logique autre : le middleware est là pour vous. Nous allons pour cela mettre en place trois middlewares d'exemple :
-
- - Un middleware qui permet lors d'une action de réaliser la même action sur un autre champ
- - Un middleware qui permet lors d'une action de réaliser une autre action du form.
- - Un middleware qui permet lors d'une action de réaliser une autre action que nous avons écrit.
-
-### Middleware de base :
-
- Prenons un exemple précis. Lorsqu'un input particulier vient à changer et que ce changement doit mettre en majuscules un autre input (oui oui, ce cas arrive tous les jours), c'est dans le middleware que tout va se jouer.
-Pour cela deux étapes :
-
-- Ecrire le middleware :
-Vous pouvez créer un dossier middleware et écrire dans notre cas :
-```jsx
-import builder from 'focus-graph/store/builder';
-import rootReducer from '../reducer';
-import {INPUT_CHANGE, INPUT_ERROR} from 'focus-graph/actions/input';
-
-
-export const amoutToUpperCaseMiddleware = store => next => action => {
-    //On récupère les informations que l'on souhaite dans le state Redux
-    const {forms, definitions, domains} = store.getState();
-    //On recherche l'action souhaitée sur le champ souhaité afin de réaliser notre action
-    if (action.type === INPUT_CHANGE && action.fieldName == 'amount') {
-        // L'objet action est celui décrit dans les actions [focus-graph](https://github.com/get-focus/focus-graph/blob/master/src/actions/form.js)
-        const {formKey} = action;
-        const {fields} = forms.find(f=> f.formKey === formKey);
-        //On met en forme notre nouvelle action
-        const lastNameAction = {...action};
-        lastNameAction.fieldName = 'name';
-        lastNameAction.rawValue = fields.find(f => f.name == 'name').rawInputValue.toUpperCase();
-        //On réalise la première action
-        next(action);
-        //On dispatch l'action que nous avons créée
-        store.dispatch(lastNameAction);
-    } else {
-    	//Dans tous les autres cas d'action, on realise l'action sans modification
-        next(action);
-    }
-}
-
-export default amoutToUpperCaseMiddleware;
-```
-IL est très simple, via les middlewares, de se placer avant ou après une action, afin de réaliser des modifications. Il suffit pour cela de récupérer l'action qui nous intéresse, de créer la nouvelle action, de réaliser la première et enfin de dispatcher l'action créée (qui passera aussi dans les middlewares).
-
-- L'ajouter lors de la création du store :
-
-Pour cette partie, je vous invite à relire la partie sur le store Redux et sur le [createStoreWithFocus](https://github.com/get-focus/focus-tuto-redux/blob/master/README.md#dernier-point-avant-de-se-lancer-on-va-créer-un-store-un-peu-plus-avancé)
-
-```jsx
-import createStoreWithFocus from 'focus-graph/store/create-store';
-import rootReducer from '../../src/reducer';
-import {amoutToUpperCaseMiddleware} from '../../src/middleware/user-middleware';
-
-//
-const store = createStoreWithFocus({dataset: rootReducer}, [amoutToUpperCaseMiddleware]);
-
-export default store;
-```
-> Le tour est joué ! C'est magique non ?
-
-### Middleware, deuxième exemple
-
-Il est également possible de dispatcher une autre action. Il suffit pour cela de réaliser la même chose que précédemment en ajoutant seulement un autre type et en respectant le contract défini par les [actions](https://github.com/get-focus/focus-graph/blob/master/src/actions/form.js) du form. Il est possible de mettre en place toutes actions disponibles du form.
-
-```jsx
-export const errorFieldMiddleware = store => next => action => {
-    const {forms, definitions, domains} = store.getState();
-    if (action.type === INPUT_CHANGE && action.fieldName == 'amount') {
-        const errorAction = {};
-        errorAction.type = 'INPUT_ERROR';
-        errorAction.formKey = action.formKey;
-        errorAction.fieldName = 'name';
-        errorAction.entityPath = action.entityPath;
-        errorAction.error = "Une erreur venue de l'espace !! "
-        next(action);
-        store.dispatch(errorAction);
-    } else {
-        next(action);
-    }
-}
-```
-
-sans oublier de l'injecter lors de la construction du store :
-
-```jsx
-import builder from 'focus-graph/store/builder';
-import rootReducer from '../../src/reducer';
-import {amoutToUpperCaseMiddleware, errorFieldMiddleware} from '../../src/middleware/user-middleware';
-
-const store = builder(rootReducer, [amoutToUpperCaseMiddleware, errorFieldMiddleware]);
-
-export default store;
-```
-
-
-###Un troisième pour la route !
-
-> En pratique ce troisième cas ne sera pas le plus utilisé, mais c'est toujours bien de savoir que c'est possible. Qui plus est, ça montre d'autant plus la force de redux (au cas où vous ne seriez pas encore convaincu).
-
-Avec focus-graph, un nombre d'actions de base est déjà présent, comme `input_change`, ou le `create_form`. Cependant pour des besoins spécifiques (très spécifiques), il se peut que vous ayez besoin d'avoir une action qui ajoute, modifie une partie du state et qui ne sera pas disponible via le form. Il faut alors écrire cette action. Pour ça, il y a un peu plus d'étapes.
-
-> Attention via cette technique il n'est pas possible de modifier l'objet form (et donc fields) du state, qui ne peut se modifier qu'à travers les actions du form.
-
-- Le middleware :
-
-```jsx
-export const ownActiondMiddleware = store => next => action => {
-    const {forms, definitions, domains} = store.getState();
-    if (action.type === INPUT_CHANGE && action.fieldName == 'name') {
-        const customAction = {};
-        customAction.type = 'MY_ACTION';
-        customAction.formKey = action.formKey;
-        next(action);
-        store.dispatch(customAction);
-    } else {
-        next(action);
-    }
-}
-```
- Toujours le même principe, au moment de l'action `input_change` sur le `name` on va dispatcher une autre action mais cette fois cela sera une action custom.
-
-- L'action custom:
-
-Une action au sens redux du terme ça ressemble à ça. En effet pour les actions spécifiques du load et du save l'actionBuilder est là pour vous simplifier les développements cependant, pour des actions "simples", voici ce que vous devez écrire. Une action doit toujours avoir un type, ce type étant le descriminant pour les reducers. Puis elle contient les informations nécessaires au reducer pour transformer le state. Pour cet exemple la clé du formulaire est suffisant, maintenant vous pouvez tout aussi bien lui donner autre chose.
-
-```jsx
-export const MY_ACTION = 'MY_ACTION';
-
-export const customAction = (formKey) => {
-  type: MY_ACTION,
-  formKey
-}
-```
-- Le reducer :
-
-De la même façon qu'avec l'action, le reducerBuilder n'est pas utile ici. Cependant il est important de comprendre qu'un reducer agit sur une partie du state et donc vous devrez indiquer ici tout les reducers dont vous avez besoin pour agir sur cette partie du state en particulier, il faudra alors réaliser un switch en fonction des différentes actions disponibles pour cette partie du state. Nous en avons qu'une seule ici, mais il n'est pas exclu d'en avoir plusieurs.
-
-Lorsque l'action MY_ACTION est dipatchée par notre middleware, le reducer va ajouter un message de victoire dans le state, sinon il ajoutera un autre message d'échec... Il faut maintenant ajouter notre reducer dans le combineReducer. C'est à ce moment-là qu'on définira le nœud du store, et donc le nom dans le state. Vous allez voir c'est très simple.
-
-```jsx
-import {MY_ACTION} from '../actions/custom-actions';
-
- const customReducer = (state = {}, action) => {
-    switch(action.type) {
-        case MY_ACTION:
-          return {victoire: 'De la Gloire'};
-        default:
-          return {echec: 'De l'échec' };
-    }
-};
-
-export default customReducer;
-
-```
-
-> A noter : il est important de se rappeler que le state redux est un objet immutable et ainsi vous devez toujours renvoyer un nouvel objet et non modifier le premier.
-
-- Le combineReducer :
-
-Il vous suffit d'ajouter votre reducer lors de la déclaration de votre store dans le customData :
-```jsx
-import customReducer from './custom-reducer'
-const store = builder({dataset: rootReducer, customData: customReducer}, [lastNameMiddleware, ownActiondMiddleware], [DevTools.instrument()]);
-
-```
-
-Et voilà, le tour est joué. Notre information se trouvera donc dans customData.
-
-- Le connecteur :
-
-Un dernier petit effort, c'est presque fini ! Donc maintenant que notre information est dans notre store, il faut récupérer cette information, souvenez-vous de nos amis les connecteurs. Notre vue doit se connecter à cette information du state, on se place alors dans celle-ci en se concentrant sur les connecteurs :
-
-```jsx
-import {connect as connectToState} from 'react-redux';
-import {selectData} from 'focus-graph/store/create-store';
-
-[...]
-
-const ConnectedUserForm = compose(
-    connectToState(selectData('customData'))
-    connectToMetadata(['user', 'financialMove', 'finance']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(SmartUserFinance );
-```
- Il vous suffit alors de renseigner le nœud du state que vous voulez récupérer : `customData` via la fontion selectData (qui permet de récupérer la bonne partie du state) et de vous connecter via la fonction connect de Redux.
- Et voilà, je vous jure que c'est fini, votre information se trouve maintenant dans vos props !
-
-```jsx
-const User = ({fieldFor,listFor, victoire, echec, ...otherProps}) => (
-  <Panel title={victoire ? "User " +victoire : "User " + echec} {...otherProps}>
-      {fieldFor('name', {entityPath: 'finance'})}
-      {fieldFor('amount', {entityPath: 'finance'})}
-      {listFor('moves', { redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
-  </Panel>
-)
-```
-
-> Pour rappel et pour conclure cette partie sur les middlewares, le principal c'est de comprendre qu'un middleware a accès au state dans sa globalité et qu'il fonctionnne dans un context donné, à l'inverse d'un reducer qui est pur et ne travaille que sur une partie de state pour en donner une autre. Les deux sont à utiliser pour des cas différents, et il n'est pas superflu de se poser les bonnes questions avant de choisir l'un ou l'autre.
-
-
-##Les listes de références
-
-Pour une utilisation complète de Focus, il serait bien de ne pas oublier les listes de références. Alors voici un dernier exemple. Il reprend tous les concepts déjà utilisés, du coup, je vais me permettre d'aller un peu plus vite !
-
-On va faire ça en quelques étapes :
-
-- Le service de chargement des listes :
-
-Toujours la même chose, c'est un service. Il a été simulé chez nous mais cela correspond à un appel serveur :
-
-```jsx
-export const loadCivility = () => Promise.resolve([{code: 'MR', label: 'M.'}, {code: 'MRS', label: 'Mme'}]);
-```
-- Le fichier de masterDataConfig :
-Dans le dossier `config` nous avons donc ajouté un fichier : `master-data-config`. Celui-ci construit l'objet `masterDataConfig` nécessaire au provider `MasterData` qui permet le chargement des domaines et définitions.
-
-- Le provider masterData :
-
-Dans le fichier `root`
-```jsx
-import {masterDataConfig} from './config/master-data-config'
-// VOTRE CODE
-<MasterDataProvider configuration={masterDataConfig}>
-```
-
-- La vue :
- Et enfin on vous a fait un dernier petit exemple pour mettre en musique tout cela, on a aussi ajouté un checkBox (de Focus-components, bien sûr) dans l'inputComponent d'un de nos domaines, mais aussi le fait de faire apparaître des champs en fonction d'un select. Vous allez voir c'est fou.
- Sinon, pour les listes de références il faut ajouter le connecteur des MasterData : `connectToMetadata(['user'])`, mais aussi le load dans le `componentWillMount` : `loadMasterData();` et dans le selectFor : `{selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}` il faut préciser le propriété masterDatum et le tour est joué !
-
-```jsx
-import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
-import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
-import {loadUserAction, saveUserAction} from '../../actions/user-actions';
-
-import Panel from 'focus-components/panel';
-import {compose} from 'redux';
-
-class UserForm extends Component {
-    componentWillMount() {
-        const {id, load, loadMasterData} = this.props;
-        load({id});
-        loadMasterData();
-    }
-
-    render() {
-        const { fields, fieldFor, selectFor} = this.props;
-        console.log(this.props)
-        const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
-        return (
-            <Panel title='User with more details for Mrs' {...this.props}>
-                {fieldFor('uuid', {entityPath: 'user'})}
-                {fieldFor('style', {entityPath: 'user'})}
-                {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-                {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName', {entityPath: 'user'})}
-                {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName', {entityPath: 'user'})}
-            </Panel>
-        );
-    }
-};
-
-UserForm.displayName = 'UserForm';
-
-const formConfig = {
-    formKey: 'userCustomForm',
-    entityPathArray: ['user', 'address'],
-    loadAction: loadUserAction,
-    saveAction: saveUserAction,
-    nonValidatedFields: ['user.firstName']
-};
-
-const ConnectedUserForm = compose(
-    connectToMetadata(['user']),
-    connectToMasterData(['civility']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
-)(UserForm);
-
-export default ConnectedUserForm;
-```
+[Première partie : votre premier formulaire](../01-Formulaire simple/)

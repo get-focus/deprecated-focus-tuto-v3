@@ -49,15 +49,43 @@ export const DO_CIVILITE = {
 }
 
 export const DO_SEXE = {
-    listName: 'maleFemaleUnknownList',
-    refContainer: {maleFemaleUnknownList: [{code: 'male', label: 'radio.male'}, {code: false, label: 'radio.female'}, {code: null, label: 'radio.unknown'}]},
     SelectComponent: RadioSelect
 }
 
 export const DO_ACCOUNTS_NAMES = {
     type: 'text',
-    InputComponent: Autocomplete
+    InputComponent: props => <div><Autocomplete/></div>
+
+/*dans https://github.com/get-focus/focus-graph/blob/a65855cd8a5a39999ca783a146cb66c2db2cd8aa/src/example/config.js#L136*/
+    //DisplayComponent: props => <div><AutoCompleteSelect isEdit={false} querySearcher={querySearcher} placeholder={'Your search...'} keyResolver={keyResolver} {...props} />{JSON.stringify(props)}</div>,
+    //       InputComponent:  props => <div>
+    //       value: {props.value}
+           //{/*<AutoCompleteSelect isEdit={true} querySearcher={querySearcher} placeholder={'Your search...'} keyResolver={keyResolver} {...props} />*/}
+    //       {JSON.stringify(props)}
+    //       </div>
 }
+/*{ JSON.stringify(props) affiche :
+    "valid":true,
+    "error":true,
+    "active":true,
+    "dirty":false,
+    "loading":false,
+    "saving":false,
+    "name":"accountsNames",
+    "entityPath":"user",
+    "dataSetValue":"GK",
+    "rawInputValue":"GK",
+    "rawValid":false,
+    "formattedInputValue":"GK",
+    "label":"comptes",
+    "textForLine":{},
+    "selectForLine":{},
+    "editing":true,
+    "metadata":{
+        "isRequired":true,
+        "type":"text"
+    }
+}*/
 
 export const DO_CHECKBOX = {
     type: 'boolean',

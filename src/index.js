@@ -12,7 +12,7 @@ intializeTranslation(i18n, 'fr-FR', [focusTranslation, frTranslation]);
 
 import React , {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import {AppContainer} from 'react-hot-loader';
 import {createStore} from 'redux';
 import Root from './root';
 import {initFetch} from './services/fetch';

@@ -5,7 +5,6 @@ import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
-import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 // Les boutons de save et de load sont maintenant portés par le panel
 import Panel from 'focus-components/panel';
 
@@ -14,34 +13,23 @@ import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 const User = ({fieldFor, selectFor, ...otherProps}) => (
     <Panel title='User' {...otherProps}>
         {fieldFor('uuid', {entityPath: 'user'})}
-        {fieldFor('firstName', {entityPath: 'user'})}
         {fieldFor('lastName', {entityPath: 'user'})}
+        {fieldFor('firstName', {entityPath: 'user'})}
         {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-        {fieldFor('sex', {entityPath: 'user'})}
+        {selectFor('sex', {entityPath: 'user', masterDatum: 'sex'})}
     </Panel>
 )
 
 class SmartUser extends Component {
     componentWillMount() {
-        const {id, load, loadMasterData, injectActionHeader, triggerPosition} = this.props;
+        const {id, load, loadMasterData} = this.props;
         // Et voilà un load !
         load({id});
         loadMasterData();
-        triggerPosition(0);
     }
 
     render() {
         const {fieldFor, selectFor} = this.props;
-        /*    const {fieldFor, selectFor} = this.props;
-        return (
-        <Panel title='User' {...this.props}>
-        {fieldFor('uuid')}
-        {fieldFor('firstName')}
-        {fieldFor('lastName')}
-        {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-        {fieldFor('sex')}
-        </Panel>
-        );*/
         return (
             <div>
                 <p>Formulaire classique avec liste de référence. Ce formulaire modifiable affiche une liste de champs input.
@@ -64,12 +52,12 @@ const formConfig = {
     entityPathArray: ['user'],
     loadAction: loadUserAction,
     saveAction: saveUserAction,
-    mapDispatchToProps: {injectActionHeader, triggerPosition}
+    nonValidatedFields: ['user.firstName']
 };
 
 const ConnectedUserForm = compose(
     connectToMetadata(['user']),
-    connectToMasterData(['civility']),
+    connectToMasterData(['civility', 'sex']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(SmartUser);

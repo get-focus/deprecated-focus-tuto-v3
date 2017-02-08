@@ -41,7 +41,7 @@ for(let i = 0; i < NB_GENERATED_ENTITY; i++){
 }
 
 function _createFinancialMoves(){
-    return [0,1,2,3,4,5,6,7,8,9,10].map(() => ({
+    return [0,1,2,3,4,5].map(() => ({
         transactionType: faker.finance.transactionType(),
         amount: faker.finance.amount()
     }));
@@ -55,7 +55,6 @@ function createComplexEntity(i){
             name: faker.finance.accountName(),
             amount: faker.finance.amount(),
             currency: faker.finance.currencyName(),
-            test: true,
             date: new Date(),
             moves: _createFinancialMoves()
         }

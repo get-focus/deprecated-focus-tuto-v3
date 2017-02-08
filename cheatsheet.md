@@ -1,15 +1,12 @@
 ## Composant react
 
 ```
-// Quand j'ai besoin d'un mixin
-const MonComposant = React.createClass(...)
-
 // Quand j'ai besoin d'une méthode du cycle de vie
 // Quand j'ai besoin du state
 class MonComposant extends React.Component{}
 
 // Quand je fais un composant pure (presque tout le temps)
-// Attention pas de state :+1
+// Attention pas de state
 function MonComposant(props){...}
 ```
 
@@ -44,7 +41,7 @@ const ConnectedUserForm = compose(
 
 ## Temps de dev (ws compris)
 
-- 1 Page [1/8, 1/2]j
+  - 1 Page [1/8, 1/2]j
   - 1 header [1/4, 1/2]
   - 1 bloc information [1/4, 1/2]j
   - 1 liste [1/4, 3/4]j
@@ -54,7 +51,6 @@ const ConnectedUserForm = compose(
 > Total: [1,5 - 3,25]j
 > (HORS MÉTIER COMPLEXE)
 > Si ce n'est pas le cas levez une alerte
-
 
 ## PropTypes
 Chaque composant doit avoir des [Proptypes](https://facebook.github.io/react/docs/reusable-components.html)
@@ -67,8 +63,8 @@ MonComposant.propTypes = {
 
 ## Metadata
 
-Sur les forms pas de composants à la main.<br/>
-Utilisez les metadonnées :+1
+Sur les forms pas de composants à la main.
+Utilisez les metadonnées
 - [InputComponent]()
 - [DisplayComponent]()
 - formatter, validators
@@ -82,6 +78,7 @@ Utilisez les metadonnées :+1
 - N noeuds `actionBuilder(['n1', 'n2', ...]) => response => dispatch({n1 : response.n1}) + dispatch({n2 : response.n2})`
 
 ## Une page de detail
+
 - La page appelle le chargement (données critiques + données secondaires)
 - Chaque bloc gère sa sauvegarde
 - Chaque bloc est un `connectedForm`
@@ -97,6 +94,7 @@ _Page => action load (load1+2 et load3)
 `dispatch(action) => middleware => reducers => state => component update`
 
 ## Form Helper
+
  Les helpers sont là pour vous aider en utilisant les metadonnées.
 - [fieldFor](https://github.com/get-focus/focus-tuto-redux/blob/master/README.md#la-vue)
 - [displayFor](https://github.com/get-focus/focus-tuto-redux/blob/master/README.md#la-vue)
@@ -117,7 +115,7 @@ const User = ({fieldFor,listFor,selectFor  ...otherProps}) => (
 
 ## Field
 
-Ce que je peux fournir au `fieldFor` (et ses frères) [ici]()
+Ce que je peux fournir au `fieldFor` (et ses frères)
 - name: string,
 - isRequired: boolean,
 - validateOnBlur: boolean,
@@ -134,9 +132,9 @@ Ce que je peux fournir au `fieldFor` (et ses frères) [ici]()
 ## Cas d'usages
 
 - J'ai un champ qui dépend d'un autre => middleware custom
-- En consultation j'ai un champs avec des étoiles => Je fais un composant à la main que je mets dans le domaine.
+- En consultation, j'ai un champs avec des étoiles => Je fais un composant à la main que je mets dans le domaine.
 - J'ai une liste dans un formulaire => `listFor`
 - J'ai une définition avec trop de champs => `nonValidateFields`
 
 ## State + reducers
-- Si j'ai un sélécteur de state => il doit être écrit à côté du reducer
+- Si j'ai un sélecteur de state => il doit être écrit à côté du reducer

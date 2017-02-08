@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Card from './user/card';
 import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 import {compose} from 'redux';
 import {Link} from 'react-router';
 

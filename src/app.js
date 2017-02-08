@@ -8,16 +8,15 @@ import AppLayout from './containers/layout'
 // Ceci est un sélecteur de state, il sera localisé près de son reducer plus tard.
 const userSelector = state => ({...state.user});
 
-
 // On crée le composant Application
 const App = props => <AppLayout {...props} />;
 
 App.defaultProps = {
-  name: ''
+    name: ''
 }
 
 App.propTypes = {
-  name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired
 }
 // On exporte le composant Application connecté au store redux.
 export default App;

@@ -13,7 +13,7 @@ export const amoutToUpperCaseMiddleware = store => next => action => {
         //On met en forme notre nouvelle action
         const lastNameAction = {...action};
         lastNameAction.fieldName = 'name';
-        lastNameAction.rawValue =  fields.find(f => f.name == 'name').rawInputValue.toUpperCase();
+        lastNameAction.rawValue = fields.find(f => f.name == 'name').rawInputValue.toUpperCase();
         //On réalise la première action
         next(action);
         //On dispatch l'action que nous avons créée
@@ -34,7 +34,7 @@ export const errorFieldMiddleware = store => next => action => {
         errorAction.formKey = action.formKey;
         errorAction.fieldName = 'name';
         errorAction.entityPath = action.entityPath;
-        errorAction.error = "Une erreur venue de l'espace !! "
+        errorAction.error = "Une erreur venue de l'espace !"
         next(action);
         store.dispatch(errorAction);
     } else {

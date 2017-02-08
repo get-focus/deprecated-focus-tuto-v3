@@ -1,11 +1,9 @@
-import React from 'react';
-import Card from './user/card';
+import React, {PureComponent} from 'react';
 
-const routes = [
-  {route: '/user/120', destination: 'User', description: 'Premier Form', title: 'Form'}
-
-];
-
-const Home = props => <div style={{display: 'flex', flexWrap: 'wrap'}}>{routes.map(route => <Card key={route.route} {...route} />)}</div>;
-
+class Home extends PureComponent {
+    render() {
+        return <h1>Bienvenue sur le tutoriel de Focus v3</h1>
+    }
+}
+Home.displayName = 'Home';
 export default Home;

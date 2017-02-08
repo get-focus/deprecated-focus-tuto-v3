@@ -1,23 +1,17 @@
 import React from 'react';
 import {IndexRoute, Router, Route} from 'react-router';
+import {hashHistory} from 'react-router';
 
 /* Components */
-import App from '../app';
+import Layout from '../containers/layout';
 import Home from '../views/home';
-import User from '../views/user/user-form';
 
-import {hashHistory } from 'react-router';
-const paramExtractor = Component => props => <Component id={props.params.id} />
-const UserWithParam = paramExtractor(User);
-
-const router = <Router history={hashHistory}  key='router'>
-  <Route path='/' component={App} key='mainRoute' >
-    <IndexRoute component={Home}/>
-    {/* Les :id sert à fournir un paramètre à l'url on extrait les paramètres d'url via la props params*/}
-    <Route path='user/:id' component={UserWithParam} />
-  </Route>
+const RouterRoot = <Router history={hashHistory} key='router'>
+    <Route path='/' component={Layout} key='mainRoute' >
+        <IndexRoute component={Home}/>
+    </Route>
 </Router>;
 
- //{/* On injecte comme composant d'application un composant connecté au store redux */}
-  //{/* Le composant IndexRoute signifie qui sera appellée par défaut*/}
-export default router;
+//{/* On injecte comme composant d'application un composant connecté au store redux */}
+//{/* Le composant IndexRoute signifie qui sera appelée par défaut*/}
+export default RouterRoot;

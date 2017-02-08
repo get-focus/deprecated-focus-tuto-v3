@@ -10,18 +10,18 @@ import reduxConf from 'redux/package.json';
 
 console.info(
     `
-        ------------------------------------------------
-        TUTORIEL FOCUS v3
-        documentation       http://getfocus.io/focus-documentation
-        ------------------------------------------------
-        focus-application   ${focusApplicationConf.version}
-        focus-components    ${focusComponentsConf.version}
-        focus-graph         ${focusGraphConf.version}
-        react               ${reactConf.version}
-        react-dom           ${reactDomConf.version}
-        react-router        ${reactRouterConf.version}
-        redux               ${reduxConf.version}
-        react-redux         ${reactReduxConf.version}
+    ------------------------------------------------
+    TUTORIEL FOCUS v3
+    documentation       http://getfocus.io/focus-documentation
+    ------------------------------------------------
+    focus-application   ${focusApplicationConf.version}
+    focus-components    ${focusComponentsConf.version}
+    focus-graph         ${focusGraphConf.version}
+    react               ${reactConf.version}
+    react-dom           ${reactDomConf.version}
+    react-router        ${reactRouterConf.version}
+    redux               ${reduxConf.version}
+    react-redux         ${reactReduxConf.version}
     `
 );
 

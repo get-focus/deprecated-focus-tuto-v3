@@ -1,21 +1,46 @@
 import React, {PropTypes, Component} from 'react';
+import {hashHistory, Router} from 'react-router';
 import {Provider as StoreProvider} from 'react-redux';
-import router from './router';
+import {Provider as MetadataProvider} from 'focus-graph/behaviours/metadata';
+import {Provider as FieldHelpersProvider} from 'focus-graph/behaviours/field';
+import {Provider as MasterdataProvider} from 'focus-graph/behaviours/master-data';
 
-const RootPure = ({store}) => /*On place le provider de store au plus haut afin de pouvoir injecter des informations du store dans toute l'applciation.*/
-<StoreProvider store={store}>
-  {router}
-</StoreProvider>;
+import routes from './router';
+import * as definitions from './config/entity-definitions';
+import * as domains from './config/domains';
+import {masterDataConfig} from './config/master-datas';
 
-RootPure.propTypes = {
-  //history: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
+import InputText from 'focus-components/input-text';
+import DisplayComponent from 'focus-components/input-display/text';
+import SelectComponent from 'focus-components/select-mdl';
+import SelectComponentDisplay from 'focus-components/input-display/text';
+
+const fieldHelperProps = {
+    InputComponent: InputText,
+    DisplayComponent: DisplayComponent,
+    SelectComponent: SelectComponent,
+    SelectComponentDisplay: SelectComponentDisplay
 };
 
 class Root extends Component {
-  render(){
-    return <RootPure {...this.props}/>
-  }
+    render() {
+        const {store} = this.props;
+        return (
+            <StoreProvider store={store}>
+                <MetadataProvider definitions={definitions} domains={domains}>
+                    <FieldHelpersProvider {...fieldHelperProps}>
+                        <MasterdataProvider configuration={masterDataConfig}>
+                            <Router history={hashHistory} routes={routes} />
+                        </MasterdataProvider>
+                    </FieldHelpersProvider>
+                </MetadataProvider>
+            </StoreProvider>
+        );
+    }
 }
+
+Root.propTypes = {
+    store: PropTypes.object.isRequired
+};
 
 export default Root;

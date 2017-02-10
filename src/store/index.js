@@ -5,13 +5,14 @@ import confirmReducer from 'focus-application/confirm/confirm-reducer';
 import messageReducer from 'focus-application/messages/messages-reducer';
 
 import DevTools from '../containers/dev-tools'
+import rootReducer from '../reducer';
 
 let lastCreatedStore;
 
 export default function configureStore(initialState){
     const store = createStoreWithFocus(
         {
-            dataset: [],
+            dataset: rootReducer,
             header: headerReducer,
             messages: messageReducer,
             confirm: confirmReducer,
@@ -20,6 +21,7 @@ export default function configureStore(initialState){
         [],
         [DevTools.instrument()]
     );
+
     lastCreatedStore = store;
     return store;
 };

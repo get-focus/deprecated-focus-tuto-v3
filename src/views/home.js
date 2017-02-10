@@ -1,9 +1,14 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import Card from './user/card';
+import {compose} from 'redux';
+import {Link} from 'react-router';
 
-class Home extends PureComponent {
-    render() {
-        return <h1>Bienvenue sur le tutoriel de Focus v3</h1>
-    }
-}
-Home.displayName = 'Home';
+const routes = [
+    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
+];
+
+const Home = props =>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+        {routes.map(route => <Card key={route.route} {...route} />)}
+    </div>;
 export default Home;

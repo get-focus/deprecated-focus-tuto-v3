@@ -6,9 +6,9 @@ import { Provider as FieldHelpersProvider } from 'focus-graph/behaviours/field';
 import { Provider as MasterdataProvider } from 'focus-graph/behaviours/master-data';
 import { Provider as SearchProvider } from 'focus-search/behaviours/search';
 
-import definitions from './config/entity-definitions';
-import domains from './config/domains';
-import masterdatas from './config/master-datas';
+import * as definitions from './config/entity-definitions/';
+import * as domains from './config/domains/';
+import {masterDataConfig} from './config/master-datas';
 
 import InputText from 'focus-components/input-text';
 import DisplayComponent from 'focus-components/input-display/text';
@@ -32,7 +32,7 @@ class Application extends PureComponent {
             <StoreProvider store={store}>
                 <MetadataProvider definitions={definitions} domains={domains}>
                     <FieldHelpersProvider {...fieldHelperProps}>
-                        <MasterdataProvider configuration={masterdatas}>
+                        <MasterdataProvider configuration={masterDataConfig}>
                             {RooterRoot}
                         </MasterdataProvider>
                     </FieldHelpersProvider>

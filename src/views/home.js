@@ -1,9 +1,15 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import Card from './user/card';
+import {connect as connectToForm } from 'focus-graph/behaviours/form';
+import {compose} from 'redux';
+import {Link} from 'react-router';
 
-class Home extends PureComponent {
-    render() {
-        return <h1>Bienvenue sur le tutoriel de Focus v3</h1>
-    }
-}
-Home.displayName = 'Home';
+const routes = [
+    {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
+];
+
+const Home = props =>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+        {routes.map(route => <Card key={route.route} {...route} />)}
+    </div>;
 export default Home;

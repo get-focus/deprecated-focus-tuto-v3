@@ -13,6 +13,23 @@ export const DO_TEXTE = {
     type: 'text'
 }
 
+export const DO_SYMBOL = {
+    type: 'text'
+}
+
+export const DO_CODE = {
+    type: 'text'
+}
+
+export const DO_MONTANT = {
+    type: 'number'
+}
+
+export const DO_DATE = {
+    type: 'text',
+    InputComponent: InputDate
+}
+
 export const DO_CIVILITE = {
     type: 'text',
     validators: [{
@@ -26,12 +43,4 @@ export const DO_CIVILITE = {
 
 export const DO_SEXE = {
     SelectComponent: RadioSelect
-}
-
-export const DO_CODE = {
-    type: 'text'
-}
-
-export const DO_MONTANT = {
-    type: 'number'
 }

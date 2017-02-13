@@ -18,6 +18,10 @@ export const user = {
     sex: {
         domain: 'DO_SEXE',
         isRequired: true
+    },
+    date: {
+        domain: 'DO_DATE',
+        isRequired: false
     }
 }
 

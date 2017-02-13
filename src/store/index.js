@@ -7,6 +7,9 @@ import messageReducer from 'focus-application/messages/messages-reducer';
 import DevTools from '../containers/dev-tools'
 import rootReducer from '../reducer';
 
+import customReducer from '../reducer/custom-reducer'
+import {amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware} from '../../src/middleware/user-middleware';
+
 let lastCreatedStore;
 
 export default function configureStore(initialState){
@@ -16,9 +19,10 @@ export default function configureStore(initialState){
             header: headerReducer,
             messages: messageReducer,
             confirm: confirmReducer,
+            customData: customReducer,
             fetch:fetchReducer
         },
-        [],
+        [amoutToUpperCaseMiddleware, errorFieldMiddleware, ownActiondMiddleware],
         [DevTools.instrument()]
     );
 

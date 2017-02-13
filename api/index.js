@@ -42,6 +42,7 @@ function createEntityFinance(i){
     };
 }
 
+//let entityJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }

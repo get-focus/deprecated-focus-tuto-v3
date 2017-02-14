@@ -37,31 +37,11 @@ const _querySearcher = query => {
     });
 };
 
-const _querySearcher2 = query => {
-    let data = [];
-    if(data.length == 0) {
-        data =  [
-            {
-                key: 'ERR',
-                label: 'Oops, no data to show here...'
-            }
-        ];
-    }
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({
-                data,
-                totalCount: data.length
-            });
-        }, 500);
-    });
-};
-
 class UserForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date1: moment().toISOString()
+            date: moment().toISOString()
         }
     }
 
@@ -82,16 +62,16 @@ class UserForm extends Component {
 
     render() {
         const {fields, fieldFor, selectFor} = this.props;
-        const {date1, error1} = this.state;
+        const {date, error1} = this.state;
 
         return (
             <div>
-                <p>Formulaire affichant différents composants. Ce formulaire permet de tester les composants, checkbox et date.</p>
+                <p>Formulaire affichant différents composants. Ce formulaire permet de tester les composants Checkbox, Date et Autocomplete.</p>
                 <Panel title='User Ref List Checkbox' {...this.props}>
                     {fieldFor('uuid', {entityPath: 'user'})}
-                    {fieldFor('style', {entityPath: 'user'})}
-                    {fieldFor('accountsNames', {entityPath: 'user'})}
-                    {fieldFor('date', {entityPath: 'user'})}
+                    {fieldFor('style')}
+                    {fieldFor('accountsNames', {masterDatum: 'accountsNames'})}
+                    {fieldFor('date')}
                 </Panel>
             </div>
         );
@@ -108,6 +88,7 @@ const formConfig = {
 //Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserForm = compose(
     connectToMetadata(['user']),
+    connectToMasterData(['accountsNames']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(UserForm);

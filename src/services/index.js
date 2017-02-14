@@ -1,10 +1,16 @@
 import focusFetch from 'focus-application/fetch/fetch-proxy'
-
+/*
 export const loadUser = async ({id}) => {
     const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
     const data = await response;
     return { ...data.user, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
 }
+*/
+
+export const loadUser = async ({id}) => {
+    return focusFetch({url: `http://localhost:9999/x/complex/user/${id}`, method: 'get'});
+};
+
 
 export const saveUser = async ({user}) => {
     await new Promise((resolve, reject) => {

@@ -106,7 +106,7 @@ app.get(API_ROOT  + '/mixed/:id', function getSingleEntity(req, res) {
     });
 });
 
-app.get(API_ROOT  + '/complex/:id', function getSingleEntity(req, res) {
+app.get(API_ROOT  + '/complex/user/:id', function getSingleEntity(req, res) {
     res.json(complexJSON.find(d => d.user.uuid ===  req.params.id));
 });
 

@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 
+import Checkbox from 'focus-components/input-checkbox';
 import InputDate from 'focus-components/input-date';
 import InputText from 'focus-components/input-text';
 import InputSelect from 'focus-components/select-mdl';
 import RadioSelect from 'focus-components/select-radio';
+import Autocomplete from 'focus-components/autocomplete-text/field';
+import SelectCheckbox from 'focus-components/select-checkbox';
 
 export const DO_ID = {
     type: 'text'
@@ -43,4 +46,19 @@ export const DO_CIVILITE = {
 
 export const DO_SEXE = {
     SelectComponent: RadioSelect
+}
+
+export const DO_ACCOUNTS_NAMES = {
+    type: 'text',
+    InputComponent: props => <div><Autocomplete/></div>
+}
+
+export const DO_CHECKBOX = {
+    type: 'boolean',
+    InputComponent: Checkbox
+}
+
+export const DO_SELECT_CHECKBOX = {
+    type: 'boolean',
+    InputComponent: SelectCheckbox
 }

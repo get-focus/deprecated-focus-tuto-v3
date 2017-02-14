@@ -8,6 +8,7 @@ import { Provider as SearchProvider } from 'focus-search/behaviours/search';
 
 import * as definitions from './config/entity-definitions/';
 import * as domains from './config/domains/';
+
 import {masterDataConfig} from './config/master-datas';
 
 import InputText from 'focus-components/input-text';

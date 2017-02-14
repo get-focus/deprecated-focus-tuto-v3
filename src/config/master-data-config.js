@@ -1,2 +1,6 @@
 import {loadCivility} from '../services/load-civility';
-export const masterDataConfig  = [{name: 'civility', service: loadCivility}];
+import {loadSexe} from '../services/load-sexe';
+export const masterDataConfig  = [
+    {name: 'civility', service: loadCivility},
+    {name: 'sexe', service: loadSexe},
+];

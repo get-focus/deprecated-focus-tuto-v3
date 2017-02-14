@@ -20,6 +20,7 @@ export const user = {
     isRequired: true
   },
   civility: { domain: 'DO_CIVILITE', isRequired: true},
+  sexe: { domain: 'DO_SEXE', isRequired: true},
   accountsNames: {domain: 'DO_ACCOUNTS_NAMES', isRequired: true}
 }
 

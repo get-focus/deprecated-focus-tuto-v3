@@ -84,12 +84,12 @@ const AppHeader = props => <Header primaryColor={'#424950'} BarContentSummary={S
 //confirmation-popin
 function AppLayout(props) {
     window.scrollTo(0, 0);
-    console.log(props);
     return  (
         <ConnectedScrollTrigger>
-            <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={()=> <Menu location={props.location} />} MessageCenter={AppMessages}>
+            <Layout AppHeader={AppHeader} LoadingBar={LoadingBar} ConfirmWrapper={ConfirmComponent} Menu={()=> <Menu location={props.location} />} MessageCenter={AppMessages} location={props.location}>
                 {props.children}
             </Layout>
+            <DevTools />
         </ConnectedScrollTrigger>
     )
 };

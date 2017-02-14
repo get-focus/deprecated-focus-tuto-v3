@@ -2,8 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import {connect as connectToState} from 'react-redux';
 import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
+import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
-import {loadFinanceAction, saveFinanceAction} from '../../actions/finance-actions';
+import {loadUserFinanceAction, saveUserFinanceAction} from '../../actions/finance-user-actions';
 import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 
 //import {selectData} from 'focus-graph/store/create-store'
@@ -24,13 +25,21 @@ const actions = {
   ]
 }
 
-const User = ({fieldFor, ...otherProps}) => (
-  <Panel title='User' {...otherProps}>
-    {fieldFor('uuid', {entityPath: 'user'})}
-    {fieldFor('firstName', {entityPath: 'user'})}
-    {fieldFor('lastName', {entityPath: 'user'})}
-  </Panel>
-)
+const User = ({fieldFor, selectFor, fields, ...otherProps}) => {
+    const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
+    return(
+        <Panel title='User' {...otherProps}>
+            {fieldFor('uuid')}
+            {selectFor('sexe', {entityPath: 'user', masterDatum: 'sexe'})}
+            {selectFor('civility', {entityPath: 'user', masterDatum: 'civility', hasUndefined: true})}
+            {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName', {entityPath: 'user'})}
+            {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName', {entityPath: 'user'})}
+            {fieldFor('firstName')}
+            {fieldFor('accountsNames')}
+            {fieldFor('date')}
+        </Panel>
+    )
+}
 
 const Finance = ({fieldFor,listFor, rawInputValue, success, fail,  ...otherProps}) => (
   <Panel title={success ? "Finance " +success : "Finance " + fail} {...otherProps}>
@@ -51,9 +60,10 @@ const selectData = name => (state ={}) => {
 
 class SmartUser extends Component {
   componentWillMount() {
-    const {id, load} = this.props;
+    const {id, load, loadMasterData} = this.props;
     // Et voila un load !
     load({id});
+    loadMasterData();
   }
 
   render() {
@@ -86,21 +96,22 @@ SmartFinance.displayName = 'SmartFinance';
 const formConfigUser = {
   formKey: 'userFinanceForm',
   entityPathArray: ['user'],
-  loadAction: loadFinanceAction,
-  saveAction: saveFinanceAction,
+  loadAction: loadUserFinanceAction,
+  saveAction: saveUserFinanceAction,
   mapDispatchToProps: {injectActionHeader, triggerPosition}
 };
 
 const formConfigFinance = {
   formKey: 'userFinanceForm2',
   entityPathArray: ['finance'],
-  loadAction: loadFinanceAction,
-  saveAction: saveFinanceAction,
+  loadAction: loadUserFinanceAction,
+  saveAction: saveUserFinanceAction,
   mapDispatchToProps: {injectActionHeader, triggerPosition}
 };
 
 const ConnectedUserForm = compose(
   connectToMetadata(['user']),
+  connectToMasterData(['civility', 'sexe']),
   connectToForm(formConfigUser),
   connectToFieldHelpers()
 )(SmartUser);

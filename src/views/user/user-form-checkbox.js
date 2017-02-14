@@ -30,7 +30,6 @@ class UserForm extends Component {
     load({id});
     injectActionHeader(actions);
     triggerPosition(0);
-    toggleEdit(true);
     loadMasterData();
   }
 
@@ -39,11 +38,11 @@ class UserForm extends Component {
     const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
     return (
       <Panel title='User Ref List Checkbox' {...this.props}>
-        {fieldFor('uuid', {entityPath: 'user'})}
-        {fieldFor('style',  {entityPath: 'user'})}
-        {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName', {entityPath: 'user'})}
-        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName', {entityPath: 'user'})}
+        {fieldFor('uuid')}
+        {fieldFor('style')}
+        {selectFor('civility', {masterDatum: 'civility'})}
+        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('firstName')}
+        {civilityField && civilityField.rawInputValue === 'MRS' && fieldFor('lastName')}
       </Panel>
     );
   }
@@ -53,7 +52,7 @@ UserForm.displayName = 'UserForm';
 
 const formConfig = {
   formKey: 'userCheckListForm',
-  entityPathArray: ['user', 'address'],
+  entityPathArray: ['user'],
   loadAction: loadUserAction,
   saveAction: saveUserAction,
   nonValidatedFields: ['user.firstName', 'user.accountsNames'],

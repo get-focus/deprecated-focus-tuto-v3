@@ -3,6 +3,9 @@ import moment from 'moment';
 
 
 import Checkbox from 'focus-components/input-checkbox';
+import Toggle from 'focus-components/input-toggle';
+import Radio from 'focus-components/input-radio';
+import SelectRadio from 'focus-components/select-radio';
 import InputDate from 'focus-components/input-date';
 import InputText from 'focus-components/input-text';
 import InputSelect from 'focus-components/select-mdl';
@@ -53,9 +56,10 @@ export const DO_ACCOUNTS_NAMES = {
 }
 
 export const DO_CHECKBOX = {
-    type: 'checkojdfjsd',
-    validators: [{
-        type: 'checkbox',
-    }],
+    type: 'checkbox',
     InputComponent: Checkbox
+}
+
+export const DO_SEXE = {
+    SelectComponent: SelectRadio
 }

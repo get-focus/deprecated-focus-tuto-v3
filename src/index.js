@@ -18,9 +18,7 @@ import { AppContainer } from 'react-hot-loader';
 import {createStore} from 'redux';
 import Root from './root';
 import configureStore from './store';
-import {initFetch} from './services/fetch';
 const store = configureStore();
-initFetch(store.dispatch);
 
 const renderApp = RootComponent => {
     console.info('App rendered')

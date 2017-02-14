@@ -12,10 +12,10 @@ import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 const User = ({fieldFor, selectFor, ...otherProps}) => (
     <Panel title='User' {...otherProps}>
         {fieldFor('uuid', {entityPath: 'user'})}
-        {fieldFor('lastName', {entityPath: 'user'})}
-        {fieldFor('firstName', {entityPath: 'user'})}
-        {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-        {selectFor('sex', {entityPath: 'user', masterDatum: 'sex'})}
+        {fieldFor('lastName')}
+        {fieldFor('firstName')}
+        {selectFor('civility', {masterDatum: 'civility'})}
+        {selectFor('sex', {masterDatum: 'sex'})}
     </Panel>
 )
 

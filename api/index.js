@@ -25,9 +25,7 @@ function createEntity(i){
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        civility: faker.name.prefix(),
-        style: true,
-        accountsNames: 'GK'
+        civility: faker.name.prefix()
     };
 }
 

@@ -26,7 +26,7 @@ function createEntity(i){
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-        style: true,
+        style: 'true',
         accountsNames: 'GK'
     };
 }

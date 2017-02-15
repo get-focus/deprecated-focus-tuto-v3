@@ -32,5 +32,9 @@ export default {
         male: 'Homme',
         female: 'Femme',
         unknown: 'Inconnu'
+    },
+    checkbox: {
+        true: 'a du style',
+        false: 'n\'a aucun style'
     }
 }

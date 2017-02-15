@@ -51,6 +51,8 @@ Une question se pose concernant le reducer : *Quand on regarde plus en détail c
 L'actionBuilder permet d'avoir un load pour deux entités, c'est l'action que vous pourrez donner dans votre formulaire ! Pour les types, pas de panique c'est normal, vous avez deux entités, et donc six actions au sens redux du terme, vous avez alors six types pour votre reducer. Ainsi si vous avez suivi le superbe tutoriel depuis le début vous avez déjà un reducer pour le nœud finance, et un autre pour le nœud user. Ainsi vous n'avez besoin que de l'action pour votre vue.
 Sinon je propose ces petits reducers (et n'oubliez pas d'exporter vos types en retour de l'action) :
 
+## Les reducers
+
 ```jsx
 // reducer/user-finance-reducer.js
 import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
@@ -90,6 +92,7 @@ export const userReducer = reducerBuilder({
 
 Sans oublier de les ajouter dans le combineReducer :
 ```jsx
+// reducer/index.js
 import {combineReducers} from 'redux';
 import {userReducer, financeReducer} from './user-finance-reducer'
 
@@ -98,6 +101,30 @@ export default combineReducers({
     finance : financeReducer
 });
 ```
+
+## Les services
+
+```jsx
+// services/index.js
+import focusFetch from 'focus-application/fetch/fetch-proxy'
+
+export const loadUserFinance = async ({id}) => {
+    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
+    const data = await response;
+    return data;
+}
+
+export const saveUserFinance = async ({user}) => {
+    await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, 0);
+    });
+    return {...finance};
+}
+```
+
+## La vue
 
 Nous sommes fin prêts à mettre en place notre formulaire à deux nœuds :
 
@@ -165,7 +192,7 @@ export default ConnectedUserForm;
 N'oubliez pas de rajouter la route dans home.js...
 
 ```jsx
-{route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finances'}
+    {route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finances'}
 ```
 
 ...et d'importer la vu dans le router !

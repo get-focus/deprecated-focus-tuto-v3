@@ -21,7 +21,7 @@ let adressJSON = [{
 }];
 
 function createEntity(i){
-    return {
+    return        {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
@@ -35,10 +35,14 @@ function createEntityFinance(i){
         uuid: '12'+i,
         name: faker.finance.accountName(),
         amount: faker.finance.amount(),
-        moves: _createFinancialMoves()
+        moves: _createFinancialMoves(),
+        accountsNames: 'GK',
+        date: new Date(),
+        style: 'checkbox.true'
     };
 }
 
+//let entityJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }

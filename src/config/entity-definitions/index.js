@@ -19,8 +19,16 @@ export const user = {
         domain: 'DO_SEXE',
         isRequired: true
     },
+    style: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
+    accountsNames: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
     date: {
-        domain: 'DO_DATE',
+        domain: 'DO_TEXTE',
         isRequired: false
     }
 }

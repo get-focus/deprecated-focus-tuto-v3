@@ -1,15 +1,27 @@
 import React, {Component} from 'react';
-import Card from './user/card';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {compose} from 'redux';
 import {Link} from 'react-router';
+import Panel from 'focus-components/panel';
+import Button from 'focus-components/button';
 
 const routes = [
     {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
 ];
 
-const Home = props =>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        {routes.map(route => <Card key={route.route} {...route} />)}
-    </div>;
+const Home = props => {
+    return(
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            {routes.map(route => <div key={route.route} style={{margin: '10px'}}>
+                <Panel title={route.title} Buttons={null}>
+                    <p>{route.description}</p>
+                    <div className="mdl-card__actions mdl-card--border">
+                        <Link to={route.route} className="mdl-button mdl-button--colored">
+                            {route.destination}
+                        </Link>
+                    </div>
+                </Panel>
+            </div>)}
+        </div>
+    )
+}
 export default Home;

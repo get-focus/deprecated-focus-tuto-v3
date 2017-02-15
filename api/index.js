@@ -5,6 +5,9 @@ const faker = require('faker');
 const isEmpty = require('lodash/isEmpty');
 
 const NB_GENERATED_ENTITY = 10;
+
+faker.locale = "fr";
+
 let entityJSON = [{
     uuid: '1234',
     firstName: 'Don Diego',
@@ -12,13 +15,14 @@ let entityJSON = [{
     civility: 'Mr'
 }];
 
+
 let adressJSON = [{
     uuid: '1234',
     city: faker.address.city()
 }];
 
 function createEntity(i){
-    return {
+    return        {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
@@ -64,9 +68,9 @@ for(let i = 0; i < NB_GENERATED_ENTITY; i++){
 }
 
 function _createFinancialMoves(){
-    return [0,1,2,3,4,5,6,7,8,9,10].map(() => ({
+    return [0,1,2,3,4,5].map(() => ({
         transactionType: faker.finance.transactionType(),
-        amount:faker.finance.amount()
+        amount: faker.finance.amount()
     }));
 }
 
@@ -82,15 +86,15 @@ const MOCKED_API_PORT = process.env.API_PORT || 9999;
 /*****************************************
 ************** Mocked API ****************
 ******************************************/
-
 const API_ROOT = '/x';
 const app = express();
+
 //middleware
-//app.use(express.static(staticFolder));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use((req, res, next) => {
     console.log(new Date() + ', ' + req.method + ', ' + req.url);
     if (!isEmpty(req.body)) {
@@ -98,6 +102,7 @@ app.use((req, res, next) => {
     }
     next();
 });
+
 //CORS middleware
 const allowCrossDomain = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -106,9 +111,10 @@ const allowCrossDomain = (req, res, next) => {
     res.header('Content-Type', 'application/json');
     next();
 }
+
 app.use(allowCrossDomain);
 
-app.get(API_ROOT + '/entity', function getAllNotifications(req, res) {
+app.get(API_ROOT  + '/entity', function getAllNotifications(req, res) {
     res.json(entityJSON);
 });
 

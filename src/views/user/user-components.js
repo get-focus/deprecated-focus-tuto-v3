@@ -58,18 +58,18 @@ class UserForm extends Component {
 UserForm.displayName = 'UserForm';
 
 const formConfig = {
-  formKey: 'userCheckListForm',
-  entityPathArray: ['user'],
-  loadAction: loadUserAction,
-  saveAction: saveUserAction,
-  nonValidatedFields: ['user.firstName', 'user.accountsNames']
+    formKey: 'userCheckListForm',
+    entityPathArray: ['user'],
+    loadAction: loadUserAction,
+    saveAction: saveUserAction,
+    nonValidatedFields: ['user.firstName', 'user.accountsNames']
 };
 
 //Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserForm = compose(
-  connectToMetadata(['user']),
-  connectToForm(formConfig),
-  connectToFieldHelpers()
+    connectToMetadata(['user']),
+    connectToForm(formConfig),
+    connectToFieldHelpers()
 )(UserForm);
 
 export default ConnectedUserForm;

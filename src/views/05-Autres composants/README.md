@@ -11,17 +11,19 @@ Si vous avez fait les parties précédentes, vous devriez avoir déjà une bonne
 
 ## Domains, entity-definitions et master-datas
 
+Il faut importer à partir de focus-component les nouveaux composants que nous allons utiliser et définit des domaines qui vont les utiliser.
+
 ```jsx
 // domains/index.js
 import React, {Component, PropTypes} from 'react';
 
 import Checkbox from 'focus-components/input-checkbox';
+import Radio from 'focus-components/input-radio';
 import InputDate from 'focus-components/input-date';
 import InputText from 'focus-components/input-text';
 import InputSelect from 'focus-components/select-mdl';
 import RadioSelect from 'focus-components/select-radio';
-import Autocomplete from 'focus-components/autocomplete-text/field';
-import SelectCheckbox from 'focus-components/select-checkbox';
+import Autocomplete from 'focus-components/autocomplete-text/edit';
 
 export const DO_ID = {
     type: 'text'
@@ -69,18 +71,39 @@ export const DO_SEXE = {
 
 export const DO_ACCOUNTS_NAMES = {
     type: 'text',
-    InputComponent: props => <div><Autocomplete/></div>
+   InputComponent: props => <div><Autocomplete querySearcher={_querySearcher}/></div>
+    //  InputComponent: Autocomplete
 }
 
 export const DO_CHECKBOX = {
-    type: 'boolean',
+    type: 'text',
     InputComponent: Checkbox
 }
 
-export const DO_SELECT_CHECKBOX = {
-    type: 'boolean',
-    InputComponent: SelectCheckbox
-}
+const _querySearcher = query => {
+    let data = [
+        {
+            key: 'JL',
+            label: 'Joh Lickeur'
+        },
+        {
+            key: 'GK',
+            label: 'Guénolé Kikabou'
+        },
+        {
+            key: 'YL',
+            label: 'Yannick Lounivis'
+        }
+    ];
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({
+                data,
+                totalCount: data.length
+            });
+        }, 500);
+    });
+};
 ```
 
 ```jsx
@@ -108,7 +131,7 @@ export const user = {
     },
     style: {
         domain: 'DO_CHECKBOX',
-        isRequired: false
+        isRequired: true
     },
     accountsNames: {
         domain: 'DO_ACCOUNTS_NAMES',
@@ -117,35 +140,6 @@ export const user = {
     date: {
         domain: 'DO_DATE',
         isRequired: false
-    }
-}
-
-export const finance = {
-    name: {
-        domain: 'DO_TEXTE',
-        isRequired: true
-    },
-    amount: {
-        domain: 'DO_AMOUNT',
-        isRequired: true
-    },
-    moves:{
-        redirect: ['financialMove']
-    },
-    currency: {
-        domain: 'DO_SYMBOL',
-        isRequired: true
-    }
-}
-
-export const financialMove = {
-    transactionType: {
-        domain: 'DO_CODE',
-        isRequired: true
-    },
-    amount: {
-        domain: 'DO_MONTANT',
-        isRequired: true
     }
 }
 ```
@@ -175,174 +169,50 @@ import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 
+import InputSelect from 'focus-components/select-mdl';
+
 import Panel from 'focus-components/panel';
-import {compose} from 'redux';
+import compose from 'lodash/flowRight';
 
-import moment  from 'moment';
-
-const _querySearcher = query => {
-    let data = [
-        {
-            key: 'JL',
-            label: 'Joh Lickeur'
-        },
-        {
-            key: 'GK',
-            label: 'Guénolé Kikabou'
-        },
-        {
-            key: 'YL',
-            label: 'Yannick Lounivis'
-        }
-    ];
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({
-                data,
-                totalCount: data.length
-            });
-        }, 500);
-    });
-};
-
-const _querySearcher2 = query => {
-    let data = [];
-    if(data.length == 0) {
-        data =  [
-            {
-                key: 'ERR',
-                label: 'Oops, no data to show here...'
-            }
-        ];
-    }
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({
-                data,
-                totalCount: data.length
-            });
-        }, 500);
-    });
-};
 
 class UserForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date1: moment().toISOString()
-        }
-    }
-
     componentWillMount() {
-        const {id, load, loadMasterData, injectActionHeader, triggerPosition} = this.props;
+        const {id, load} = this.props;
         load({id});
-        loadMasterData();
-        injectActionHeader(actions);
-        triggerPosition(0);
-    }
-
-    changeHandler = id => {
-        return value => {
-            const {isValid, message} = this.refs[`date${id}`].validate();
-            this.setState({
-                [`date${id}`]: value,
-                [`error${id}`]: isValid ? null : message
-            });
-        }
     }
 
     render() {
-        const {fields, fieldFor, selectFor} = this.props;
+        const { fields, fieldFor, selectFor} = this.props;
         const civilityField = find(fields, {name: 'civility', entityPath: 'user'});
-        const {date1, error1} = this.state;
-        /*
-        <InputDate
-        error={error1}
-        format={['DD/MM/YYYY', 'DD.MM.YYYY', 'DD MMM YYYY']}
-        locale='fr'
-        name='date1'
-        onChange={this.changeHandler(1)}
-        ref='date1'
-        value={date1}
-        />
-        <Autocomplete
-        isEdit={true}
-        querySearcher={_querySearcher}
-        placeholder={'Your search...'}
-        onChange={(value) => console.log(value)}
-        />
-        <Autocomplete
-        isEdit={true}
-        querySearcher={_querySearcher2}
-        placeholder={'Custom dropdown failed results...'}
-        />
-        </Panel>
-        */
         return (
-            <div>
-                <p>Formulaire affichant différents composants. Ce formulaire permet de tester les composants, checkbox et date.</p>
-                <Panel title='User Ref List Checkbox' {...this.props}>
-                    {fieldFor('uuid', {entityPath: 'user'})}
-                    {fieldFor('style', {entityPath: 'user'})}
-                    {selectFor('civility', {entityPath: 'user', masterDatum: 'civility'})}
-                    {fieldFor('accountsNames', {entityPath: 'user'})}
-                    {fieldFor('date', {entityPath: 'user'})}
-                </Panel>
-            </div>
+            <Panel title='User Ref List Checkbox' {...this.props}>
+                {fieldFor('uuid')}
+                {fieldFor('style')}
+                {fieldFor('accountsNames', {masterDatum: 'accountsNames'})}
+                {fieldFor('date')}
+            </Panel>
         );
     }
 };
 
+UserForm.displayName = 'UserForm';
+
 const formConfig = {
     formKey: 'userCheckListForm',
-    entityPathArray: ['user', 'address'],
+    entityPathArray: ['user'],
     loadAction: loadUserAction,
     saveAction: saveUserAction,
-    mapDispatchToProps: {injectActionHeader, triggerPosition}
+    nonValidatedFields: ['user.firstName', 'user.accountsNames']
 };
 
 //Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserForm = compose(
     connectToMetadata(['user']),
-    connectToMasterData(['civility']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(UserForm);
 
 export default ConnectedUserForm;
-```
-
-
-
-```jsx
-import React from 'react';
-import {Link} from 'react-router';
-const cardStyle= {
-  flex: 1,
-  minWidth: '300px',
-  maxWidth: '300px',
-  marginTop: '7px',
-  marginRight: '20px',
-  marginBottom: '20px'
-};
-const Card = ({title,description, route, destination }) => {
-  return (
-      <div style={cardStyle} className="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div className="mdl-card__title">
-          <h2 className="mdl-card__title-text">{title}</h2>
-        </div>
-        <div className="mdl-card__supporting-text">
-          {description}
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
-          <Link to={route} className="mdl-button mdl-button--colored">
-            {destination}
-          </Link>
-        </div>
-    </div>
-  );
-}
-export default Card;
 ```
 
 ## Les actions
@@ -410,9 +280,6 @@ export const loadAccountsNames = () => Promise.resolve(data, totalCount: data.le
 
 ## Les reducers
 
-Pour rappel un reducer est une fonction pure (pas liée à un contexte, dans d'autres termes une fonction `static` !) avec une signature très simple :
-		`(previousState, action) => newState`
-
 ```jsx
 // reducer/index.js
 import {combineReducers} from 'redux';
@@ -453,109 +320,20 @@ import UserComponent from '../views/user/user-components';
 
 // ...votre code...
 
-<Route path='user/component/:id' component={({params}) => <UserComponent id={params.id}/>} />
+        <Route path='user/component/:id' component={({params}) => <UserComponent id={params.id}/>} />
 ```
+
+Ajoutez la carte menant au formulaire sur la page d'accueil :
 
 ```jsx
 // views/home.js
-import React, {Component} from 'react';
-import Card from './user/card';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {compose} from 'redux';
-import {Link} from 'react-router';
-
-const routes = [
-    {route: '/user/component/120', destination: 'user refs', description: 'Formulaire avec différents composants', title: 'User Components'}
-];
-
-const Home = props =>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        {routes.map(route => <Card key={route.route} {...route} />)}
-    </div>;
-export default Home;
+// ...votre code...
+    {route: '/user/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
 ```
 
+Voici à quoi ressemble votre formulaire en mode édition :
 
-Encore une fois quelques explications très simples. Souvenez-vous, dans Redux, les reducers permettent de mettre à jour une partie du state pour une action particulière, discriminée par son type.  Le `reducerBuilder` permet alors de réaliser cela facilement pour nos deux actions construites avec l'`actionBuilder`. Il prend en entrée un objet composé de :
-
-- name : correspondant à votre entité définition.
-
-- LoadTypes : l'`actionBuilder` permet de construire trois actions au sens Redux du terme : la request, la response, et l'error. Ces trois types sont renvoyés par l'actionBuilder dans l'objet loadUserTypes que nous avons importé.
-
-- SaveTypes : même principe que le load.
-
-- DefaultData : il est également possible de mettre un state par default dans les reducers Redux. Cette fonctionnalité est également disponible via le `reducerBuilder` en lui donnant l'objet souhaité.
-
-Ce builder permet donc de construire des reducers Redux, voilà ce qu'il créé :
-```jsx
- function userReducer(state = DEFAULT_STATE, {type, payload}){
- const {data} = state;
-  switch (type) {
-   case REQUEST_LOAD_USER:
-       return {data, loading: true, saving: false};
-   case RESPONSE_LOAD_USER:
-       return {data: payload, loading: false, saving: false};
-   case ERROR_LOAD_USER:
-	   return {data: payload, loading: false, saving: false};    
-   default:
-       return state
-  }
- }
-```
-
-```jsx
-// views/home.js
-import React, {Component} from 'react';
-import Card from './user/card';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {compose} from 'redux';
-import {Link} from 'react-router';
-
-const routes = [
-    {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
-];
-
-const Home = props =>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        {routes.map(route => <Card key={route.route} {...route} />)}
-    </div>;
-export default Home;
-```
-
-```jsx
-// views/user/card.js
-import React from 'react';
-import {Link} from 'react-router';
-const cardStyle= {
-  flex: 1,
-  minWidth: '300px',
-  maxWidth: '300px',
-  marginTop: '7px',
-  marginRight: '20px',
-  marginBottom: '20px'
-};
-
-const Card = ({title,description, route, destination }) => {
-  return (
-      <div style={cardStyle} className="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div className="mdl-card__title">
-          <h2 className="mdl-card__title-text">{title}</h2>
-        </div>
-        <div className="mdl-card__supporting-text">
-          {description}
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
-          <Link to={route} className="mdl-button mdl-button--colored">
-            {destination}
-          </Link>
-        </div>
-    </div>
-  );
-}
-export default Card;
-```
-
-![capture](https://cloud.githubusercontent.com/assets/10349407/16381193/944d89fe-3c7b-11e6-9c05-d1b6c1d49a02.PNG)
+![image](https://cloud.githubusercontent.com/assets/8124804/22969519/14d766a8-f36f-11e6-8e47-abfc74b2854b.png)
 
 ---
 

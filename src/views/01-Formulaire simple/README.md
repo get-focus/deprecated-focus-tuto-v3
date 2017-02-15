@@ -8,44 +8,6 @@ Il y a alors quatre étapes pour réaliser cela :
 - les services,
 - les reducers
 
-Nous souhaitons un composant sous forme de carte amenant à la page du formulaire.
-![image](https://cloud.githubusercontent.com/assets/8124804/22785450/9940c6ae-eed4-11e6-8b48-ca69f2bf8ba7.png)
-
-Pour en arriver là nous avons besoin de créer un composant carte.
-
-```jsx
-// views/user/card.js
-import React from 'react';
-import {Link} from 'react-router';
-const cardStyle= {
-  flex: 1,
-  minWidth: '300px',
-  maxWidth: '300px',
-  marginTop: '7px',
-  marginRight: '20px',
-  marginBottom: '20px'
-};
-
-const Card = ({title,description, route, destination }) => {
-  return (
-      <div style={cardStyle} className="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div className="mdl-card__title">
-          <h2 className="mdl-card__title-text">{title}</h2>
-        </div>
-        <div className="mdl-card__supporting-text">
-          {description}
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
-          <Link to={route} className="mdl-button mdl-button--colored">
-            {destination}
-          </Link>
-        </div>
-    </div>
-  );
-}
-export default Card;
-```
-
 Il faut créer les domaines qui permettent de définir des règles que nous appliquerons sur les champs de notre formulaire.
 
 ```jsx
@@ -466,20 +428,31 @@ Et enfin modifier le fichier home pour afficher notre carte menant vers la vue d
 ```jsx
 // home.js
 import React, {Component} from 'react';
-import Card from './user/card';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
-import {injectActionHeader, triggerPosition} from 'focus-application/header/header-actions';
 import {compose} from 'redux';
 import {Link} from 'react-router';
+import Panel from 'focus-components/panel';
+import Button from 'focus-components/button';
 
 const routes = [
-    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
+    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
 ];
 
-const Home = props =>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        {routes.map(route => <Card key={route.route} {...route} />)}
-    </div>;
+const Home = props => {
+    return(
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            {routes.map(route => <div key={route.route} style={{margin: '10px'}}>
+                <Panel title={route.title} Buttons={null}>
+                    <p>{route.description}</p>
+                    <div className="mdl-card__actions mdl-card--border">
+                        <Link to={route.route} className="mdl-button mdl-button--colored">
+                            {route.destination}
+                        </Link>
+                    </div>
+                </Panel>
+            </div>)}
+        </div>
+    )
+}
 export default Home;
 ```
 
@@ -501,11 +474,11 @@ Toujours la même chose, c'est un service. Il a été simulé chez nous mais cel
 ```jsx
 //services/load-civility.js
 export const loadCivility = () => Promise.resolve([
-  {code: 'M', label: 'M'},
-  {code: 'Mme', label: 'Mme'},
-  {code: 'Mlle', label: 'Mlle'},
-  {code: 'Dr', label: 'Dr'},
-  {code: 'Prof', label: 'Prof'},
+    {code: 'M', label: 'M'},
+    {code: 'Mme', label: 'Mme'},
+    {code: 'Mlle', label: 'Mlle'},
+    {code: 'Dr', label: 'Dr'},
+    {code: 'Prof', label: 'Prof'},
 ]);
 ```
 
@@ -518,10 +491,10 @@ Dans le dossier `config` nous avons donc ajouté un fichier : `master-data.js`. 
 import {loadCivility} from '../../services/load-civility';
 
 export const masterDataConfig  = [
-  {
-    name: 'civility',
-    service: loadCivility
-  }
+    {
+        name: 'civility',
+        service: loadCivility
+    }
 ];
 ```
 
@@ -552,6 +525,7 @@ componentWillMount() {
     load({id});
     loadMasterData();
 }
+
 //...Votre code...
 
 const ConnectedUserForm = compose(
@@ -564,7 +538,7 @@ const ConnectedUserForm = compose(
 
 - domaines et définitions
 
-Importez le composant de liste de selection...
+Importez le composant de liste de sélection...
 
 ```jsx
 //config/domains/index.js

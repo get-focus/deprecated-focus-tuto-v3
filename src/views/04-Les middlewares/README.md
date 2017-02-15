@@ -89,6 +89,18 @@ export const user = {
     sex: {
         domain: 'DO_SEXE',
         isRequired: true
+    },
+    style: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
+    accountsNames: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
+    date: {
+        domain: 'DO_TEXTE',
+        isRequired: false
     }
 }
 
@@ -525,39 +537,6 @@ FinancialMoveLine.defaultProps = {
 export default FinancialMoveLine;
 ```
 
-```jsx
-// views/card.js
-import React from 'react';
-import {Link} from 'react-router';
-const cardStyle= {
-  flex: 1,
-  minWidth: '300px',
-  maxWidth: '300px',
-  marginTop: '7px',
-  marginRight: '20px',
-  marginBottom: '20px'
-};
-
-const Card = ({title,description, route, destination }) => {
-  return (
-      <div style={cardStyle} className="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div className="mdl-card__title">
-          <h2 className="mdl-card__title-text">{title}</h2>
-        </div>
-        <div className="mdl-card__supporting-text">
-          {description}
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
-          <Link to={route} className="mdl-button mdl-button--colored">
-            {destination}
-          </Link>
-        </div>
-    </div>
-  );
-}
-export default Card;
-```
-
 - Le service
 
 ```jsx
@@ -608,19 +587,31 @@ export default RouterRoot;
 ```jsx
 // views/home.js
 import React, {Component} from 'react';
-import Card from './user/card';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
 import {compose} from 'redux';
 import {Link} from 'react-router';
+import Panel from 'focus-components/panel';
+import Button from 'focus-components/button';
 
 const routes = [
     {route: '/user/list/120', destination: 'Custom data', description: 'Exemple d\'utilisation d\'un custom midlleware', title: 'Custom data'}
 ];
 
-const Home = props =>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-        {routes.map(route => <Card key={route.route} {...route} />)}
-    </div>;
+const Home = props => {
+    return(
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            {routes.map(route => <div key={route.route} style={{margin: '10px'}}>
+                <Panel title={route.title} Buttons={null}>
+                    <p>{route.description}</p>
+                    <div className="mdl-card__actions mdl-card--border">
+                        <Link to={route.route} className="mdl-button mdl-button--colored">
+                            {route.destination}
+                        </Link>
+                    </div>
+                </Panel>
+            </div>)}
+        </div>
+    )
+}
 export default Home;
 ```
 

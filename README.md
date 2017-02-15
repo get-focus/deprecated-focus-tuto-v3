@@ -1,7 +1,7 @@
 # Tutorial de fonctionnement de la nouvelle API de gestion des entités et des pages
 
-Après avoir [récupéré le code source du tutoriel](#Initialisation),
-[pour commencer à créer votre premier formulaire, c'est par ici](../../../../tutorial-step-2/src/views/01-Formulaire simple/).
+Après avoir [récupéré le code source du tutoriel](#initialisation),
+[pour commencer à créer votre premier formulaire, c'est par ici](../tutorial-step-1/src/views/01-Formulaire simple/).
 
 Nous avons conscience qu'il reste quelques petites erreurs, nous avons fait ce tutoriel avec plein d'amour, n'hésitez pas à contribuer pour nous aider =) !
 
@@ -652,4 +652,4 @@ Ensuite ce store sera fourni au `Provider` de store exposé par [react-redux](ht
 
 ---
 
-[Première partie : votre premier formulaire](../../../../tutorial-step-2/src/views/01-Formulaire simple/)
+[Première partie : votre premier formulaire](../tutorial-step-1/src/views/01-Formulaire simple/)

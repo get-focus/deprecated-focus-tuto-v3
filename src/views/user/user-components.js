@@ -7,35 +7,12 @@ import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {loadUserAction, saveUserAction} from '../../actions/user-actions';
 
+import InputSelect from 'focus-components/select-mdl';
+
 import Panel from 'focus-components/panel';
-import {compose} from 'redux';
+import compose from 'lodash/flowRight';
 
-import moment  from 'moment';
-
-const _querySearcher = query => {
-    let data = [
-        {
-            key: 'JL',
-            label: 'Joh Lickeur'
-        },
-        {
-            key: 'GK',
-            label: 'Guénolé Kikabou'
-        },
-        {
-            key: 'YL',
-            label: 'Yannick Lounivis'
-        }
-    ];
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({
-                data,
-                totalCount: data.length
-            });
-        }, 500);
-    });
-};
+import moment from 'moment';
 
 class UserForm extends Component {
     constructor(props) {
@@ -78,19 +55,21 @@ class UserForm extends Component {
     }
 };
 
+UserForm.displayName = 'UserForm';
+
 const formConfig = {
-    formKey: 'userCheckListForm',
-    entityPathArray: ['user'],
-    loadAction: loadUserAction,
-    saveAction: saveUserAction
+  formKey: 'userCheckListForm',
+  entityPathArray: ['user'],
+  loadAction: loadUserAction,
+  saveAction: saveUserAction,
+  nonValidatedFields: ['user.firstName', 'user.accountsNames']
 };
 
 //Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserForm = compose(
-    connectToMetadata(['user']),
-    connectToMasterData(['accountsNames']),
-    connectToForm(formConfig),
-    connectToFieldHelpers()
+  connectToMetadata(['user']),
+  connectToForm(formConfig),
+  connectToFieldHelpers()
 )(UserForm);
 
 export default ConnectedUserForm;

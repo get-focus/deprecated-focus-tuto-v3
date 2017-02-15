@@ -20,7 +20,7 @@ export const user = {
         isRequired: true
     },
     style: {
-        domain: 'DO_TEXTE',
+        domain: 'DO_CHECKBOX',
         isRequired: true
     },
     accountsNames: {

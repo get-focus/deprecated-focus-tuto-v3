@@ -3,8 +3,8 @@
 Cette partie s'intéresse à mettre en musique d'autres composants de formulaires.
 
 Le formulaire créé affichera comme nouveaux composants :
-- un champs [date](https://github.com/get-focus/focus-components/tree/develop/src/input-date),
-- un champs [select checkbox](https://github.com/get-focus/focus-components/tree/develop/src/select-checkbox),
+- un champ [date](https://github.com/get-focus/focus-components/tree/develop/src/input-date),
+- un champ [select checkbox](https://github.com/get-focus/focus-components/tree/develop/src/select-checkbox),
 - un champ [autocomplete](https://github.com/get-focus/focus-components/blob/develop/src/autocomplete-text/field.js)
 
 Si vous avez fait les parties précédentes, vous devriez avoir déjà une bonne partie du code de prêt.

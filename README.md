@@ -1,5 +1,8 @@
 # Tutorial de fonctionnement de la nouvelle API de gestion des entités et des pages
 
+Après avoir [récupéré le code source du tutoriel](#Initialisation),
+[pour commencer à créer votre premier formulaire, c'est par ici](../../../../tutorial-step-2/src/views/01-Formulaire simple/).
+
 Nous avons conscience qu'il reste quelques petites erreurs, nous avons fait ce tutoriel avec plein d'amour, n'hésitez pas à contribuer pour nous aider =) !
 
 Afin d'aborder au mieux ce tutoriel, vous avez idéalement des connaissance en JavaScript. [Notre tutoriel est disponible ici](http://getfocus.io/formation-js/#/).
@@ -94,7 +97,8 @@ Un peu comme ceci
 
 - Lancez la commande `npm start` et rendez vous à [http://localhost:3000](http://localhost:3000)
 
-### Analyse de ce qui est affiché.
+Voici ce qui est affiché :
+![image](https://cloud.githubusercontent.com/assets/8124804/22976522/719fe4a2-f38b-11e6-8101-d7b420e289ca.png)
 
 Nous avons dans le fichier home.js les éléments suivants :
 
@@ -102,6 +106,7 @@ Nous avons dans le fichier home.js les éléments suivants :
 // views/home.js
 import React, {PureComponent} from 'react';
 
+// un composant react
 class Home extends PureComponent {
     render() {
         return <h1>Bienvenue sur le tutoriel de Focus v3</h1>
@@ -116,6 +121,8 @@ export default Home;
 > Voir la doc de [react](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)
 
 ## Brancher un routeur
+
+> !!! Jusqu'à la fin de cette page, le code est purement explicatif et ne doit pas être utilisé pour réaliser les tutos
 
 L'objectif est maintenant de brancher un routeur dans notre application.
 
@@ -289,7 +296,6 @@ ReactDOM.render(
 > Rappel, pour le moment nous n'avons fait que du React, redux, et react routeur.
 
 - Nous allons maintenant sortir la partie application du composant root dans un fichier `src/app.js`.
-
 
 ```jsx
 import React, {PropTypes} from 'react';
@@ -644,7 +650,6 @@ Ensuite ce store sera fourni au `Provider` de store exposé par [react-redux](ht
 > Le socle applicatif est maintenant prêt.
 > On y va, on peut passer aux exemples !
 
-
 ---
 
-[Première partie : votre premier formulaire](../01-Formulaire simple/)
+[Première partie : votre premier formulaire](../../../../tutorial-step-2/src/views/01-Formulaire simple/)

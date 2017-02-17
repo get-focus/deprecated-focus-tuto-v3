@@ -48,3 +48,9 @@ export const saveUserFinance = async ({user}) => {
     });
     return {...finance};
 }
+
+export const loadError = async () => {
+    const response = await fetch(`http://localhost:9999/x/error`)
+    const data = await response;
+    return data;
+}

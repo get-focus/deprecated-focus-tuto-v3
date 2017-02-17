@@ -7,7 +7,7 @@ import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import Panel from 'focus-components/panel';
 
-import {loadUserAction, saveUserAction} from '../../actions/user-actions';
+import {loadUserAction, saveUserAction, saveErrorUserAction} from '../../actions/user-actions';
 
 const User = ({fieldFor, selectFor, ...otherProps}) => (
     <Panel title='User' {...otherProps}>
@@ -35,7 +35,7 @@ class SmartUser extends PureComponent {
                     <br/>
                     Le champs civilité est une liste de référence. Le champs sexe est une radio list.
                 </p>
-                <User fieldFor={fieldFor} selectFor={selectFor} { ...this.props}/>
+                <User fieldFor={fieldFor} selectFor={selectFor} {...this.props}/>
             </div>
         );
     }
@@ -45,7 +45,7 @@ const formConfig = {
     formKey: 'userForm',
     entityPathArray: ['user'],
     loadAction: loadUserAction,
-    saveAction: saveUserAction
+    saveAction: saveErrorUserAction
 };
 
 const ConnectedUserForm = compose(

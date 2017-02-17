@@ -16,3 +16,5 @@ export const masterDataConfig  = [
         service: loadAccountsNames
     }
 ];
+
+export default []

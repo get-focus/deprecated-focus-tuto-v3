@@ -45,6 +45,10 @@ function createEntityFinance(i){
         style: 'checkbox.true',
         accountsNames: 'GK',
         date: new Date(),
+<<<<<<< HEAD
+>>>>>>> save form 6
+=======
+        sex: 'unknown'
 >>>>>>> save form 6
     };
 }
@@ -183,7 +187,15 @@ app.get(API_ROOT + '/error', function createNotifs(req, res) {
 
 //https://github.com/get-focus/focus-graph/blob/deliver-version-3.2.0/api/index.js
 app.get(API_ROOT  + '/error', function createNotifs(req, res) {
+<<<<<<< HEAD
     res.status(403);
     res.json({"globalErrors":[" Libelle doit être renseigné"], "status": 'ERROR'})
+>>>>>>> save form 6
+=======
+    res.json({
+        //res.status(403);
+        globalErrors : ['globalErrors', 'you failed'],
+        "status": 'ERROR'
+    })
 >>>>>>> save form 6
 });

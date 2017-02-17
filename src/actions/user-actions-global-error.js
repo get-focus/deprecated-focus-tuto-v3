@@ -14,6 +14,10 @@ const _saveUserAction = actionBuilder({names: ['user'], type: 'save', service: s
 export const saveUserTypes = _saveUserAction.types;
 export const saveUserAction = _saveUserAction.action;
 
+const _loadUserErrorAction = actionBuilder({names: ['user'], type: 'load', service: loadUser});
+export const loadUserErrorTypes = _loadUserErrorAction.types;
+export const loadUserErrorAction = _loadUserErrorAction.action;
+
 const _saveErrorUserAction = actionBuilder({names: ['user'], type: 'save', service: loadError});
 export const saveErrorUserTypes = _saveErrorUserAction.types;
 export const saveErrorUserAction = _saveErrorUserAction.action;

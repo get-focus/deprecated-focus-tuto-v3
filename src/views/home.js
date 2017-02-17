@@ -10,6 +10,7 @@ const routes = [
     {route: '/users/finances/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finance'},
     {route: '/users/lists/120', destination: 'Custom data', description: 'Exemple d\'utilisation d\'un custom midlleware', title: 'Custom data'},
     {route: '/users/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
+    {route: '/user/error/120', destination: 'Error', description: 'Composant user avec une error', title: 'Error'}
 ];
 
 const Home = props => {

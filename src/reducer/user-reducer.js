@@ -1,5 +1,5 @@
 import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadUserTypes, saveUserTypes} from '../actions/user-actions';
+import {loadUserTypes, saveUserTypes, saveErrorUserTypes} from '../actions/user-actions-global-error';
 
 // Données initiales pour la state redux
 const DEFAULT_DATA = {

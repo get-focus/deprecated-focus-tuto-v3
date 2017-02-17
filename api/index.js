@@ -25,7 +25,8 @@ function createEntity(i){
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        civility: faker.name.prefix()
+        civility: faker.name.prefix(),
+        sex: 'unknown'
     };
 }
 

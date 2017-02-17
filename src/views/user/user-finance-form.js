@@ -46,7 +46,7 @@ const formConfig = {
 };
 
 const ConnectedUserForm = compose(
-    connectToMetadata(['user', 'financialMove', 'finance']),
+    connectToMetadata(['user', 'finance']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(SmartUserFinance);

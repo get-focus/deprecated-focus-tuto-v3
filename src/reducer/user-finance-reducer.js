@@ -6,16 +6,16 @@ const DEFAULT_DATA = {
     firstName:'Amélie'
 };
 
-// Utilisation du reducerBuilder qui attends le type des trois actions créés par l'actionBuimlder
-export const financeReducer = reducerBuilder({
-  name: 'finance',
-  loadTypes: loadUserFinanceTypes,
-  saveTypes: saveUserFinanceTypes
-});
-
 export const userReducer = reducerBuilder({
     name: 'user',
     loadTypes: loadUserFinanceTypes,
     saveTypes: saveUserFinanceTypes,
     defaultData: DEFAULT_DATA
+});
+
+// Utilisation du reducerBuilder qui attends le type des actions créés par l'actionBuilder
+export const financeReducer = reducerBuilder({
+  name: 'finance',
+  loadTypes: loadUserFinanceTypes,
+  saveTypes: saveUserFinanceTypes
 });

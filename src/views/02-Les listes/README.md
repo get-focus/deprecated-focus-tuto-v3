@@ -23,9 +23,9 @@ import FinancialMoveLine from './financialMoveLine'
 
 const Finance = ({fieldFor,listFor, ...otherProps}) => (
     <Panel title='Finance ' {...otherProps}>
-        {fieldFor('name', {entityPath: 'finance'})}
-        {fieldFor('amount', {entityPath: 'finance'})}
-        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+        {fieldFor('name')}
+        {fieldFor('amount')}
+        {listFor('moves', {redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
     </Panel>
 )
 
@@ -119,16 +119,16 @@ import focusFetch from 'focus-application/fetch/fetch-proxy'
 export const loadFinance = async ({id}) => {
     const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
     const data = await response;
-    return { ...data.user, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
+    return { ...data.finance, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
 }
 
-export const saveFinance = async ({user}) => {
+export const saveFinance = async ({finance}) => {
     await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve()
         }, 0);
     });
-    return {...user};
+    return {...finance};
 }
 ```
 
@@ -239,7 +239,7 @@ N'oubliez pas de rajouter la route dans home.js...
 {route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
 ```
 
-...et d'importer la vu dans le router !
+...et d'importer la vue dans le router !
 
 ```jsx
 import Finance from '../views/user/finance-form';

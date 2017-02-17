@@ -15,8 +15,6 @@ export default {
     finance: {
         name: 'nom du compte',
         amount: 'disponible',
-        date: 'date',
-        test: 'test',
         moves: 'opérations sur le compte'
     },
     button: {

@@ -6,7 +6,7 @@ export const loadFinance = async ({id}) => {
     return { ...data.finance, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
 }
 
-export const saveFinance = async ({user}) => {
+export const saveFinance = async ({finance}) => {
     await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve()

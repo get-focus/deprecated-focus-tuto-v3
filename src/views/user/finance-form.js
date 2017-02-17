@@ -10,9 +10,9 @@ import FinancialMoveLine from './financialMoveLine'
 
 const Finance = ({fieldFor,listFor, ...otherProps}) => (
     <Panel title='Finance ' {...otherProps}>
-        {fieldFor('name', {entityPath: 'finance'})}
-        {fieldFor('amount', {entityPath: 'finance'})}
-        {listFor('moves', {entityPath : 'finance', redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+        {fieldFor('name')}
+        {fieldFor('amount')}
+        {listFor('moves', {redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
     </Panel>
 )
 

@@ -5,7 +5,7 @@ import Panel from 'focus-components/panel';
 import Button from 'focus-components/button';
 
 const routes = [
-    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
+    {route: '/users/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
 ];
 
 const Home = props => {

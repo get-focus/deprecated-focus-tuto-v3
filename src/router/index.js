@@ -11,7 +11,7 @@ const RouterRoot = <Router history={hashHistory} key='router'>
     <Route path='/' component={Layout} key='mainRoute' >
         <IndexRoute component={Home}/>
         {/* Les :id sert à fournir un paramètre à l'url on extrait les paramètres d'url via la props params*/}
-        <Route path='user/:id' component={({params}) => <User id={params.id}/>} />
+        <Route path='users/:id' component={({params}) => <User id={params.id}/>} />
     </Route>
 </Router>;
 

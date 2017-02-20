@@ -286,10 +286,13 @@ https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Pr
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUser = async ({id}) => {
-    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
-    const data = await response;
-    return { ...data.user, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
-}
+    return focusFetch({url: `http://localhost:9999/x/users/${id}`, method: 'GET'}).then((data) => {
+        return {
+            ...data.user,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
+        };
+    });
+};
 
 export const saveUser = async ({user}) => {
     await new Promise((resolve, reject) => {
@@ -414,7 +417,7 @@ const RouterRoot = <Router history={hashHistory} key='router'>
     <Route path='/' component={Layout} key='mainRoute' >
         <IndexRoute component={Home}/>
         {/* Les :id sert à fournir un paramètre à l'url on extrait les paramètres d'url via la props params*/}
-        <Route path='user/:id' component={({params}) => <User id={params.id}/>} />
+        <Route path='users/:id' component={({params}) => <User id={params.id}/>} />
     </Route>
 </Router>;
 
@@ -426,7 +429,7 @@ export default RouterRoot;
 Et enfin modifier le fichier home pour afficher notre carte menant vers la vue du formulaire.
 
 ```jsx
-// home.js
+// views/home.js
 import React, {Component} from 'react';
 import {compose} from 'redux';
 import {Link} from 'react-router';
@@ -434,7 +437,7 @@ import Panel from 'focus-components/panel';
 import Button from 'focus-components/button';
 
 const routes = [
-    {route: '/user/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
+    {route: '/users/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'}
 ];
 
 const Home = props => {

@@ -7,7 +7,7 @@ import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import Panel from 'focus-components/panel';
 
-import {loadUserErrorAction, saveErrorUserAction, saveUserAction} from '../../actions/user-actions-global-error';
+import {loadErrorUserAction, saveErrorUserAction} from '../../actions/user-actions-global-error';
 
 class UserErrors extends PureComponent {
     componentWillMount() {
@@ -21,8 +21,9 @@ class UserErrors extends PureComponent {
         const {editing, fields, fieldFor, listFor, selectFor} = this.props;
         return (
             <Panel title='User and address' {...this.props}>
-                {fieldFor('uuid', {entityPath: 'user'})}
-                {fieldFor('firstName', {entityPath: 'user'})}
+                {fieldFor('uuid')}
+                {fieldFor('firstName')}
+                {fieldFor('lastName')}
             </Panel>
         );
     }
@@ -34,7 +35,7 @@ const formConfig = {
     //todo: it should raise an error if i use the same formKey.
     formKey: 'userAndAddressForm',
     entityPathArray: ['user'],
-    loadAction: loadUserErrorAction,
+    loadAction: loadErrorUserAction,
     saveAction: saveErrorUserAction
 };
 

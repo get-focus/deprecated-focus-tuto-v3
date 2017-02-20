@@ -188,13 +188,16 @@ app.get(API_ROOT + '/error', function createNotifs(req, res) {
 //https://github.com/get-focus/focus-graph/blob/deliver-version-3.2.0/api/index.js
 app.get(API_ROOT  + '/error', function createNotifs(req, res) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     res.status(403);
     res.json({"globalErrors":[" Libelle doit être renseigné"], "status": 'ERROR'})
 >>>>>>> save form 6
 =======
+=======
+    res.status(403),
+>>>>>>> form 6 tuto+code
     res.json({
-        //res.status(403);
-        globalErrors : ['globalErrors', 'you failed'],
+        globalErrors : ['Une erreur globale'],
         "status": 'ERROR'
     })
 >>>>>>> save form 6

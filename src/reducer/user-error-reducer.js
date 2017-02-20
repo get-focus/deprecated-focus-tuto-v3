@@ -1,5 +1,5 @@
 import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadUserTypes, saveUserTypes, saveErrorUserTypes} from '../actions/user-actions-global-error';
+import {loadErrorUserTypes,saveErrorUserTypes} from '../actions/user-actions-global-error';
 
 // Données initiales pour la state redux
 const DEFAULT_DATA = {
@@ -8,11 +8,11 @@ const DEFAULT_DATA = {
 
 // Utilisation du reducerBuilder qui attend un name correspondant à votre entité, puis les types de load renvoyés par les actions
 // mais aussi les types des saves et enfin les defaultData.
-const userReducer = reducerBuilder({
+const userErrorReducer = reducerBuilder({
     name: 'user',
-    loadTypes: loadUserTypes,
-    saveTypes: saveUserTypes,
+    loadTypes: loadErrorUserTypes,
+    saveTypes: saveErrorUserTypes,
     defaultData: DEFAULT_DATA
 });
 
-export default userReducer;
+export default userErrorReducer;

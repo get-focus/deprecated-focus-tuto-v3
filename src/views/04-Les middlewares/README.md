@@ -31,10 +31,6 @@ export const DO_TEXTE = {
     type: 'text'
 }
 
-export const DO_AMOUNT = {
-    type: 'number'
-}
-
 export const DO_SYMBOL = {
     type: 'text'
 }
@@ -110,7 +106,7 @@ export const finance = {
         isRequired: true
     },
     amount: {
-        domain: 'DO_AMOUNT',
+        domain: 'DO_MONTANT',
         isRequired: true
     },
     moves:{
@@ -508,7 +504,7 @@ const User = ({fieldFor,listFor, victoire, echec, ...otherProps}) => (
   <Panel title={victoire ? "User " +victoire : "User " + echec} {...otherProps}>
       {fieldFor('name', {entityPath: 'finance'})}
       {fieldFor('amount', {entityPath: 'finance'})}
-      {listFor('moves', { redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+      {listFor('moves', {redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
   </Panel>
 )
 ```
@@ -528,7 +524,6 @@ function FinancialMoveLine({fieldForLine, ...otherProps}) {
 
 FinancialMoveLine.displayName = 'financialMoveLine';
 FinancialMoveLine.propTypes = {
-    onClick: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string)
 };
 FinancialMoveLine.defaultProps = {
@@ -575,7 +570,7 @@ import CustomFinanceUserForm from '../views/user/custom-finance-user-form';
 const RouterRoot = <Router history={hashHistory} key='router'>
     <Route path='/' component={Layout} key='mainRoute' >
         <IndexRoute component={Home}/>
-        <Route path='user/list/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
+        <Route path='users/lists/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
     </Route>
 </Router>;
 
@@ -593,7 +588,7 @@ import Panel from 'focus-components/panel';
 import Button from 'focus-components/button';
 
 const routes = [
-    {route: '/user/list/120', destination: 'Custom data', description: 'Exemple d\'utilisation d\'un custom midlleware', title: 'Custom data'}
+    {route: '/users/lists/120', destination: 'Custom data', description: 'Exemple d\'utilisation d\'un custom midlleware', title: 'Custom data'}
 ];
 
 const Home = props => {
@@ -618,6 +613,8 @@ export default Home;
 Voici ce qu'on obtient :
 
 ![image](https://cloud.githubusercontent.com/assets/8124804/22893718/dc3e54e0-f216-11e6-9724-7e7233f6d151.png)
+
+> Pour l'exemple nous avons ajouté le composant ScrollSpyContainer qui en encapsulant les composants des formulaires perme de générer la navigation à gauche.
 
 > Pour rappel et pour conclure cette partie sur les middlewares, le principal c'est de comprendre qu'un middleware a accès au state dans sa globalité et qu'il fonctionnne dans un context donné, à l'inverse d'un reducer qui est pur et ne travaille que sur une partie de state pour en donner une autre. Les deux sont à utiliser pour des cas différents, et il n'est pas superflu de se poser les bonnes questions avant de choisir l'un ou l'autre.
 

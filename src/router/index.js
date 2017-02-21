@@ -17,7 +17,7 @@ const RouterRoot = <Router history={hashHistory} key='router'>
         <Route path='users/:id' component={({params}) => <User id={params.id}/>} />
         <Route path='finances/:id' component={({params}) => <Finance id={params.id}/>} />
         <Route path='users/finances/:id' component={({params}) => <UserFinanceView id={params.id}/>} />
-        <Route path='user/list/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
+        <Route path='users/lists/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
     </Route>
 </Router>;
 

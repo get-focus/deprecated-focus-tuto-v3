@@ -10,6 +10,6 @@ export const financeReducer = reducerBuilder({
 
 export const userReducer = reducerBuilder({
     name: 'user',
-    loadTypes : loadUserFinanceTypes,
+    loadTypes: loadUserFinanceTypes,
     saveTypes: saveUserFinanceTypes,
 });

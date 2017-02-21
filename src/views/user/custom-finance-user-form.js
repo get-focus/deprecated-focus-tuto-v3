@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect as connectToState} from 'react-redux';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
+import {connect as connectToForm} from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
@@ -23,7 +23,7 @@ const Finance = ({fieldFor, listFor, ...otherProps}) => (
     <Panel title='Finance' {...otherProps}>
         {fieldFor('name', {entityPath: 'finance'})}
         {fieldFor('amount', {entityPath: 'finance'})}
-        {listFor('moves', { redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+        {listFor('moves', {redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
     </Panel>
 )
 

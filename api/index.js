@@ -42,7 +42,15 @@ function createEntityFinance(i){
     };
 }
 
-//let entityJSON = [];
+function createEntityFinance(i){
+    return {
+        uuid: '12'+i,
+        name: faker.finance.accountName(),
+        amount: faker.finance.amount(),
+        moves: _createFinancialMoves()
+    };
+}
+
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }

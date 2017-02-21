@@ -9,7 +9,7 @@ import Panel from 'focus-components/panel';
 import {loadUserFinanceAction, saveUserFinanceAction} from '../../actions/finance-user-actions';
 
 const User = ({fieldFor,listFor, ...otherProps}) => (
-    <Panel title='User' {...otherProps}>
+    <Panel title='User Finance' {...otherProps}>
         {fieldFor('uuid', {entityPath: 'user'})}
         {fieldFor('firstName', {entityPath: 'user'})}
         {fieldFor('lastName', {entityPath: 'user'})}

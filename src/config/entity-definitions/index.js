@@ -34,19 +34,19 @@ export const user = {
 }
 
 export const finance = {
-    uuid:  {
+    uuid: {
         domain: 'DO_ID',
         isRequired: true
     },
-    name:  {
+    name: {
         domain: 'DO_TEXTE',
         isRequired: true
     },
-    amount:  {
+    amount: {
         domain: 'DO_MONTANT',
         isRequired: true
     },
-    moves: {
+    moves:{
         redirect: ['financialMove']
     }
 }

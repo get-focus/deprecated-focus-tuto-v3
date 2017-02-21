@@ -21,12 +21,15 @@ let adressJSON = [{
 }];
 
 function createEntity(i){
-    return        {
+    return {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-        sex: undefined
+        sex: undefined,
+        accountsNames: 'GK',
+        date: new Date(),
+        style: 'checkbox.true'
     };
 }
 
@@ -35,14 +38,10 @@ function createEntityFinance(i){
         uuid: '12'+i,
         name: faker.finance.accountName(),
         amount: faker.finance.amount(),
-        moves: _createFinancialMoves(),
-        accountsNames: 'GK',
-        date: new Date(),
-        style: 'checkbox.true'
+        moves: _createFinancialMoves()
     };
 }
 
-//let entityJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
@@ -166,7 +165,7 @@ const server = app.listen(MOCKED_API_PORT, function serverCallback() {
     console.log('Mocked entity API listening at http://localhost:%s', MOCKED_API_PORT);
 });
 
-app.get(API_ROOT  + '/error', function createNotifs(req, res) {
+app.get(API_ROOT + '/error', function createNotifs(req, res) {
     res.status(403),
     res.json({
         globalErrors : ['Une erreur globale'],

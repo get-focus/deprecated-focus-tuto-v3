@@ -58,18 +58,6 @@ Sinon je propose ces petits reducers (et n'oubliez pas d'exporter vos types en r
 import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
 import {loadUserFinanceTypes, saveUserFinanceTypes} from '../actions/finance-user-actions';
 
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_LOAD_FINANCE, RESPONSE_LOAD_FINANCE, ERROR_LOAD_FINANCE} = loadUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_SAVE_FINANCE, RESPONSE_SAVE_FINANCE, ERROR_SAVE_FINANCE} = saveUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_LOAD_USER, RESPONSE_LOAD_USER, ERROR_LOAD_USER} = loadUserFinanceTypes;
-
-// Récupération des types des trois actions redux créé par l'actionBuilder
-const {REQUEST_SAVE_USER, RESPONSE_SAVE_USER, ERROR_SAVE_USER} = saveUserFinanceTypes;
-
 // Données initiales pour la state redux
 const DEFAULT_DATA = {
     firstName:'Amélie'
@@ -78,14 +66,14 @@ const DEFAULT_DATA = {
 // Utilisation du reducerBuilder qui attends le type des trois actions créés par l'actionBuimlder
 export const financeReducer = reducerBuilder({
   name: 'finance',
-  loadTypes: {REQUEST_LOAD_FINANCE, RESPONSE_LOAD_FINANCE, ERROR_LOAD_FINANCE},
-  saveTypes: {REQUEST_SAVE_FINANCE, RESPONSE_SAVE_FINANCE, ERROR_SAVE_FINANCE}
+  loadTypes: loadUserFinanceTypes,
+  saveTypes: saveUserFinanceTypes
 });
 
 export const userReducer = reducerBuilder({
-	name: 'user',
-    saveTypes: {REQUEST_SAVE_USER, RESPONSE_SAVE_USER, ERROR_SAVE_USER},
-    loadTypes : {REQUEST_LOAD_USER, RESPONSE_LOAD_USER, ERROR_LOAD_USER},
+    name: 'user',
+    loadTypes : loadUserFinanceTypes,
+    saveTypes: saveUserFinanceTypes,
     defaultData: DEFAULT_DATA
 });
 ```
@@ -109,9 +97,12 @@ export default combineReducers({
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUserFinance = async ({id}) => {
-    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
-    const data = await response;
-    return data;
+    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'GET'}).then((data) => {
+        return {
+            ...data,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
+        };
+    });
 }
 
 export const saveUserFinance = async ({user}) => {
@@ -143,7 +134,7 @@ import compose from 'lodash/flowRight';
 import FinancialMoveLine from './financialMoveLine'
 
 const User = ({fieldFor,listFor, ...otherProps}) => (
-    <Panel title='User' {...otherProps}>
+    <Panel title='User Finance' {...otherProps}>
         {fieldFor('uuid', {entityPath: 'user'})}
         {fieldFor('firstName', {entityPath: 'user'})}
         {fieldFor('lastName', {entityPath: 'user'})}
@@ -192,17 +183,17 @@ export default ConnectedUserForm;
 N'oubliez pas de rajouter la route dans home.js...
 
 ```jsx
-    {route: '/user/finance/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finances'}
+    {route: '/users/finances/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finances'}
 ```
 
 ...et d'importer la vu dans le router !
 
 ```jsx
-import Finance from '../views/user/finance-form';
+import UserFinanceView from '../views/user/user-finance-form';
 
 // ... votre code ...
 
-<Route path='finance/:id' component={({params}) => <Finance id={params.id}/>} />
+        <Route path='users/finances/:id' component={({params}) => <UserFinanceView id={params.id}/>} />
 ```
 
 Si vos *domains* et *entity-definitions* sont correctement définis, voici ce qu'on obtient :

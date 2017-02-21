@@ -11,7 +11,7 @@ Si vous avez fait les parties précédentes, vous devriez avoir déjà une bonne
 
 ## Domains, entity-definitions et master-datas
 
-Il faut importer à partir de focus-component les nouveaux composants que nous allons utiliser et définit des domaines qui vont les utiliser.
+Il faut importer à partir de focus-component les nouveaux composants que nous allons utiliser et définir des domaines qui vont les utiliser.
 
 ```jsx
 // domains/index.js
@@ -31,10 +31,6 @@ export const DO_ID = {
 
 export const DO_TEXTE = {
     type: 'text'
-}
-
-export const DO_AMOUNT = {
-    type: 'number'
 }
 
 export const DO_SYMBOL = {
@@ -198,7 +194,7 @@ class UserForm extends Component {
 UserForm.displayName = 'UserForm';
 
 const formConfig = {
-    formKey: 'userCheckListForm',
+    formKey: 'userComponentsListForm',
     entityPathArray: ['user'],
     loadAction: loadUserAction,
     saveAction: saveUserAction,
@@ -320,15 +316,17 @@ import UserComponent from '../views/user/user-components';
 
 // ...votre code...
 
-        <Route path='user/component/:id' component={({params}) => <UserComponent id={params.id}/>} />
+        <Route path='users/component/:id' component={({params}) => <UserComponent id={params.id}/>} />
 ```
 
 Ajoutez la carte menant au formulaire sur la page d'accueil :
 
 ```jsx
 // views/home.js
+
 // ...votre code...
-    {route: '/user/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
+
+    {route: '/users/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
 ```
 
 Voici à quoi ressemble votre formulaire en mode édition :

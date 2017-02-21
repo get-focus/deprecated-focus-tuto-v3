@@ -50,7 +50,7 @@ export const DO_SEXE = {
 
 export const DO_ACCOUNTS_NAMES = {
     type: 'text',
-   InputComponent: props => <div><Autocomplete querySearcher={_querySearcher}/></div>
+    InputComponent: props => <div><Autocomplete querySearcher={_querySearcher}/></div>
 }
 
 export const DO_CHECKBOX = {

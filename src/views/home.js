@@ -9,7 +9,7 @@ const routes = [
     {route: '/finances/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'},
     {route: '/users/finances/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finance'},
     {route: '/users/lists/120', destination: 'Custom data', description: 'Exemple d\'utilisation d\'un custom midlleware', title: 'Custom data'},
-    {route: '/user/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
+    {route: '/users/component/120', destination: 'user components', description: 'Formulaire avec différents composants', title: 'User Components'}
 ];
 
 const Home = props => {

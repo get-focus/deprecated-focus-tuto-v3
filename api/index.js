@@ -43,16 +43,6 @@ function createEntityFinance(i){
     };
 }
 
-function createEntityFinance(i){
-    return {
-        uuid: '12'+i,
-        name: faker.finance.accountName(),
-        amount: faker.finance.amount(),
-        moves: _createFinancialMoves()
-    };
-}
-
-//let entityJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
@@ -114,7 +104,7 @@ const allowCrossDomain = (req, res, next) => {
 
 app.use(allowCrossDomain);
 
-app.get(API_ROOT  + '/entity', function getAllNotifications(req, res) {
+app.get(API_ROOT + '/entity', function getAllNotifications(req, res) {
     res.json(entityJSON);
 });
 
@@ -145,6 +135,12 @@ app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
 
 app.get(API_ROOT  + '/complex', (req, res) => {
     res.json(complexJSON);
+});
+
+app.put(API_ROOT + '/entity/:id', (req, res) => {
+    var savedData = req.body;
+    savedData.isSaved = true;
+    res.json(savedData);
 });
 
 app.post(API_ROOT + '/entity/:id', (req, res) => {

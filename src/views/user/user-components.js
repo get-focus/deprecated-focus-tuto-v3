@@ -58,7 +58,7 @@ class UserForm extends Component {
 UserForm.displayName = 'UserForm';
 
 const formConfig = {
-    formKey: 'userCheckListForm',
+    formKey: 'userComponentsListForm',
     entityPathArray: ['user'],
     loadAction: loadUserAction,
     saveAction: saveUserAction,

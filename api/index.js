@@ -30,9 +30,24 @@ function createEntity(i){
     };
 }
 
+function createEntityFinance(i){
+    return {
+        uuid: '12'+i,
+        name: faker.finance.accountName(),
+        amount: faker.finance.amount(),
+        moves: _createFinancialMoves()
+    };
+}
+
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
+
+let entityFinanceJSON = [];
+for(let i = 0; i < NB_GENERATED_ENTITY; i++){
+    entityFinanceJSON.push(createEntityFinance(i));
+}
+
 let complexJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     complexJSON.push(createComplexEntity(i));
@@ -49,13 +64,7 @@ function createComplexEntity(i){
     return {
         user: createEntity(i),
         adress: adressJSON,
-        finance: {
-            name: faker.finance.accountName(),
-            amount: faker.finance.amount(),
-            currency: faker.finance.currencyName(),
-            date: new Date(),
-            moves: _createFinancialMoves()
-        }
+        finance: createEntityFinance(i)
     }
 }
 
@@ -113,6 +122,11 @@ app.get(API_ROOT + '/complex/:id', function getSingleEntity(req, res) {
 //récupération d'un user
 app.get(API_ROOT + '/users/:id', function getSingleEntity(req, res) {
     res.json({user: entityJSON.find(d => d.uuid === req.params.id)});
+});
+
+//récupération d'une entité finance
+app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
+    res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
 });
 
 app.get(API_ROOT + '/complex', (req, res) => {

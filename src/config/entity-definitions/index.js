@@ -1,14 +1,14 @@
 export const finance = {
+    uuid:  {
+        domain: 'DO_ID',
+        isRequired: true
+    },
     name:  {
         domain: 'DO_TEXTE',
         isRequired: true
     },
     amount:  {
-        domain: 'DO_AMOUNT',
-        isRequired: true
-    },
-    currency: {
-        domain: 'DO_SYMBOL',
+        domain: 'DO_MONTANT',
         isRequired: true
     },
     moves: {

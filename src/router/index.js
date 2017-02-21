@@ -10,7 +10,7 @@ import Finance from '../views/user/finance-form';
 const RouterRoot = <Router history={hashHistory} key='router'>
     <Route path='/' component={Layout} key='mainRoute' >
         <IndexRoute component={Home}/>
-        <Route path='finance/:id' component={({params}) => <Finance id={params.id}/>} />
+        <Route path='finances/:id' component={({params}) => <Finance id={params.id}/>} />
     </Route>
 </Router>;
 

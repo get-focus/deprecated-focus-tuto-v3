@@ -1,9 +1,12 @@
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadFinance = async ({id}) => {
-    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
-    const data = await response;
-    return { ...data.finance, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
+    return focusFetch({url: `http://localhost:9999/x/finances/${id}`, method: 'GET'}).then((data) => {
+        return {
+            ...data.finance,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
+        };
+    });
 }
 
 export const saveFinance = async ({finance}) => {

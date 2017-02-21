@@ -117,9 +117,12 @@ Ajoutez les nouveaux services
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadFinance = async ({id}) => {
-    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
-    const data = await response;
-    return { ...data.finance, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus };
+    return focusFetch({url: `http://localhost:9999/x/finances/${id}`, method: 'GET'}).then((data) => {
+        return {
+            ...data.finance,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
+        };
+    });
 }
 
 export const saveFinance = async ({finance}) => {
@@ -176,16 +179,16 @@ export const DO_MONTANT = {
 ```jsx
 // config/entity-definitions/index.js
 export const finance = {
+    uuid:  {
+        domain: 'DO_ID',
+        isRequired: true
+    },
     name:  {
         domain: 'DO_TEXTE',
         isRequired: true
     },
     amount:  {
-        domain: 'DO_AMOUNT',
-        isRequired: true
-    },
-    currency: {
-        domain: 'DO_SYMBOL',
+        domain: 'DO_MONTANT',
         isRequired: true
     },
     moves:{
@@ -216,15 +219,14 @@ import React, {PropTypes} from 'react';
 function FinancialMoveLine({fieldForLine, ...otherProps}) {
     return (
     <div>
-        <div> {fieldForLine('transactionType', {entityPath: 'financialMove'})} </div>
-        <div> {fieldForLine('amount', {entityPath: 'financialMove'})} </div>
+        <div>{fieldForLine('transactionType', {entityPath: 'financialMove'})}</div>
+        <div>{fieldForLine('amount', {entityPath: 'financialMove'})}</div>
     </div>
   );
 }
 
 FinancialMoveLine.displayName = 'financialMoveLine';
 FinancialMoveLine.propTypes = {
-    onClick: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string)
 };
 FinancialMoveLine.defaultProps = {
@@ -236,7 +238,7 @@ export default FinancialMoveLine;
 N'oubliez pas de rajouter la route dans home.js...
 
 ```jsx
-{route: '/finance/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
+{route: '/finances/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
 ```
 
 ...et d'importer la vue dans le router !
@@ -246,7 +248,7 @@ import Finance from '../views/user/finance-form';
 
 // ... votre code ...
 
-<Route path='finance/:id' component={({params}) => <Finance id={params.id}/>} />
+<Route path='finances/:id' component={({params}) => <Finance id={params.id}/>} />
 ```
 
 Voici ce que vous devriez obtenir :

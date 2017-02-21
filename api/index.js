@@ -13,7 +13,7 @@ let entityJSON = [{
     firstName: 'Don Diego',
     lastName: 'De Libercourt',
     civility: 'Mr'
-}];//require('./api-mock/notifs.json');
+}];
 
 let adressJSON = [{
     uuid: '1234',
@@ -21,20 +21,33 @@ let adressJSON = [{
 }];
 
 function createEntity(i){
-    return        {
+    return {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-        style: 'true',
-        accountsNames: 'GK'
+        sex: 'unknown'
     };
 }
 
-//let entityJSON = [];
+function createEntityFinance(i){
+    return {
+        uuid: '12'+i,
+        name: faker.finance.accountName(),
+        amount: faker.finance.amount(),
+        moves: _createFinancialMoves()
+    };
+}
+
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
+
+let entityFinanceJSON = [];
+for(let i = 0; i < NB_GENERATED_ENTITY; i++){
+    entityFinanceJSON.push(createEntityFinance(i));
+}
+
 let complexJSON = [];
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     complexJSON.push(createComplexEntity(i));
@@ -51,12 +64,7 @@ function createComplexEntity(i){
     return {
         user: createEntity(i),
         adress: adressJSON,
-        finance: {
-            name: faker.finance.accountName(),
-            amount: faker.finance.amount(),
-            currency: faker.finance.currencyName(),
-            moves: _createFinancialMoves()
-        }
+        finance: createEntityFinance(i)
     }
 }
 
@@ -92,54 +100,72 @@ const allowCrossDomain = (req, res, next) => {
 
 app.use(allowCrossDomain);
 
-app.get(API_ROOT  + '/entity', function getAllNotifications(req, res) {
+app.get(API_ROOT + '/entity', function getAllNotifications(req, res) {
     res.json(entityJSON);
 });
 
-app.get(API_ROOT  + '/entity/:id', function getSingleEntity(req, res) {
+app.get(API_ROOT + '/entity/:id', function getSingleEntity(req, res) {
     res.json(entityJSON.find(d => d.uuid === req.params.id));
 });
 
-app.get(API_ROOT  + '/mixed/:id', function getSingleEntity(req, res) {
+app.get(API_ROOT + '/mixed/:id', function getSingleEntity(req, res) {
     res.json({
         user: entityJSON.find(d => d.uuid === req.params.id),
         address: adressJSON.find(d => d.uuid = req.params.id)
     });
 });
 
-app.get(API_ROOT  + '/complex/:id', function getSingleEntity(req, res) {
-    res.json(complexJSON.find(d => d.user.uuid ===  req.params.id));
+app.get(API_ROOT + '/complex/:id', function getSingleEntity(req, res) {
+    res.json(complexJSON.find(d => d.user.uuid === req.params.id));
 });
 
-app.get(API_ROOT  + '/complex', (req, res) => {
+//récupération d'un user
+app.get(API_ROOT + '/users/:id', function getSingleEntity(req, res) {
+    res.json({user: entityJSON.find(d => d.uuid === req.params.id)});
+});
+
+//récupération d'une entité finance
+app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
+    res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
+});
+
+app.get(API_ROOT + '/complex', (req, res) => {
     res.json(complexJSON);
 });
 
-app.put(API_ROOT  + '/entity/:id', (req, res) => {
+app.put(API_ROOT + '/entity/:id', (req, res) => {
     var savedData = req.body;
     savedData.isSaved = true;
     res.json(savedData);
 });
 
-app.post(API_ROOT  + '/entity/:id', (req, res) => {
+app.post(API_ROOT + '/entity/:id', (req, res) => {
     var savedData = req.body;
     savedData.isSaved = true;
     res.json(savedData);
 });
 
-app.get(API_ROOT  + '/entity/create', function createNotifs(req, res) {
+app.get(API_ROOT + '/entity/create', function createNotifs(req, res) {
     entityJSON.push(createEntity())
     res.json(entityJSON);}
 );
 
-app.delete(API_ROOT  + '/entity', function deleteNotifs(req, res) {
+app.delete(API_ROOT + '/entity', function deleteNotifs(req, res) {
     res.json(JSON.stringify(req.body));
 });
 
-app.delete(API_ROOT  + '/entity/:id', function deleteNotif(req, res) {
+app.delete(API_ROOT + '/entity/:id', function deleteNotif(req, res) {
     res.json({id: req.params.id});
 });
 
 const server = app.listen(MOCKED_API_PORT, function serverCallback() {
     console.log('Mocked entity API listening at http://localhost:%s', MOCKED_API_PORT);
+});
+
+app.get(API_ROOT  + '/error', function createNotifs(req, res) {
+    res.status(403),
+    res.json({
+        globalErrors : ['Une erreur globale'],
+        "status": 'ERROR'
+    })
 });

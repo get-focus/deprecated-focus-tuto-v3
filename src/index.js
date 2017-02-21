@@ -43,6 +43,8 @@ import focusComponentsFr from 'focus-components/translation/resources/fr-FR';
 import tutoFr from './config/translations/fr-FR';
 intializeTranslation(i18next, 'fr-FR', [focusComponentsFr, tutoFr]);
 
+import './styles';
+
 const renderApp = RootComponent => {
     console.info('App rendered')
     ReactDOM.render(

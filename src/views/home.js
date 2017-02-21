@@ -10,7 +10,7 @@ const routes = [
 
 const Home = props => {
     return(
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+        <div data-component='homeCard'>
             {routes.map(route => <div key={route.route} style={{margin: '10px'}}>
                 <Panel title={route.title} Buttons={null}>
                     <p>{route.description}</p>

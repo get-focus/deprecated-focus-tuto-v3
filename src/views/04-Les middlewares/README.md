@@ -101,6 +101,10 @@ export const user = {
 }
 
 export const finance = {
+    uuid: {
+        domain: 'DO_ID',
+        isRequired: true
+    },
     name: {
         domain: 'DO_TEXTE',
         isRequired: true
@@ -539,9 +543,7 @@ export default FinancialMoveLine;
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUserFinance = async ({id}) => {
-    const response = await focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'})
-    const data = await response;
-    return {...data, __Focus__updateRequestStatus: data.__Focus__updateRequestStatus};
+    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'GET'});
 }
 
 export const saveUserFinance = async ({user}) => {

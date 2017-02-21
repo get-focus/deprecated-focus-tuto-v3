@@ -27,7 +27,6 @@ function createEntity(i){
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-<<<<<<< HEAD
         sex: undefined,
         accountsNames: 'GK',
         date: new Date(),
@@ -41,18 +40,21 @@ function createEntityFinance(i){
         name: faker.finance.accountName(),
         amount: faker.finance.amount(),
         moves: _createFinancialMoves()
-=======
-        style: 'checkbox.true',
-        accountsNames: 'GK',
-        date: new Date(),
-<<<<<<< HEAD
->>>>>>> save form 6
-=======
-        sex: 'unknown'
->>>>>>> save form 6
     };
 }
 
+<<<<<<< HEAD
+=======
+function createEntityFinance(i){
+    return {
+        uuid: '12'+i,
+        name: faker.finance.accountName(),
+        amount: faker.finance.amount(),
+        moves: _createFinancialMoves()
+    };
+}
+
+>>>>>>> rewrite api and routes
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
@@ -136,6 +138,14 @@ app.get(API_ROOT + '/complex/:id', function getSingleEntity(req, res) {
 //récupération d'un user
 app.get(API_ROOT + '/users/:id', function getSingleEntity(req, res) {
     res.json({user: entityJSON.find(d => d.uuid === req.params.id)});
+<<<<<<< HEAD
+});
+
+//récupération d'une entité finance
+app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
+    res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
+=======
+>>>>>>> rewrite api and routes
 });
 
 //récupération d'une entité finance
@@ -143,7 +153,7 @@ app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
     res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
 });
 
-app.get(API_ROOT  + '/complex', (req, res) => {
+app.get(API_ROOT + '/complex', (req, res) => {
     res.json(complexJSON);
 });
 
@@ -177,6 +187,7 @@ const server = app.listen(MOCKED_API_PORT, function serverCallback() {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.get(API_ROOT + '/error', function createNotifs(req, res) {
     res.status(403),
     res.json({
@@ -186,6 +197,8 @@ app.get(API_ROOT + '/error', function createNotifs(req, res) {
 =======
 
 //https://github.com/get-focus/focus-graph/blob/deliver-version-3.2.0/api/index.js
+=======
+>>>>>>> rewrite api and routes
 app.get(API_ROOT  + '/error', function createNotifs(req, res) {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -200,5 +213,9 @@ app.get(API_ROOT  + '/error', function createNotifs(req, res) {
         globalErrors : ['Une erreur globale'],
         "status": 'ERROR'
     })
+<<<<<<< HEAD
 >>>>>>> save form 6
 });
+=======
+});
+>>>>>>> rewrite api and routes

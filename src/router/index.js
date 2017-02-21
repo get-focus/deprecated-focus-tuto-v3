@@ -21,7 +21,7 @@ const RouterRoot = <Router history={hashHistory} key='router'>
         <Route path='users/finances/:id' component={({params}) => <UserFinanceView id={params.id}/>} />
         <Route path='users/lists/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
         <Route path='users/component/:id' component={({params}) => <UserComponent id={params.id}/>} />
-        <Route path='user/error/:id' component={({params}) => <UserError id={params.id}/>} />
+        <Route path='users/error/:id' component={({params}) => <UserError id={params.id}/>} />
     </Route>
 </Router>;
 

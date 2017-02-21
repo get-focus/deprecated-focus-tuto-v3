@@ -10,41 +10,7 @@ Il y a alors quatre étapes pour réaliser cela :
 
 Il faut créer les domaines dans 'domains.index.js' qui permettent de définir des règles que nous appliquerons sur les champs de notre formulaire. Normalement plus de difficultés arrivé à ce niveau là.
 
-```jsx
-// domains.index.js
-import React, {Component, PropTypes} from 'react';
-
-import InputDate from 'focus-components/input-date';
-import InputText from 'focus-components/input-text';
-import InputSelect from 'focus-components/select-mdl';
-import RadioSelect from 'focus-components/select-radio';
-
-export const DO_ID = {
-    type: 'text'
-}
-
-export const DO_TEXTE = {
-    type: 'text'
-}
-
-export const DO_CIVILITE = {
-    type: 'text',
-    validators: [{
-        type: 'string',
-        options: {
-            maxLength: 200
-        }
-    }],
-    InputComponent: InputSelect
-}
-
-export const DO_SEXE = {
-    SelectComponent: RadioSelect
-}
-```
-
-Nous allons appliquer ces domaines dans les entity-definitions.
-
+Nous allons appliquer ces domaines dans les entity-definitions. Encore une fois il ne devrait pas y avoir de problème à être autonome là-dessus.
 
 ## La vue
 
@@ -110,7 +76,7 @@ export default ConnectedUserErrors;
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUser = async ({id}) => {
-    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'GET'}).then((data) => {
+    return focusFetch({url: `http://localhost:9999/x/users/${id}`, method: 'GET'}).then((data) => {
         return {
             ...data.user,
             __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
@@ -207,7 +173,7 @@ Il faut maintenant connecter la vue créée au router en important celle-ci dans
 import UserError from '../views/user/user-error';
 
 // ...votre code...
-        <Route path='user/error/:id' component={({params}) => <UserError id={params.id}/>} />
+        <Route path='users/error/:id' component={({params}) => <UserError id={params.id}/>} />
 // ...votre code...
 ```
 
@@ -216,7 +182,7 @@ Et enfin modifier le fichier home pour afficher notre carte menant vers la vue d
 ```jsx
 // home.js
 // ...votre code...
-    {route: '/user/error/120', destination: 'Error', description: 'Composant user avec une error', title: 'Error'}
+    {route: '/users/error/120', destination: 'Error', description: 'Composant user avec une error', title: 'Error'}
 // ...votre code...
 ```
 

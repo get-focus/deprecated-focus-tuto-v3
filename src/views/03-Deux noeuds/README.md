@@ -97,12 +97,7 @@ export default combineReducers({
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUserFinance = async ({id}) => {
-    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'GET'}).then((data) => {
-        return {
-            ...data,
-            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
-        };
-    });
+    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'GET'});
 }
 
 export const saveUserFinance = async ({user}) => {

@@ -192,7 +192,14 @@ import UserFinanceView from '../views/user/user-finance-form';
 ```
 
 Si vos *domains* et *entity-definitions* sont correctement définis, voici ce qu'on obtient :
+
 ![image](https://cloud.githubusercontent.com/assets/8124804/22876992/9af81fae-f1d3-11e6-8913-0933d1f54aef.png)
+
+Avec la commande 'ctrl+h', il est possible de visualiser la console redux :
+
+![image](https://cloud.githubusercontent.com/assets/8124804/23204599/85f27cce-f8e7-11e6-843a-33ec849ab245.png)
+
+![image](https://cloud.githubusercontent.com/assets/8124804/23205229/5fc7794e-f8e9-11e6-9299-d7de1aa4c8c2.png)
 
 ---
 

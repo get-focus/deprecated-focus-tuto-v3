@@ -27,10 +27,5 @@ export default {
     },
     select: {
         unSelected: 'Aucun label'
-    },
-    radio: {
-        male: 'Homme',
-        female: 'Femme',
-        unknown: 'Inconnu'
     }
 }

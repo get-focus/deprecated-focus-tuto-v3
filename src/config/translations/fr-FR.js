@@ -15,8 +15,6 @@ export default {
     finance: {
         name: 'nom du compte',
         amount: 'disponible',
-        date: 'date',
-        test: 'test',
         moves: 'opérations sur le compte'
     },
     button: {
@@ -27,5 +25,9 @@ export default {
     },
     select: {
         unSelected: 'Aucun label'
+    },
+    checkbox: {
+        true: 'a du style',
+        false: 'n\'a aucun style'
     }
 }

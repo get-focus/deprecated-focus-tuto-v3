@@ -27,3 +27,11 @@ export const DO_CIVILITE = {
 export const DO_SEXE = {
     SelectComponent: RadioSelect
 }
+
+export const DO_CODE = {
+    type: 'text'
+}
+
+export const DO_MONTANT = {
+    type: 'number'
+}

@@ -376,7 +376,7 @@ const store = createStoreWithFocus(
         messages: messageReducer,
         confirm: confirmReducer,
         customData: customReducer,
-        fetch:fetchReducer
+        fetch: fetchReducer
     },
 ```
 
@@ -387,18 +387,84 @@ Et voilà, le tour est joué. Notre information se trouvera donc dans customData
 Un dernier petit effort, c'est presque fini ! Donc maintenant que notre information est dans notre store, il faut récupérer cette information, souvenez-vous de nos amis les connecteurs. Notre vue doit se connecter à cette information du state, on se place alors dans celle-ci en se concentrant sur les connecteurs :
 
 ```jsx
-// views/user/custom-finance-user-form.js
+// views/user/custom-user-form.js
 import React, {Component, PropTypes} from 'react';
 import {connect as connectToState} from 'react-redux';
-import {connect as connectToForm } from 'focus-graph/behaviours/form';
+import {connect as connectToForm} from 'focus-graph/behaviours/form';
 import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
 import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
 import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import {loadUserFinanceAction, saveUserFinanceAction} from '../../actions/finance-user-actions';
 import Panel from 'focus-components/panel';
 import compose from 'lodash/flowRight';
-import FinancialMoveLine from './financialMoveLine'
 import ScrollSpyContainer from 'focus-components/scrollspy-container';
+
+import SmartUser from './custom-finance-user/custom-user-form'
+import SmartFinance from './custom-finance-user/custom-finance-form'
+
+class SmartComponent extends Component {
+    render() {
+        return (
+            <ScrollSpyContainer>
+                <ConnectedUserForm {...this.props}/>
+                <ConnectedFinanceForm {...this.props}/>
+            </ScrollSpyContainer>
+        );
+    }
+};
+
+const selectData = name => (state ={}) => {
+    if( !state.customData[name]) {
+        console.warn(`SELECT_DATA : there is no ${name} in the dataset of the state`)
+        return state.customData;
+    }
+    return state.dataset[name]
+}
+
+const formConfigUser = {
+    formKey: 'userFinanceForm',
+    entityPathArray: ['user'],
+    loadAction: loadUserFinanceAction,
+    saveAction: saveUserFinanceAction
+};
+
+const ConnectedUserForm = compose(
+    connectToMetadata(['user']),
+    connectToMasterData(['civility', 'sexe']),
+    connectToForm(formConfigUser),
+    connectToFieldHelpers()
+)(SmartUser);
+
+const formConfigFinance = {
+    formKey: 'userFinanceForm2',
+    entityPathArray: ['finance'],
+    loadAction: loadUserFinanceAction,
+    saveAction: saveUserFinanceAction
+};
+
+const ConnectedFinanceForm = compose(
+    connectToMetadata(['financialMove', 'finance']),
+    connectToForm(formConfigFinance),
+    connectToFieldHelpers(),
+    connectToState(selectData('customData'))
+)(SmartFinance);
+
+SmartComponent.displayName = 'SmartComponent';
+export default SmartComponent;
+```
+
+Les deux composants user et finance appelés :
+
+```jsx
+// views/user/custom-finance-user/custom-user-form.js
+import React, {Component, PropTypes} from 'react';
+import {connect as connectToState} from 'react-redux';
+import {connect as connectToForm} from 'focus-graph/behaviours/form';
+import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
+import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
+import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
+import Panel from 'focus-components/panel';
+import compose from 'lodash/flowRight';
 
 const User = ({fieldFor, selectFor, fields, ...otherProps}) => {
     return(
@@ -407,22 +473,6 @@ const User = ({fieldFor, selectFor, fields, ...otherProps}) => {
             {fieldFor('firstName')}
         </Panel>
     )
-}
-
-const Finance = ({fieldFor, listFor, ...otherProps}) => (
-    <Panel title='Finance' {...otherProps}>
-        {fieldFor('name', {entityPath: 'finance'})}
-        {fieldFor('amount', {entityPath: 'finance'})}
-        {listFor('moves', { redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
-    </Panel>
-)
-
-const selectData = name => (state ={}) => {
-    if( !state.customData[name]) {
-        console.warn(`SELECT_DATA : there is no ${name} in the dataset of the state`)
-        return state.customData;
-    }
-    return state.dataset[name]
 }
 
 class SmartUser extends Component {
@@ -441,6 +491,28 @@ class SmartUser extends Component {
 
 SmartUser.displayName = 'SmartUser';
 
+export default SmartUser;
+```
+```jsx
+// views/user/custom-finance-user/custom-finance-form.js
+import React, {Component, PropTypes} from 'react';
+import {connect as connectToState} from 'react-redux';
+import {connect as connectToForm} from 'focus-graph/behaviours/form';
+import {connect as connectToMetadata} from 'focus-graph/behaviours/metadata';
+import {connect as connectToMasterData} from 'focus-graph/behaviours/master-data';
+import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
+import Panel from 'focus-components/panel';
+import compose from 'lodash/flowRight';
+import FinancialMoveLine from '../financialMoveLine'
+
+const Finance = ({fieldFor, listFor, ...otherProps}) => (
+    <Panel title='Finance' {...otherProps}>
+        {fieldFor('name')}
+        {fieldFor('amount')}
+        {listFor('moves', {redirectEntityPath: ['financialMove'], LineComponent: FinancialMoveLine})}
+    </Panel>
+)
+
 class SmartFinance extends Component {
     componentWillMount() {
         const {id, load} = this.props;
@@ -457,47 +529,7 @@ class SmartFinance extends Component {
 
 SmartFinance.displayName = 'SmartFinance';
 
-const formConfigUser = {
-    formKey: 'userFinanceForm',
-    entityPathArray: ['user'],
-    loadAction: loadUserFinanceAction,
-    saveAction: saveUserFinanceAction
-};
-
-const formConfigFinance = {
-    formKey: 'userFinanceForm2',
-    entityPathArray: ['finance'],
-    loadAction: loadUserFinanceAction,
-    saveAction: saveUserFinanceAction
-};
-
-const ConnectedUserForm = compose(
-    connectToMetadata(['user']),
-    connectToMasterData(['civility', 'sexe']),
-    connectToForm(formConfigUser),
-    connectToFieldHelpers()
-)(SmartUser);
-
-const ConnectedFinanceForm = compose(
-    connectToMetadata(['financialMove', 'finance']),
-    connectToForm(formConfigFinance),
-    connectToFieldHelpers(),
-    connectToState(selectData('customData'))
-)(SmartFinance);
-
-class SmartComponent extends Component {
-    render() {
-        return (
-            <ScrollSpyContainer>
-                <ConnectedUserForm {...this.props}/>
-                <ConnectedFinanceForm {...this.props}/>
-            </ScrollSpyContainer>
-        );
-    }
-};
-
-SmartComponent.displayName = 'SmartComponent';
-export default SmartComponent;
+export default SmartFinance;
 ```
 
  Il vous suffit alors de renseigner le nœud du state que vous voulez récupérer : `customData` via la fontion selectData (qui permet de récupérer la bonne partie du state) et de vous connecter via la fonction connect de Redux.

@@ -24,12 +24,7 @@ export default {
         cancel: 'annuler'
     },
     select: {
-        unSelected: 'Aucun label'
-    },
-    radio: {
-        male: 'Homme',
-        female: 'Femme',
-        unknown: 'Inconnu'
+        unSelected: 'Aucun label
     },
     checkbox: {
         true: 'a du style',

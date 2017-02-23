@@ -5,12 +5,13 @@ import Panel from 'focus-components/panel';
 import Button from 'focus-components/button';
 
 const routes = [
+    {route: '/users/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
     {route: '/finances/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
 ];
 
 const Home = props => {
-    return(
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+    return (
+        <div data-component='homeCard'>
             {routes.map(route => <div key={route.route} style={{margin: '10px'}}>
                 <Panel title={route.title} Buttons={null}>
                     <p>{route.description}</p>

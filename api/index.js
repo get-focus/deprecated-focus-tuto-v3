@@ -26,7 +26,7 @@ function createEntity(i){
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-        sex: 'unknown'
+        sex: undefined
     };
 }
 

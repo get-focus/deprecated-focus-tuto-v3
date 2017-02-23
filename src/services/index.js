@@ -1,5 +1,23 @@
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
+export const loadUser = async ({id}) => {
+    return focusFetch({url: `http://localhost:9999/x/users/${id}`, method: 'GET'}).then((data) => {
+        return {
+            ...data.user,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
+        };
+    });
+};
+
+export const saveUser = async ({user}) => {
+    await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, 0);
+    });
+    return {...user};
+}
+
 export const loadFinance = async ({id}) => {
     return focusFetch({url: `http://localhost:9999/x/finances/${id}`, method: 'GET'}).then((data) => {
         return {
@@ -10,10 +28,10 @@ export const loadFinance = async ({id}) => {
 }
 
 export const saveFinance = async ({finance}) => {
-    await new Promise((resolve, reject) => {
+  await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve()
         }, 0);
     });
-    return {...finance};
+  return {...finance};
 }

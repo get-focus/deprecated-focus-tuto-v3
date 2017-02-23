@@ -26,7 +26,10 @@ function createEntity(i){
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         civility: faker.name.prefix(),
-        sex: undefined
+        sex: undefined,
+        accountsNames: 'GK',
+        date: new Date(),
+        style: 'checkbox.true'
     };
 }
 
@@ -162,7 +165,7 @@ const server = app.listen(MOCKED_API_PORT, function serverCallback() {
     console.log('Mocked entity API listening at http://localhost:%s', MOCKED_API_PORT);
 });
 
-app.get(API_ROOT  + '/error', function createNotifs(req, res) {
+app.get(API_ROOT + '/error', function createNotifs(req, res) {
     res.status(403),
     res.json({
         globalErrors : ['Une erreur globale'],

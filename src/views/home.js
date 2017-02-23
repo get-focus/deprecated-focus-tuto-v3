@@ -6,7 +6,8 @@ import Button from 'focus-components/button';
 
 const routes = [
     {route: '/users/120', destination: 'user', description: 'Formulaire classique avec liste de référence', title: 'User form'},
-    {route: '/finances/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'}
+    {route: '/finances/120', destination: 'Finance List', description: 'Exemple d\'un formulaire avec un ListFor', title: 'Finance List'},
+    {route: '/users/finances/120', destination: 'user finance', description: 'Exemple d\'un formulaire avec deux noeuds', title: 'User finance'}
 ];
 
 const Home = props => {

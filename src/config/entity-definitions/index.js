@@ -18,23 +18,35 @@ export const user = {
     sex: {
         domain: 'DO_SEXE',
         isRequired: true
+    },
+    style: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
+    accountsNames: {
+        domain: 'DO_TEXTE',
+        isRequired: true
+    },
+    date: {
+        domain: 'DO_TEXTE',
+        isRequired: false
     }
 }
 
 export const finance = {
-    uuid:  {
+    uuid: {
         domain: 'DO_ID',
         isRequired: true
     },
-    name:  {
+    name: {
         domain: 'DO_TEXTE',
         isRequired: true
     },
-    amount:  {
+    amount: {
         domain: 'DO_MONTANT',
         isRequired: true
     },
-    moves: {
+    moves:{
         redirect: ['financialMove']
     }
 }

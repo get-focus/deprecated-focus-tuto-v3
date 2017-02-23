@@ -28,10 +28,23 @@ export const loadFinance = async ({id}) => {
 }
 
 export const saveFinance = async ({finance}) => {
-  await new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve()
         }, 0);
     });
-  return {...finance};
+    return {...finance};
+}
+
+export const loadUserFinance = async ({id}) => {
+    return focusFetch({url: `http://localhost:9999/x/complex/${id}`, method: 'get'});
+}
+
+export const saveUserFinance = async ({user}) => {
+    await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, 0);
+    });
+    return {...finance};
 }

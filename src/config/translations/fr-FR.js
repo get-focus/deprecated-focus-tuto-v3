@@ -24,7 +24,7 @@ export default {
         cancel: 'annuler'
     },
     select: {
-        unSelected: 'Aucun label
+        unSelected: 'Aucun label'
     },
     checkbox: {
         true: 'a du style',

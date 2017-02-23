@@ -20,15 +20,15 @@ export const user = {
         isRequired: true
     },
     style: {
-        domain: 'DO_TEXTE',
+        domain: 'DO_CHECKBOX',
         isRequired: true
     },
     accountsNames: {
-        domain: 'DO_TEXTE',
+        domain: 'DO_ACCOUNTS_NAMES',
         isRequired: true
     },
     date: {
-        domain: 'DO_TEXTE',
+        domain: 'DO_DATE',
         isRequired: false
     }
 }

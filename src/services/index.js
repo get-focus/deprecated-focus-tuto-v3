@@ -7,7 +7,7 @@ export const loadUser = async ({id}) => {
             __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
         };
     });
-};
+}
 
 export const saveUser = async ({user}) => {
     await new Promise((resolve, reject) => {

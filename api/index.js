@@ -15,13 +15,14 @@ let entityJSON = [{
     civility: 'Mr'
 }];
 
+
 let adressJSON = [{
     uuid: '1234',
     city: faker.address.city()
 }];
 
 function createEntity(i){
-    return {
+    return        {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
@@ -30,15 +31,6 @@ function createEntity(i){
         accountsNames: 'GK',
         date: new Date(),
         style: 'checkbox.true'
-    };
-}
-
-function createEntityFinance(i){
-    return {
-        uuid: '12'+i,
-        name: faker.finance.accountName(),
-        amount: faker.finance.amount(),
-        moves: _createFinancialMoves()
     };
 }
 
@@ -141,7 +133,7 @@ app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
     res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
 });
 
-app.get(API_ROOT + '/complex', (req, res) => {
+app.get(API_ROOT  + '/complex', (req, res) => {
     res.json(complexJSON);
 });
 

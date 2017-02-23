@@ -43,6 +43,15 @@ function createEntityFinance(i){
     };
 }
 
+function createEntityFinance(i){
+    return {
+        uuid: '12'+i,
+        name: faker.finance.accountName(),
+        amount: faker.finance.amount(),
+        moves: _createFinancialMoves()
+    };
+}
+
 for(let i = 0; i < NB_GENERATED_ENTITY; i++){
     entityJSON.push(createEntity(i));
 }
@@ -133,7 +142,7 @@ app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
     res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
 });
 
-app.get(API_ROOT  + '/complex', (req, res) => {
+app.get(API_ROOT + '/complex', (req, res) => {
     res.json(complexJSON);
 });
 
@@ -166,7 +175,8 @@ const server = app.listen(MOCKED_API_PORT, function serverCallback() {
     console.log('Mocked entity API listening at http://localhost:%s', MOCKED_API_PORT);
 });
 
-app.get(API_ROOT + '/error', function createNotifs(req, res) {
+app.get(API_ROOT  + '/error', function createNotifs(req, res) {
+    res.json({"globalErrors":[" Libelle doit être renseigné"], "status": 'ERROR'})
     res.status(403),
     res.json({
         globalErrors : ['Une erreur globale'],

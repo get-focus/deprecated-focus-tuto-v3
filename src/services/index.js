@@ -48,3 +48,14 @@ export const saveUserFinance = async ({user}) => {
     });
     return {...finance};
 }
+
+export const loadError = async ({user}) => {
+    return focusFetch({url: `http://localhost:9999/x/error`, method: 'GET'}).then((data) => {
+        return {
+            ...data.user,
+            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus,
+            __Focus__status: data.__Focus__status,
+            globalErrors: data.globalErrors
+        };
+    });
+}

@@ -17,8 +17,8 @@ import SnackBar from 'focus-components/snackbar';
 import ContentActionsComponent from 'focus-components/header-actions';
 
 // This should be done by default by focus-application
-import { headerIsExpandedSelector} from 'focus-application/header/header-reducer';
-import { expandHeader, unExpandHeader} from 'focus-application/header/header-actions'
+import {headerIsExpandedSelector} from 'focus-application/header/header-reducer';
+import {expandHeader, unExpandHeader} from 'focus-application/header/header-actions'
 const ConnectedScrollTrigger = connectToStore(headerIsExpandedSelector,{expandHeader, unExpandHeader})(ScrollTrigger);
 
 const ConfirmComponent = props => <ConfirmWrapper {...props} ConfirmationModal={ConfirmationPopin}/>

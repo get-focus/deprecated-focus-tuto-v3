@@ -659,4 +659,4 @@ Voici ce qu'on obtient :
 
 ---
 
-[Prochaine partie : les autres composants](../../../../tutorial-step-5/src/views/05-Autres%20composants/)
+[Prochaine partie : les autres composants](../05-Autres%20composants/)

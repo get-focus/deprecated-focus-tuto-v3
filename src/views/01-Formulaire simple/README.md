@@ -680,4 +680,4 @@ Ce formulaire permet ainsi d'avoir facilement :
 
 ---
 
-[Prochaine partie : un formulaire avec un ListFor](../../../../tutorial-step-2/src/views/02-Les%20listes/)
+[Prochaine partie : un formulaire avec un ListFor](../02-Les%20listes/)

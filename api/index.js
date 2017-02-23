@@ -22,7 +22,7 @@ let adressJSON = [{
 }];
 
 function createEntity(i){
-    return        {
+    return {
         uuid: '12'+i,
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
@@ -134,12 +134,12 @@ app.get(API_ROOT + '/complex/:id', function getSingleEntity(req, res) {
 
 //récupération d'un user
 app.get(API_ROOT + '/users/:id', function getSingleEntity(req, res) {
-    res.json({user: entityJSON.find(d => d.uuid === req.params.id)});
+    res.json(entityJSON.find(d => d.uuid === req.params.id));
 });
 
 //récupération d'une entité finance
 app.get(API_ROOT + '/finances/:id', function getSingleFinanceEntity(req, res) {
-    res.json({finance: entityFinanceJSON.find(d => d.uuid === req.params.id)});
+    res.json(entityFinanceJSON.find(d => d.uuid === req.params.id));
 });
 
 app.get(API_ROOT + '/complex', (req, res) => {
@@ -176,7 +176,6 @@ const server = app.listen(MOCKED_API_PORT, function serverCallback() {
 });
 
 app.get(API_ROOT  + '/error', function createNotifs(req, res) {
-    res.json({"globalErrors":[" Libelle doit être renseigné"], "status": 'ERROR'})
     res.status(403),
     res.json({
         globalErrors : ['Une erreur globale'],

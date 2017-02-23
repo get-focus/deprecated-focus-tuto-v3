@@ -125,7 +125,6 @@ export const saveErrorUserTypes = _saveErrorUserAction.types;
 export const saveErrorUserAction = _saveErrorUserAction.action;
 ```
 
-
 Et dans index.js, ajoutez :
 
 ```jsx

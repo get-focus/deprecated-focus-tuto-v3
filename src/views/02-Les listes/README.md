@@ -256,4 +256,4 @@ Voici ce que vous devriez obtenir :
 
 ---
 
-[Prochaine partie : un formulaire avec un ListFor](../../../tutorial-step-3/src/views/03-Deux%20noeuds/)
+[Prochaine partie : un formulaire avec un ListFor](../03-Deux%20noeuds/)

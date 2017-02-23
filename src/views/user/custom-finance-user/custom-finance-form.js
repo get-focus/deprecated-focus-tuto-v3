@@ -8,6 +8,8 @@ import Panel from 'focus-components/panel';
 import compose from 'lodash/flowRight';
 import FinancialMoveLine from '../financialMoveLine'
 
+import {loadUserFinanceAction, saveUserFinanceAction} from '../../../actions/finance-user-actions';
+
 const Finance = ({fieldFor, listFor, ...otherProps}) => (
     <Panel title='Finance' {...otherProps}>
         {fieldFor('name')}
@@ -29,6 +31,28 @@ class SmartFinance extends Component {
         );
     }
 };
+
+const selectData = name => (state ={}) => {
+    if( !state.customData[name]) {
+        console.warn(`SELECT_DATA : there is no ${name} in the dataset of the state`)
+        return state.customData;
+    }
+    return state.dataset[name]
+}
+
+const formConfigFinance = {
+    formKey: 'userFinanceForm2',
+    entityPathArray: ['finance'],
+    loadAction: loadUserFinanceAction,
+    saveAction: saveUserFinanceAction
+};
+
+export const ConnectedFinanceForm = compose(
+    connectToMetadata(['financialMove', 'finance']),
+    connectToForm(formConfigFinance),
+    connectToFieldHelpers(),
+    connectToState(selectData('customData'))
+)(SmartFinance);
 
 SmartFinance.displayName = 'SmartFinance';
 

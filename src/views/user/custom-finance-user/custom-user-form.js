@@ -7,6 +7,8 @@ import {connect as connectToFieldHelpers} from 'focus-graph/behaviours/field';
 import Panel from 'focus-components/panel';
 import compose from 'lodash/flowRight';
 
+import {loadUserFinanceAction, saveUserFinanceAction} from '../../../actions/finance-user-actions';
+
 const User = ({fieldFor, selectFor, fields, ...otherProps}) => {
     return(
         <Panel title='User' {...otherProps}>
@@ -29,6 +31,20 @@ class SmartUser extends Component {
         );
     }
 };
+
+const formConfigUser = {
+    formKey: 'userFinanceForm',
+    entityPathArray: ['user'],
+    loadAction: loadUserFinanceAction,
+    saveAction: saveUserFinanceAction
+};
+
+export const ConnectedUserForm = compose(
+    connectToMetadata(['user']),
+    connectToMasterData(['civility', 'sexe']),
+    connectToForm(formConfigUser),
+    connectToFieldHelpers()
+)(SmartUser);
 
 SmartUser.displayName = 'SmartUser';
 

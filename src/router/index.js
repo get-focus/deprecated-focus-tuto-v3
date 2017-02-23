@@ -8,6 +8,7 @@ import Home from '../views/home';
 import User from '../views/user/user-form';
 import Finance from '../views/user/finance-form';
 import UserFinanceView from '../views/user/user-finance-form';
+import CustomFinanceUserForm from '../views/user/custom-finance-user-form';
 
 const RouterRoot = <Router history={hashHistory} key='router'>
     <Route path='/' component={Layout} key='mainRoute' >
@@ -16,6 +17,7 @@ const RouterRoot = <Router history={hashHistory} key='router'>
         <Route path='users/:id' component={({params}) => <User id={params.id}/>} />
         <Route path='finances/:id' component={({params}) => <Finance id={params.id}/>} />
         <Route path='users/finances/:id' component={({params}) => <UserFinanceView id={params.id}/>} />
+        <Route path='users/lists/:id' component={({params}) => <CustomFinanceUserForm id={params.id}/>} />
     </Route>
 </Router>;
 

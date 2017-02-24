@@ -31,19 +31,21 @@ import {loadErrorUserAction, saveErrorUserAction} from '../../actions/user-actio
 
 class UserErrors extends PureComponent {
     componentWillMount() {
-        const {id, load} = this.props;
+        const {id, load, loadMasterData} = this.props;
         load({id});
+        loadMasterData();
     }
     componentWillReceiveProps(nextProps){
       console.log(nextProps.error)
     }
     render() {
-        const {editing, fields, fieldFor, listFor, selectFor} = this.props;
+        const {fieldFor, selectFor, ...otherProps} = this.props;
         return (
             <Panel title='User and address' {...this.props}>
                 {fieldFor('uuid')}
                 {fieldFor('firstName')}
                 {fieldFor('lastName')}
+                {selectFor('sex', {masterDatum: 'sex'})}
             </Panel>
         );
     }
@@ -52,16 +54,15 @@ class UserErrors extends PureComponent {
 UserErrors.displayName = 'UserErrors';
 
 const formConfig = {
-    //todo: it should raise an error if i use the same formKey.
     formKey: 'userAndAddressForm',
     entityPathArray: ['user'],
     loadAction: loadErrorUserAction,
     saveAction: saveErrorUserAction
 };
 
-//Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserErrors = compose(
     connectToMetadata(['user']),
+    connectToMasterData(['sex']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(UserErrors);
@@ -76,12 +77,7 @@ export default ConnectedUserErrors;
 import focusFetch from 'focus-application/fetch/fetch-proxy'
 
 export const loadUser = async ({id}) => {
-    return focusFetch({url: `http://localhost:9999/x/users/${id}`, method: 'GET'}).then((data) => {
-        return {
-            ...data.user,
-            __Focus__updateRequestStatus: data.__Focus__updateRequestStatus
-        };
-    });
+    return focusFetch({url: `http://localhost:9999/x/users/${id}`, method: 'GET'});
 }
 
 export const saveUser = async ({user}) => {
@@ -125,19 +121,14 @@ export const saveErrorUserTypes = _saveErrorUserAction.types;
 export const saveErrorUserAction = _saveErrorUserAction.action;
 ```
 
-Et dans index.js, ajoutez :
-
-```jsx
-import {initFetch} from './services/fetch';
-initFetch(store.dispatch);
-```
-
 ## Les reducers
+
+Si vous n'avez pas le reducer créé pour un user sous la main, vous pouvez en créer un.
 
 ```jsx
 // reducer/user-error-reducer.js
 import {reducerBuilder} from 'focus-graph/reducers/reducer-builder';
-import {loadErrorUserTypes,saveErrorUserTypes} from '../actions/user-actions-global-error';
+import {loadErrorUserTypes, saveErrorUserTypes} from '../actions/user-actions-global-error';
 
 // Données initiales pour la state redux
 const DEFAULT_DATA = {

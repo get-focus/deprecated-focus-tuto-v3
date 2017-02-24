@@ -11,19 +11,21 @@ import {loadErrorUserAction, saveErrorUserAction} from '../../actions/user-actio
 
 class UserErrors extends PureComponent {
     componentWillMount() {
-        const {id, load} = this.props;
+        const {id, load, loadMasterData} = this.props;
         load({id});
+        loadMasterData();
     }
     componentWillReceiveProps(nextProps){
       console.log(nextProps.error)
     }
     render() {
-        const {editing, fields, fieldFor, listFor, selectFor} = this.props;
+        const {fieldFor, selectFor, ...otherProps} = this.props;
         return (
             <Panel title='User and address' {...this.props}>
                 {fieldFor('uuid')}
                 {fieldFor('firstName')}
                 {fieldFor('lastName')}
+                {selectFor('sex', {masterDatum: 'sex'})}
             </Panel>
         );
     }
@@ -32,16 +34,15 @@ class UserErrors extends PureComponent {
 UserErrors.displayName = 'UserErrors';
 
 const formConfig = {
-    //todo: it should raise an error if i use the same formKey.
     formKey: 'userAndAddressForm',
     entityPathArray: ['user'],
     loadAction: loadErrorUserAction,
     saveAction: saveErrorUserAction
 };
 
-//Connect the component to all its behaviours (respect the order for store, store -> props, helper)
 const ConnectedUserErrors = compose(
     connectToMetadata(['user']),
+    connectToMasterData(['sex']),
     connectToForm(formConfig),
     connectToFieldHelpers()
 )(UserErrors);
